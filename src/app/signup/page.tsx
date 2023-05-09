@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { authSchema } from "@/lib/validators/authform"
 import AuthHeader from "./components/AuthHeader"
@@ -13,6 +13,7 @@ import { AiFillCheckCircle } from "react-icons/ai"
 import { FaGoogle, FaFacebookF } from "react-icons/fa"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
+import { toast } from "react-hot-toast"
 
 type ValidationType = {
 	regex: RegExp
@@ -58,11 +59,20 @@ export default function SignUp() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [passwordInputValue])
 
-	const onSubmit = (data: AuthSignUpFormType) => {
+	const onSubmit: SubmitHandler<AuthSignUpFormType> = data => {
 		setIsLoading(true)
-		console.log(data)
-		setIsLoading(false)
-		// register user
+		axios
+			.post("/api/register", data)
+			.then(res => {
+				console.log(res)
+			})
+			.catch(err => {
+				console.log(err)
+				toast.error("Something went wrong, please try again later")
+			})
+			.finally(() => {
+				setIsLoading(false)
+			})
 	}
 
 	return (
@@ -261,7 +271,7 @@ export default function SignUp() {
 						<Button
 							disabled={isLoading}
 							type="submit"
-							className="group relative w-full gap-2 bg-gradient-to-t from-emerald-600 from-5% via-emerald-500 via-60% to-emerald-400 to-100% px-10 text-base text-white shadow-sm transition-all hover:opacity-90"
+							className="group relative w-full gap-2 bg-emerald-500 px-10 text-base text-white shadow-sm transition-all hover:opacity-90 hover:ring-2 hover:ring-transparent"
 						>
 							{isLoading ? (
 								<>
@@ -289,11 +299,11 @@ export default function SignUp() {
 						<div className="w-1/2 border-b dark:border-neutral-600"></div>
 					</div>
 					<div className="space-y-2.5 pt-1.5">
-						<Button className="relative w-full gap-3 border border-neutral-200 bg-white/90 text-[14px] shadow-sm transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-600/40 dark:bg-neutral-700/50 dark:shadow-sm dark:shadow-black/30 hover:dark:bg-neutral-700/80">
+						<Button className="relative w-full gap-3 border border-neutral-300 bg-white text-[14px] shadow-sm transition duration-300 ease-in-out hover:border-neutral-400 hover:ring-2 hover:ring-neutral-200/80 dark:border-neutral-600/40 dark:bg-neutral-700/50 dark:shadow-sm dark:shadow-black/30 dark:hover:border-neutral-600 dark:hover:ring-neutral-700/50">
 							<FaGoogle className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 fill-neutral-700 dark:fill-neutral-200" />
 							<span className="mt-1 text-neutral-700 dark:text-neutral-200">Continue with Google</span>
 						</Button>
-						<Button className="relative w-full gap-3 border border-neutral-200 bg-white/90 text-[14px] shadow-sm transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-600/40 dark:bg-neutral-700/50 dark:shadow-sm dark:shadow-black/30 hover:dark:bg-neutral-700/80">
+						<Button className="relative w-full gap-3 border border-neutral-300 bg-white text-[14px] shadow-sm transition duration-300 ease-in-out hover:border-neutral-400 hover:ring-2 hover:ring-neutral-200/80 dark:border-neutral-600/40 dark:bg-neutral-700/50 dark:shadow-sm dark:shadow-black/30 dark:hover:border-neutral-600 dark:hover:ring-neutral-700/50">
 							<FaFacebookF className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 fill-neutral-700 dark:fill-neutral-200" />
 							<span className="mt-1 text-neutral-700 dark:text-neutral-200">Continue with Facebook</span>
 						</Button>

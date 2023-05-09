@@ -9,7 +9,7 @@ interface Props {
 
 export default function layout({ children }: Props) {
 	return (
-		<div className="relative flex min-h-screen flex-row items-center justify-center bg-neutral-50/50 dark:bg-[#1c1c1c]">
+		<div className="relative flex min-h-screen flex-row items-center justify-center bg-white dark:bg-[#1c1c1c]">
 			{children}
 		</div>
 	)

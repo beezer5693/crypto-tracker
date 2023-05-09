@@ -24,7 +24,7 @@ export default function AuthHeader({}: Props) {
 				<Image src={Icon} alt="Icon" width={25} height={25} />
 				<div>
 					<span className="text-md font-bold tracking-wide text-neutral-700 dark:text-white/90">Coin</span>
-					<span className="text-sm font-medium tracking-wide text-neutral-700 dark:text-emerald-400">TRACKER</span>
+					<span className="text-sm font-medium tracking-wide text-emerald-500 dark:text-emerald-400">TRACKER</span>
 				</div>
 			</div>
 			<button>
