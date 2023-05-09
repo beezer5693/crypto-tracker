@@ -1,6 +1,6 @@
 "use client"
 
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { authSchema } from "@/lib/validators/authform"
@@ -14,11 +14,16 @@ import { FaGoogle, FaFacebookF } from "react-icons/fa"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 
+type ValidationType = {
+	regex: RegExp
+	isValid: boolean
+}
+
 export default function SignUp() {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [showPassword, setShowPassword] = useState<boolean>(false)
 	const [showPasswordValidation, setShowPasswordValidation] = useState<boolean>(false)
-	const [passwordValidation, setPasswordValidation] = useState([
+	const [passwordValidation, setPasswordValidation] = useState<ValidationType[]>([
 		{ regex: /[A-Z]/, isValid: false },
 		{ regex: /[a-z]/, isValid: false },
 		{ regex: /[0-9]/, isValid: false },
@@ -65,12 +70,12 @@ export default function SignUp() {
 			<AuthHeader />
 			<div className="mx-auto flex max-w-sm flex-col items-center space-y-7 rounded-md bg-transparent">
 				<div className="w-full space-y-2">
-					<h1 className="text-2xl font-medium tracking-wide text-black dark:text-white">Get started</h1>
+					<h1 className="text-2xl font-medium text-black dark:text-white">Get started</h1>
 					<p className="text-xs font-semibold text-neutral-500 dark:text-white/70">Create a new account</p>
 				</div>
 				<div className="form-card w-full space-y-3">
-					<form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-						<div className="space-y-2">
+					<form className="flex flex-col gap-3.5" onSubmit={handleSubmit(onSubmit)}>
+						<div className="space-y-1">
 							<label className="text-xs font-medium text-neutral-500 dark:text-white/80" htmlFor="firstname">
 								First name
 							</label>
@@ -93,7 +98,7 @@ export default function SignUp() {
 							</div>
 							{errors.firstname && <p className="text-xs font-medium text-red-500">{errors.firstname.message}</p>}
 						</div>
-						<div className="space-y-2">
+						<div className="space-y-1">
 							<label className="text-xs font-medium text-neutral-500 dark:text-white/80" htmlFor="firstname">
 								Last name
 							</label>
@@ -116,7 +121,7 @@ export default function SignUp() {
 							</div>
 							{errors.lastname && <p className="text-xs font-medium text-red-500">{errors.lastname.message}</p>}
 						</div>
-						<div className="space-y-2">
+						<div className="space-y-1">
 							<label className="text-xs font-medium text-neutral-500 dark:text-white/80" htmlFor="email">
 								Email
 							</label>
@@ -139,7 +144,7 @@ export default function SignUp() {
 							</div>
 							{errors.email && <p className="text-xs font-medium text-red-500">{errors.email.message}</p>}
 						</div>
-						<div className="relative mb-4 space-y-1.5">
+						<div className="relative mb-4 space-y-1">
 							<label className="text-xs font-medium text-neutral-500 dark:text-white/80" htmlFor="password">
 								Password
 							</label>
@@ -256,7 +261,7 @@ export default function SignUp() {
 						<Button
 							disabled={isLoading}
 							type="submit"
-							className="group relative w-full gap-2 border border-emerald-600 bg-emerald-600 px-10 text-base text-white shadow-sm transition-all hover:border-x-emerald-500 hover:border-b-emerald-600 hover:border-t-emerald-500 hover:bg-emerald-500 dark:border-x-emerald-400  dark:border-t-emerald-400 dark:shadow-neutral-950 hover:dark:bg-emerald-500"
+							className="group relative w-full gap-2 bg-gradient-to-t from-emerald-600 from-5% via-emerald-500 via-60% to-emerald-400 to-100% px-10 text-base text-white shadow-sm transition-all hover:opacity-90"
 						>
 							{isLoading ? (
 								<>
@@ -266,7 +271,7 @@ export default function SignUp() {
 							) : (
 								<span className="text-[15px] text-white">Sign In</span>
 							)}
-							<ChevronRight className="absolute right-36 top-1/2 h-[15px] w-[15px] -translate-y-1/2 opacity-0 transition-all duration-300 ease-out group-hover:opacity-100" />
+							<ChevronRight className="absolute right-[136px] top-1/2 h-[15px] w-[15px] -translate-y-1/2 opacity-0 transition-all duration-300 ease-out group-hover:opacity-100" />
 						</Button>
 					</form>
 					<p className="py-2 text-[13px] font-medium text-neutral-500 dark:text-neutral-400/60">
@@ -275,7 +280,7 @@ export default function SignUp() {
 							href={"/"}
 							className="ml-2 text-[13px] font-medium text-neutral-800 underline transition hover:text-neutral-500 dark:text-white/90 dark:hover:text-white/70"
 						>
-							Sign In Now
+							Sign Up Now
 						</Link>
 					</p>
 					<div className="flex items-center justify-center gap-2 pb-2">
@@ -284,13 +289,13 @@ export default function SignUp() {
 						<div className="w-1/2 border-b dark:border-neutral-600"></div>
 					</div>
 					<div className="space-y-2.5 pt-1.5">
-						<Button className="w-full gap-3 border border-neutral-200 bg-white/90 text-[14px] text-black shadow-sm transition duration-300 ease-in-out hover:bg-neutral-50 dark:border-neutral-300 dark:border-x-neutral-700/50 dark:border-b-transparent dark:border-t-neutral-700/50 dark:bg-[#2e2e2e] dark:text-white/90 dark:shadow-sm dark:shadow-black/30 hover:dark:bg-[#373737]">
-							<FaGoogle className="h-4 w-4" />
-							<span className="mt-0.5">Continue with Google</span>
+						<Button className="relative w-full gap-3 border border-neutral-200 bg-white/90 text-[14px] shadow-sm transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-600/40 dark:bg-neutral-700/50 dark:shadow-sm dark:shadow-black/30 hover:dark:bg-neutral-700/80">
+							<FaGoogle className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 fill-neutral-700 dark:fill-neutral-200" />
+							<span className="mt-1 text-neutral-700 dark:text-neutral-200">Continue with Google</span>
 						</Button>
-						<Button className="w-full gap-3 border border-neutral-200 bg-white/90 text-[14px] text-black shadow-sm transition duration-300 ease-in-out hover:bg-neutral-50 dark:border-neutral-300 dark:border-x-neutral-700/50 dark:border-b-transparent dark:border-t-neutral-700/50 dark:bg-[#2e2e2e] dark:text-white/90 dark:shadow-sm dark:shadow-black/30 hover:dark:bg-[#373737]">
-							<FaFacebookF className="h-4 w-4" />
-							<span className="mt-0.5">Continue with Facebook</span>
+						<Button className="relative w-full gap-3 border border-neutral-200 bg-white/90 text-[14px] shadow-sm transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-600/40 dark:bg-neutral-700/50 dark:shadow-sm dark:shadow-black/30 hover:dark:bg-neutral-700/80">
+							<FaFacebookF className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 fill-neutral-700 dark:fill-neutral-200" />
+							<span className="mt-1 text-neutral-700 dark:text-neutral-200">Continue with Facebook</span>
 						</Button>
 					</div>
 				</div>

@@ -4,11 +4,13 @@ export const authSchema: ZodType<AuthSignUpFormType> = z.object({
 	firstname: z
 		.string()
 		.nonempty("First name is a required field")
-		.max(100, { message: "Last name must be less than 100 characters." }),
+		.max(100, { message: "Last name must be less than 100 characters." })
+		.refine(val => /^[A-Za-z]+$/.test(val), "First name must contain only letters"),
 	lastname: z
 		.string()
 		.nonempty("Last name is a required field")
-		.max(100, { message: "Last name must be less than 100 characters." }),
+		.max(100, { message: "Last name must be less than 100 characters." })
+		.refine(val => /^[A-Za-z]+$/.test(val), "Last name must contain only letters"),
 	email: z.string().nonempty("Email is a required field").email({ message: "Invalid email address." }),
 	password: z
 		.string()

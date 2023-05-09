@@ -20,9 +20,12 @@ export default function AuthHeader({}: Props) {
 
 	return (
 		<header className="absolute left-0 right-0 top-0 flex justify-between px-9 py-7">
-			<div className="flex items-center gap-2">
+			<div className="flex items-center gap-2.5">
 				<Image src={Icon} alt="Icon" width={25} height={25} />
-				<span className="text-md font-bold tracking-wide text-neutral-700 dark:text-white/90">Cryptotracker</span>
+				<div>
+					<span className="text-md font-bold tracking-wide text-neutral-700 dark:text-white/90">Coin</span>
+					<span className="text-sm font-medium tracking-wide text-neutral-700 dark:text-emerald-400">TRACKER</span>
+				</div>
 			</div>
 			<button>
 				{theme === "light" ? (
