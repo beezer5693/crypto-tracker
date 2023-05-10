@@ -11,6 +11,16 @@ export async function POST(request: Request) {
 			return new NextResponse("Missing required fields", { status: 400 })
 		}
 
+		const userExists = await client.user.findUnique({
+			where: {
+				email_address: email,
+			},
+		})
+
+		if (userExists) {
+			return new NextResponse("User already exists", { status: 400 })
+		}
+
 		const hashedPassword = await bcrypt.hash(password, 10)
 
 		const user = await client.user.create({

@@ -5,7 +5,7 @@ type User = {
 	password: string
 }
 
-type AuthSignUpFormType = {
+type AuthFormType = {
 	firstname: string
 	lastname: string
 	email: string
