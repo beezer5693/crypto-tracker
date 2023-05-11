@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 
 		const userExists = await client.user.findUnique({
 			where: {
-				email_address: email,
+				email,
 			},
 		})
 
@@ -25,10 +25,10 @@ export async function POST(request: Request) {
 
 		const user = await client.user.create({
 			data: {
-				first_name: firstname,
-				last_name: lastname,
-				email_address: email,
-				hashed_password: hashedPassword,
+				firstName: firstname,
+				lastName: lastname,
+				email,
+				hashedPassword,
 			},
 		})
 

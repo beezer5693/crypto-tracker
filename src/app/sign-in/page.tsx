@@ -10,8 +10,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link"
 import { AlertCircle, ChevronRight, Eye, EyeOff, Loader2 } from "lucide-react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { FaFacebookF, FaGoogle } from "react-icons/fa"
 import { useToast } from "@/components/ui/use-toast"
+import GoogleAuth from "@/components/GoogleAuth"
+import FacebookAuth from "@/components/FacebookAuth"
 
 export default function Page() {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -25,6 +26,8 @@ export default function Page() {
 
 	const { toast } = useToast()
 
+	// Runs the sign in function from next-auth
+	// See @/api/auth/[...nextauth] for details
 	const onSubmit: SubmitHandler<AuthFormType> = data => {
 		setIsLoading(true)
 		signIn("credentials", {
@@ -39,7 +42,7 @@ export default function Page() {
 						variant: "error",
 					})
 				}
-				if (cb?.ok) {
+				if (cb?.ok && !cb?.error) {
 					console.log("logged in")
 				}
 			})
@@ -50,7 +53,7 @@ export default function Page() {
 		<>
 			<div className="mx-auto flex w-[400px] flex-col items-center space-y-7 bg-transparent">
 				<div className="w-full space-y-2">
-					<h1 className="text-3xl font-medium text-black dark:text-white">Welcome back</h1>
+					<h1 className="text-3xl text-black dark:text-white">Welcome back</h1>
 					<p className="text-xs font-semibold text-neutral-500 dark:text-white/70">Sign in to your account</p>
 				</div>
 				<div className="form-card w-full space-y-3">
@@ -61,6 +64,7 @@ export default function Page() {
 							</label>
 							<div className="relative">
 								<Input
+									disabled={isLoading}
 									className={cn({
 										"border-red-500 bg-red-500/20 placeholder:text-red-500/80 dark:border-red-900 dark:bg-[#1f1315] dark:placeholder:text-red-600/60":
 											errors.email,
@@ -68,7 +72,7 @@ export default function Page() {
 									{...register("email")}
 									id="email"
 									name="email"
-									placeholder="you@example.com"
+									placeholder={"you@example.com"}
 								/>
 								<AlertCircle
 									className={cn("invisible absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 stroke-red-500", {
@@ -85,6 +89,7 @@ export default function Page() {
 							<div className="space-y-2">
 								<div className="group relative">
 									<Input
+										disabled={isLoading}
 										className={cn({
 											"border-red-500 bg-red-500/20 placeholder:text-red-500/80 dark:border-red-900 dark:bg-[#1f1315] dark:placeholder:text-red-600/60":
 												errors.password,
@@ -95,19 +100,17 @@ export default function Page() {
 										name="password"
 										placeholder="●●●●●●●●"
 									/>
-									<div className="absolute right-2 top-1/2 -translate-y-[50%] cursor-pointer rounded border border-neutral-300 bg-white/90 px-2.5 py-1 transition hover:bg-white/40 dark:border-x dark:border-b dark:border-t dark:border-neutral-600/60 dark:border-b-neutral-700/60 dark:bg-[#303030] dark:hover:bg-[#373737]">
+									<button
+										type="button"
+										onClick={showPassword ? () => setShowPassword(false) : () => setShowPassword(true)}
+										className="absolute right-2 top-1/2 -translate-y-[50%] cursor-pointer rounded border border-neutral-300 bg-white/90 px-2.5 py-1 transition hover:bg-white/40 dark:border-x dark:border-b dark:border-t dark:border-neutral-600/60 dark:border-b-neutral-700/60 dark:bg-[#303030] dark:hover:bg-[#373737]"
+									>
 										{showPassword ? (
-											<EyeOff
-												onClick={() => setShowPassword(false)}
-												className="h-4 w-4 cursor-pointer stroke-neutral-700 stroke-1 dark:stroke-neutral-300"
-											/>
+											<EyeOff className="h-4 w-4 cursor-pointer stroke-neutral-700 stroke-1 dark:stroke-neutral-300" />
 										) : (
-											<Eye
-												onClick={() => setShowPassword(true)}
-												className="h-4 w-4 cursor-pointer stroke-neutral-700 stroke-1 dark:stroke-neutral-300"
-											/>
+											<Eye className="h-4 w-4 cursor-pointer stroke-neutral-700 stroke-1 dark:stroke-neutral-300" />
 										)}
-									</div>
+									</button>
 									<AlertCircle
 										className={cn("invisible absolute right-14 top-1/2 h-5 w-5 -translate-y-1/2 stroke-red-500", {
 											visible: errors.password,
@@ -139,14 +142,8 @@ export default function Page() {
 						<div className="w-1/2 border-b dark:border-neutral-600/60"></div>
 					</div>
 					<div className="space-y-2.5">
-						<Button className="relative w-full gap-3 border border-neutral-300 bg-white text-[14px] shadow-sm transition duration-300 ease-in-out hover:border-neutral-400 hover:ring-2 hover:ring-neutral-200/80 dark:border-neutral-600/40 dark:bg-neutral-700/50 dark:shadow-sm dark:shadow-black/30 dark:hover:border-neutral-600 dark:hover:ring-neutral-700/50">
-							<FaGoogle className="absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 fill-neutral-700 dark:fill-neutral-200" />
-							<span className="mt-1 text-neutral-700 dark:text-neutral-200">Continue with Google</span>
-						</Button>
-						<Button className="relative w-full gap-3 border border-neutral-300 bg-white text-[14px] shadow-sm transition duration-300 ease-in-out hover:border-neutral-400 hover:ring-2 hover:ring-neutral-200/80 dark:border-neutral-600/40 dark:bg-neutral-700/50 dark:shadow-sm dark:shadow-black/30 dark:hover:border-neutral-600 dark:hover:ring-neutral-700/50">
-							<FaFacebookF className="absolute left-3.5 top-1/2 h-[18px] w-[18px] -translate-y-1/2 stroke-neutral-700 dark:stroke-neutral-200" />
-							<span className="mt-1 text-neutral-700 dark:text-neutral-200">Continue with Facebook</span>
-						</Button>
+						<GoogleAuth />
+						<FacebookAuth />
 					</div>
 					<div className="flex justify-center pt-3">
 						<p className="py-2 text-[13px] font-medium text-neutral-500 dark:text-neutral-400/90">

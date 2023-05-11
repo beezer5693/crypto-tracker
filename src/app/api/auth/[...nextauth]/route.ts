@@ -12,12 +12,20 @@ export const authOptions: AuthOptions = {
 		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID as string,
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+			profile(profile) {
+				return {
+					id: profile.sub as string,
+					firstName: profile.given_name as string,
+					lastName: profile.family_name as string,
+					email: profile.email as string,
+				}
+			},
 		}),
 		CredentialsProvider({
 			name: "credentials",
 			credentials: {
-				email: { label: "Email", type: "text" },
-				password: { label: "Password", type: "password" },
+				email: { label: "email", type: "text" },
+				password: { label: "password", type: "password" },
 			},
 			async authorize(credentials) {
 				if (!credentials?.email || !credentials?.password) {
@@ -26,15 +34,15 @@ export const authOptions: AuthOptions = {
 
 				const user = await client.user.findUnique({
 					where: {
-						email_address: credentials.email,
+						email: credentials.email,
 					},
 				})
 
-				if (!user || !user?.hashed_password) {
+				if (!user || !user?.hashedPassword) {
 					throw new Error("Invalid credentials")
 				}
 
-				const isCorrectPassword = await bcrypt.compare(credentials.password, user.hashed_password)
+				const isCorrectPassword = await bcrypt.compare(credentials.password, user.hashedPassword)
 
 				if (!isCorrectPassword) {
 					throw new Error("Invalid credentials")
