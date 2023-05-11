@@ -11,14 +11,19 @@ interface Props {
 
 export default function layout({ children }: Props) {
 	return (
-		<div className="relative flex min-h-screen flex-row items-center justify-center bg-white px-3 dark:bg-[#1c1c1c]">
+		<div className="relative flex min-h-screen flex-col items-center justify-between bg-neutral-50/50 px-6 py-7 dark:bg-[#1c1c1c]">
 			<AuthHeader />
 			{children}
-			<p className="absolute bottom-7 right-1/2 w-[400px] translate-x-1/2 text-center text-[11px] text-neutral-400/80">
-				{"By continuing, your agree to CoinTracker's"}
-				<span className="ml-0.5 cursor-pointer underline hover:text-neutral-300">Terms of Service</span> and{" "}
-				<span className="cursor-pointer underline hover:text-neutral-300">Privacy Policy</span> and to receive periodic
-				emails with updates.
+			<p className="w-[300px] text-center text-[.70rem] font-medium text-neutral-500 dark:text-neutral-400/70 sm:w-[400px]">
+				{"By continuing, your agree to Cointracker's"}{" "}
+				<span className="cursor-pointer underline hover:text-neutral-700 dark:hover:text-neutral-300/80">
+					Terms of Service
+				</span>{" "}
+				and{" "}
+				<span className="cursor-pointer underline hover:text-neutral-700 dark:hover:text-neutral-300/80">
+					Privacy Policy
+				</span>{" "}
+				and to receive periodic emails with updates.
 			</p>
 		</div>
 	)

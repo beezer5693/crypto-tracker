@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* animation for react-collapse used to show password validation on sign-up */
+.ReactCollapse--collapse {
+	transition: height 300ms;
+}

@@ -3,12 +3,14 @@ import Icon from "../assets/icon.png"
 
 export default function AuthHeader() {
 	return (
-		<header className="absolute left-0 right-0 top-0 flex justify-between px-9 py-7">
+		<header className="mb-5 flex w-[300px] items-center justify-start sm:m-0 sm:w-full sm:justify-start sm:px-2">
 			<div className="flex items-center gap-2.5">
 				<Image src={Icon} alt="Icon" width={25} height={25} />
 				<div>
-					<span className="text-md font-bold tracking-wide text-neutral-700 dark:text-white/90">Coin</span>
-					<span className="text-md font-medium tracking-wide text-emerald-500 dark:text-emerald-400">Tracker</span>
+					<span className="text-[1.1rem] font-bold tracking-wide text-neutral-700  dark:text-white/90">coin</span>
+					<span className="text-[1.1rem] font-medium tracking-wide text-emerald-500 dark:text-emerald-400">
+						tracker
+					</span>
 				</div>
 			</div>
 		</header>

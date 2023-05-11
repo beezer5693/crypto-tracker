@@ -8,13 +8,13 @@ import { cn } from "@/lib/utils"
 import { authSignInSchema } from "@/lib/validators/authform"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link"
-import { AlertCircle, ChevronRight, Eye, EyeOff, Loader2 } from "lucide-react"
+import { AlertCircle, Eye, EyeOff, Loader2 } from "lucide-react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useToast } from "@/components/ui/use-toast"
 import GoogleAuth from "@/components/GoogleAuth"
 import FacebookAuth from "@/components/FacebookAuth"
 
-export default function Page() {
+export default function SignIn() {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [showPassword, setShowPassword] = useState<boolean>(false)
 
@@ -51,15 +51,15 @@ export default function Page() {
 
 	return (
 		<>
-			<div className="mx-auto flex w-[400px] flex-col items-center space-y-7 bg-transparent">
+			<div className="mx-auto flex w-[300px] flex-1 flex-col items-center justify-center space-y-7 bg-transparent py-7 sm:w-[400px]">
 				<div className="w-full space-y-2">
-					<h1 className="text-3xl text-black dark:text-white">Welcome back</h1>
+					<h1 className="text-2xl text-black dark:text-white sm:text-3xl">Welcome back</h1>
 					<p className="text-xs font-semibold text-neutral-500 dark:text-white/70">Sign in to your account</p>
 				</div>
 				<div className="form-card w-full space-y-3">
 					<form className="flex flex-col gap-3.5" onSubmit={handleSubmit(onSubmit)}>
 						<div className="space-y-1">
-							<label className="text-xs font-medium text-neutral-500 dark:text-white/80" htmlFor="email">
+							<label className="text-[.8rem] font-medium text-neutral-500 dark:text-white/80" htmlFor="email">
 								Email
 							</label>
 							<div className="relative">
@@ -83,7 +83,7 @@ export default function Page() {
 							{errors.email && <p className="text-xs font-medium text-red-500">{errors.email.message}</p>}
 						</div>
 						<div className="relative mb-4 space-y-1">
-							<label className="text-xs font-medium text-neutral-500 dark:text-white/80" htmlFor="password">
+							<label className="text-[.8rem] font-medium text-neutral-500 dark:text-white/80" htmlFor="password">
 								Password
 							</label>
 							<div className="space-y-2">
@@ -100,17 +100,17 @@ export default function Page() {
 										name="password"
 										placeholder="●●●●●●●●"
 									/>
-									<button
+									<Button
 										type="button"
 										onClick={showPassword ? () => setShowPassword(false) : () => setShowPassword(true)}
-										className="absolute right-2 top-1/2 -translate-y-[50%] cursor-pointer rounded border border-neutral-300 bg-white/90 px-2.5 py-1 transition hover:bg-white/40 dark:border-x dark:border-b dark:border-t dark:border-neutral-600/60 dark:border-b-neutral-700/60 dark:bg-[#303030] dark:hover:bg-[#373737]"
+										className="absolute right-2 top-1/2 h-6 -translate-y-[50%] cursor-pointer rounded border border-neutral-300 bg-white/90 px-2.5 py-1 transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-[#303030] dark:ring-neutral-700 dark:hover:bg-[#373737] dark:focus:border-neutral-600 dark:focus:ring-1"
 									>
 										{showPassword ? (
 											<EyeOff className="h-4 w-4 cursor-pointer stroke-neutral-700 stroke-1 dark:stroke-neutral-300" />
 										) : (
 											<Eye className="h-4 w-4 cursor-pointer stroke-neutral-700 stroke-1 dark:stroke-neutral-300" />
 										)}
-									</button>
+									</Button>
 									<AlertCircle
 										className={cn("invisible absolute right-14 top-1/2 h-5 w-5 -translate-y-1/2 stroke-red-500", {
 											visible: errors.password,
@@ -123,17 +123,16 @@ export default function Page() {
 						<Button
 							disabled={isLoading}
 							type="submit"
-							className="group relative mb-2 w-full gap-2 border border-emerald-600 bg-emerald-600/80 px-10 text-base text-white shadow-sm transition duration-300 ease-in-out hover:border-emerald-500 hover:bg-emerald-500"
+							className="mb-2 w-full gap-2 border border-emerald-600 bg-emerald-500 px-10 text-white shadow-sm transition duration-300 ease-in-out hover:bg-emerald-600 dark:border-emerald-500 dark:bg-emerald-500/70 dark:hover:border-emerald-500 dark:hover:bg-emerald-500"
 						>
 							{isLoading ? (
 								<>
 									<Loader2 className="h-4 w-4 animate-spin text-white" />
-									<span className="text-[15px] text-white">Signing in...</span>
+									<span className="text-[.95rem] text-white">Signing in...</span>
 								</>
 							) : (
-								<span className="text-[15px] text-white">Sign In</span>
+								<span className="text-[.95rem] text-white">Sign In</span>
 							)}
-							<ChevronRight className="absolute right-[150px] top-1/2 h-[15px] w-[15px] -translate-y-1/2 opacity-0 transition-all duration-300 ease-out group-hover:opacity-100" />
 						</Button>
 					</form>
 					<div className="flex items-center justify-center gap-2 pb-2">
@@ -146,11 +145,11 @@ export default function Page() {
 						<FacebookAuth />
 					</div>
 					<div className="flex justify-center pt-3">
-						<p className="py-2 text-[13px] font-medium text-neutral-500 dark:text-neutral-400/90">
+						<p className="py-2 text-[.8rem] font-medium text-neutral-500 dark:text-neutral-400/90">
 							{"Don't have an account?"}
 							<Link
 								href={"/sign-up"}
-								className="ml-2 text-[13px] font-medium text-neutral-800 underline transition hover:text-neutral-500 dark:text-white/90 dark:hover:text-white/70"
+								className="ml-1 text-[.8rem] font-medium text-neutral-800 underline transition hover:text-neutral-500 dark:text-white/90 dark:hover:text-white/70"
 							>
 								Sign Up Now
 							</Link>

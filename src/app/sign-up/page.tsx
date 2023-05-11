@@ -1,20 +1,20 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { authSignUpSchema } from "@/lib/validators/authform"
-import axios from "axios"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Loader2, EyeOff, Eye, ChevronRight, AlertCircle, Circle } from "lucide-react"
-import { AiFillCheckCircle } from "react-icons/ai"
 import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
 import { useToast } from "@/components/ui/use-toast"
 import GoogleAuth from "@/components/GoogleAuth"
 import FacebookAuth from "@/components/FacebookAuth"
+import axios from "axios"
+import Link from "next/link"
+import { Collapse } from "react-collapse"
+import { cn } from "@/lib/utils"
+import { Loader2, EyeOff, Eye, AlertCircle, Circle } from "lucide-react"
+import { AiFillCheckCircle } from "react-icons/ai"
 
 type ValidationType = {
 	regex: RegExp
@@ -25,7 +25,7 @@ export default function SignUp() {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [showPassword, setShowPassword] = useState<boolean>(false)
 	const [showPasswordValidation, setShowPasswordValidation] = useState<boolean>(false)
-	const [passwordValidator, setPasswordValidation] = useState<ValidationType[]>([
+	const [passwordValidationCheck, setPasswordValidationCheck] = useState<ValidationType[]>([
 		{ regex: /[A-Z]/, isValidated: false },
 		{ regex: /[a-z]/, isValidated: false },
 		{ regex: /[0-9]/, isValidated: false },
@@ -41,7 +41,6 @@ export default function SignUp() {
 	} = useForm<AuthFormType>({ resolver: zodResolver(authSignUpSchema) })
 
 	const { toast } = useToast()
-	const router = useRouter()
 
 	// Watches password input value on each key press
 	// This is fed into the handlePasswordValidation function
@@ -52,7 +51,7 @@ export default function SignUp() {
 	useEffect(() => {
 		const handlePasswordValidation = (inputVal: string) => {
 			const value = inputVal
-			const isValidated = passwordValidator.map(validationCheck => {
+			const isValidated = passwordValidationCheck.map(validationCheck => {
 				if (validationCheck.regex.test(value)) {
 					validationCheck.isValidated = true
 				} else {
@@ -61,7 +60,7 @@ export default function SignUp() {
 				return validationCheck
 			})
 
-			setPasswordValidation(isValidated)
+			setPasswordValidationCheck(isValidated)
 		}
 
 		handlePasswordValidation(passwordInputValue)
@@ -74,7 +73,7 @@ export default function SignUp() {
 		axios
 			.post("/api/register", data)
 			.then(() => {
-				router.push("/")
+				console.log("success")
 			})
 			.catch(err => {
 				toast({
@@ -90,15 +89,15 @@ export default function SignUp() {
 
 	return (
 		<>
-			<div className="mx-auto flex w-[400px] flex-col items-center space-y-7 bg-transparent">
+			<div className="mx-auto flex w-[300px] flex-1 flex-col items-center justify-center space-y-7 bg-transparent py-7 sm:w-[400px]">
 				<div className="w-full space-y-2">
-					<h1 className="text-3xl text-black dark:text-white">Get started</h1>
+					<h1 className="text-2xl text-black dark:text-white sm:text-3xl">Get started</h1>
 					<p className="text-xs font-semibold text-neutral-500 dark:text-white/70">Create a new account</p>
 				</div>
 				<div className="form-card w-full space-y-3">
 					<form className="flex flex-col gap-3.5" onSubmit={handleSubmit(onSubmit)}>
 						<div className="space-y-1">
-							<label className="text-xs font-medium text-neutral-500 dark:text-white/80" htmlFor="firstname">
+							<label className="text-[.8rem] font-medium text-neutral-500 dark:text-white/80" htmlFor="firstname">
 								First name
 							</label>
 							<div className="relative">
@@ -122,7 +121,7 @@ export default function SignUp() {
 							{errors.firstname && <p className="text-xs font-medium text-red-500">{errors.firstname.message}</p>}
 						</div>
 						<div className="space-y-1">
-							<label className="text-xs font-medium text-neutral-500 dark:text-white/80" htmlFor="firstname">
+							<label className="text-[.8rem] font-medium text-neutral-500 dark:text-white/80" htmlFor="firstname">
 								Last name
 							</label>
 							<div className="relative">
@@ -146,7 +145,7 @@ export default function SignUp() {
 							{errors.lastname && <p className="text-xs font-medium text-red-500">{errors.lastname.message}</p>}
 						</div>
 						<div className="space-y-1">
-							<label className="text-xs font-medium text-neutral-500 dark:text-white/80" htmlFor="email">
+							<label className="text-[.8rem] font-medium text-neutral-500 dark:text-white/80" htmlFor="email">
 								Email
 							</label>
 							<div className="relative">
@@ -170,11 +169,11 @@ export default function SignUp() {
 							{errors.email && <p className="text-xs font-medium text-red-500">{errors.email.message}</p>}
 						</div>
 						<div className="relative mb-4 space-y-1">
-							<label className="text-xs font-medium text-neutral-500 dark:text-white/80" htmlFor="password">
+							<label className="text-[.8rem] font-medium text-neutral-500 dark:text-white/80" htmlFor="password">
 								Password
 							</label>
-							<div className="space-y-2">
-								<div className="group relative">
+							<div className="space-y-1">
+								<div className="peer relative">
 									<Input
 										disabled={isLoading}
 										onFocus={() => setShowPasswordValidation(true)}
@@ -188,17 +187,17 @@ export default function SignUp() {
 										name="password"
 										placeholder="●●●●●●●●"
 									/>
-									<button
+									<Button
 										type="button"
 										onClick={showPassword ? () => setShowPassword(false) : () => setShowPassword(true)}
-										className="absolute right-2 top-1/2 -translate-y-[50%] cursor-pointer rounded border border-neutral-300 bg-white/90 px-2.5 py-1 transition hover:bg-white/40 dark:border-x dark:border-b dark:border-t dark:border-neutral-600/60 dark:border-b-neutral-700/60 dark:bg-[#303030] dark:hover:bg-[#373737]"
+										className="absolute right-2 top-1/2 h-6 -translate-y-[50%] cursor-pointer rounded border border-neutral-300 bg-white/90 px-2.5 py-1 transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-[#303030] dark:hover:bg-[#373737] dark:focus:border-neutral-600"
 									>
 										{showPassword ? (
 											<EyeOff className="h-4 w-4 cursor-pointer stroke-neutral-700 stroke-1 dark:stroke-neutral-300" />
 										) : (
 											<Eye className="h-4 w-4 cursor-pointer stroke-neutral-700 stroke-1 dark:stroke-neutral-300" />
 										)}
-									</button>
+									</Button>
 									<AlertCircle
 										className={cn("invisible absolute right-14 top-1/2 h-5 w-5 -translate-y-1/2 stroke-red-500", {
 											visible: errors.password,
@@ -206,96 +205,95 @@ export default function SignUp() {
 									/>
 								</div>
 								{errors.password && <p className="text-xs font-medium text-red-500">{errors.password.message}</p>}
-								{showPasswordValidation && (
-									<div className="space-y-1 pt-3">
+								<Collapse isOpened={showPasswordValidation}>
+									<div className="pt-3">
 										<div className="flex items-center gap-2">
-											{passwordValidator[0].isValidated ? (
+											{passwordValidationCheck[0].isValidated ? (
 												<AiFillCheckCircle className="h-[13.5px] w-[13.5px] fill-neutral-500 dark:fill-neutral-300" />
 											) : (
 												<Circle className="h-[13.5px] w-[13.5px] stroke-neutral-400 stroke-[2.5px] dark:stroke-neutral-400/80" />
 											)}
 											<span
 												className={cn("mt-0.5 text-xs font-semibold text-neutral-400 dark:text-neutral-400/80", {
-													"text-neutral-500 dark:text-neutral-300": passwordValidator[0].isValidated,
+													"text-neutral-500 dark:text-neutral-300": passwordValidationCheck[0].isValidated,
 												})}
 											>
 												Uppercase letter
 											</span>
 										</div>
 										<div className="flex items-center gap-2">
-											{passwordValidator[1].isValidated ? (
+											{passwordValidationCheck[1].isValidated ? (
 												<AiFillCheckCircle className="h-[13.5px] w-[13.5px] fill-neutral-500 dark:fill-neutral-300" />
 											) : (
 												<Circle className="h-[13.5px] w-[13.5px] stroke-neutral-400 stroke-[2.5px] dark:stroke-neutral-400/80" />
 											)}
 											<span
 												className={cn("mt-0.5 text-xs font-semibold text-neutral-400 dark:text-neutral-400/80", {
-													"text-neutral-500 dark:text-neutral-300": passwordValidator[1].isValidated,
+													"text-neutral-500 dark:text-neutral-300": passwordValidationCheck[1].isValidated,
 												})}
 											>
 												Lowercase letter
 											</span>
 										</div>
 										<div className="flex items-center gap-2">
-											{passwordValidator[2].isValidated ? (
+											{passwordValidationCheck[2].isValidated ? (
 												<AiFillCheckCircle className="h-[13.5px] w-[13.5px] fill-neutral-500 dark:fill-neutral-300" />
 											) : (
 												<Circle className="h-[13.5px] w-[13.5px] stroke-neutral-400 stroke-[2.5px] dark:stroke-neutral-400/80" />
 											)}
 											<span
 												className={cn("mt-0.5 text-xs font-semibold text-neutral-400 dark:text-neutral-400/80", {
-													"text-neutral-500 dark:text-neutral-300": passwordValidator[2].isValidated,
+													"text-neutral-500 dark:text-neutral-300": passwordValidationCheck[2].isValidated,
 												})}
 											>
 												Number
 											</span>
 										</div>
 										<div className="flex items-center gap-2">
-											{passwordValidator[3].isValidated ? (
+											{passwordValidationCheck[3].isValidated ? (
 												<AiFillCheckCircle className="h-[13.5px] w-[13.5px] fill-neutral-500 dark:fill-neutral-300" />
 											) : (
 												<Circle className="h-[13.5px] w-[13.5px] stroke-neutral-400 stroke-[2.5px] dark:stroke-neutral-400/80" />
 											)}
 											<span
 												className={cn("mt-0.5 text-xs font-semibold text-neutral-400 dark:text-neutral-400/80", {
-													"text-neutral-500 dark:text-neutral-300": passwordValidator[3].isValidated,
+													"text-neutral-500 dark:text-neutral-300": passwordValidationCheck[3].isValidated,
 												})}
 											>
 												{"Special character (e.g. !?<>@#$%)"}
 											</span>
 										</div>
 										<div className="flex items-center gap-2">
-											{passwordValidator[4].isValidated ? (
+											{passwordValidationCheck[4].isValidated ? (
 												<AiFillCheckCircle className="h-[13.5px] w-[13.5px] fill-neutral-500 dark:fill-neutral-300" />
 											) : (
 												<Circle className="h-[13.5px] w-[13.5px] stroke-neutral-400 stroke-[2.5px] dark:stroke-neutral-400/80" />
 											)}
 											<span
 												className={cn("mt-0.5 text-xs font-semibold text-neutral-400 dark:text-neutral-400/80", {
-													"text-neutral-500 dark:text-neutral-300": passwordValidator[4].isValidated,
+													"text-neutral-500 dark:text-neutral-300": passwordValidationCheck[4].isValidated,
 												})}
 											>
 												{"> 7 characters"}
 											</span>
 										</div>
 									</div>
-								)}
+								</Collapse>
 							</div>
 						</div>
 						<Button
 							disabled={isLoading}
 							type="submit"
-							className="group relative mb-2 w-full gap-2 border border-emerald-600 bg-emerald-600/80 px-10 text-base text-white shadow-sm transition duration-300 ease-in-out hover:border-emerald-500 hover:bg-emerald-500"
+							className="mb-2 w-full gap-2 border border-emerald-600 bg-emerald-500 px-10 text-white shadow-sm transition duration-300 ease-in-out hover:bg-emerald-600 dark:border-emerald-500 dark:bg-emerald-500/70 dark:hover:border-emerald-500 dark:hover:bg-emerald-500"
 						>
 							{isLoading ? (
 								<>
 									<Loader2 className="h-4 w-4 animate-spin text-white" />
-									<span className="text-[15px] text-white">Signing up...</span>
+									<span className="text-[.95rem] text-white">Signing up...</span>
 								</>
 							) : (
-								<span className="text-[15px] text-white">Sign Up</span>
+								<span className="text-[.95rem] text-white">Sign Up</span>
 							)}
-							<ChevronRight className="absolute right-[150px] top-1/2 h-[15px] w-[15px] -translate-y-1/2 opacity-0 transition-all duration-300 ease-out group-hover:opacity-100" />
 						</Button>
 					</form>
 					<div className="flex items-center justify-center gap-2 pb-2">
@@ -308,11 +306,11 @@ export default function SignUp() {
 						<FacebookAuth />
 					</div>
 					<div className="flex justify-center pt-3">
-						<p className="py-2 text-[13px] font-medium text-neutral-500 dark:text-neutral-400/90">
-							Already have an account?
+						<p className="py-2 text-[.8rem] font-medium text-neutral-500 dark:text-neutral-400/90">
+							Have an account?
 							<Link
 								href={"/sign-in"}
-								className="ml-2 text-[13px] font-medium text-neutral-800 underline transition hover:text-neutral-500 dark:text-white/90 dark:hover:text-white/70"
+								className="ml-1 text-[.8rem] font-medium text-neutral-800 underline transition hover:text-neutral-500 dark:text-white/90 dark:hover:text-white/70"
 							>
 								Sign In Now
 							</Link>
