@@ -12,7 +12,7 @@ import { AlertCircle, Eye, EyeOff, Loader2 } from "lucide-react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useToast } from "@/components/ui/use-toast"
 import GoogleAuth from "@/components/GoogleAuth"
-import FacebookAuth from "@/components/FacebookAuth"
+import DiscordAuth from "@/components/DiscordAuth"
 
 export default function SignIn() {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -58,7 +58,7 @@ export default function SignIn() {
 				</div>
 				<div className="form-card w-full space-y-3">
 					<form className="flex flex-col gap-3.5" onSubmit={handleSubmit(onSubmit)}>
-						<div className="space-y-1">
+						<div className="space-y-1.5">
 							<label className="text-[.8rem] font-medium text-neutral-500 dark:text-white/80" htmlFor="email">
 								Email
 							</label>
@@ -82,7 +82,7 @@ export default function SignIn() {
 							</div>
 							{errors.email && <p className="text-xs font-medium text-red-500">{errors.email.message}</p>}
 						</div>
-						<div className="relative mb-4 space-y-1">
+						<div className="relative mb-4 space-y-1.5">
 							<label className="text-[.8rem] font-medium text-neutral-500 dark:text-white/80" htmlFor="password">
 								Password
 							</label>
@@ -103,7 +103,7 @@ export default function SignIn() {
 									<Button
 										type="button"
 										onClick={showPassword ? () => setShowPassword(false) : () => setShowPassword(true)}
-										className="absolute right-2 top-1/2 h-6 -translate-y-[50%] cursor-pointer rounded border border-neutral-300 bg-white/90 px-2.5 py-1 transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-[#303030] dark:ring-neutral-700 dark:hover:bg-[#373737] dark:focus:border-neutral-600 dark:focus:ring-1"
+										className="absolute right-2 top-1/2 h-6 -translate-y-[50%] cursor-pointer rounded border border-neutral-300 bg-white/90 px-2.5 py-1 transition hover:bg-neutral-50 dark:border-neutral-700 dark:bg-[#303030] dark:ring-neutral-700 dark:hover:bg-[#373737] dark:focus:border-neutral-600 dark:focus:ring-1"
 									>
 										{showPassword ? (
 											<EyeOff className="h-4 w-4 cursor-pointer stroke-neutral-700 stroke-1 dark:stroke-neutral-300" />
@@ -142,7 +142,7 @@ export default function SignIn() {
 					</div>
 					<div className="space-y-2.5">
 						<GoogleAuth />
-						<FacebookAuth />
+						<DiscordAuth />
 					</div>
 					<div className="flex justify-center pt-3">
 						<p className="py-2 text-[.8rem] font-medium text-neutral-500 dark:text-neutral-400/90">

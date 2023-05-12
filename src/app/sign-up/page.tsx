@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
 import GoogleAuth from "@/components/GoogleAuth"
-import FacebookAuth from "@/components/FacebookAuth"
+import DiscordAuth from "@/components/DiscordAuth"
 import axios from "axios"
 import Link from "next/link"
 import { Collapse } from "react-collapse"
@@ -96,7 +96,7 @@ export default function SignUp() {
 				</div>
 				<div className="form-card w-full space-y-3">
 					<form className="flex flex-col gap-3.5" onSubmit={handleSubmit(onSubmit)}>
-						<div className="space-y-1">
+						<div className="space-y-1.5">
 							<label className="text-[.8rem] font-medium text-neutral-500 dark:text-white/80" htmlFor="firstname">
 								First name
 							</label>
@@ -120,7 +120,7 @@ export default function SignUp() {
 							</div>
 							{errors.firstname && <p className="text-xs font-medium text-red-500">{errors.firstname.message}</p>}
 						</div>
-						<div className="space-y-1">
+						<div className="space-y-1.5">
 							<label className="text-[.8rem] font-medium text-neutral-500 dark:text-white/80" htmlFor="firstname">
 								Last name
 							</label>
@@ -144,7 +144,7 @@ export default function SignUp() {
 							</div>
 							{errors.lastname && <p className="text-xs font-medium text-red-500">{errors.lastname.message}</p>}
 						</div>
-						<div className="space-y-1">
+						<div className="space-y-1.5">
 							<label className="text-[.8rem] font-medium text-neutral-500 dark:text-white/80" htmlFor="email">
 								Email
 							</label>
@@ -168,7 +168,7 @@ export default function SignUp() {
 							</div>
 							{errors.email && <p className="text-xs font-medium text-red-500">{errors.email.message}</p>}
 						</div>
-						<div className="relative mb-4 space-y-1">
+						<div className="relative mb-4 space-y-1.5">
 							<label className="text-[.8rem] font-medium text-neutral-500 dark:text-white/80" htmlFor="password">
 								Password
 							</label>
@@ -190,7 +190,7 @@ export default function SignUp() {
 									<Button
 										type="button"
 										onClick={showPassword ? () => setShowPassword(false) : () => setShowPassword(true)}
-										className="absolute right-2 top-1/2 h-6 -translate-y-[50%] cursor-pointer rounded border border-neutral-300 bg-white/90 px-2.5 py-1 transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-[#303030] dark:hover:bg-[#373737] dark:focus:border-neutral-600"
+										className="absolute right-2 top-1/2 h-6 -translate-y-[50%] cursor-pointer rounded border border-neutral-300 bg-white/90 px-2.5 py-1 transition hover:bg-neutral-50 dark:border-neutral-700 dark:bg-[#303030] dark:hover:bg-[#373737] dark:focus:border-neutral-600"
 									>
 										{showPassword ? (
 											<EyeOff className="h-4 w-4 cursor-pointer stroke-neutral-700 stroke-1 dark:stroke-neutral-300" />
@@ -297,13 +297,13 @@ export default function SignUp() {
 						</Button>
 					</form>
 					<div className="flex items-center justify-center gap-2 pb-2">
-						<div className="w-1/2 border-b dark:border-neutral-600/60"></div>
-						<span className="mb-0.5 text-sm text-black dark:text-white/90">or</span>
-						<div className="w-1/2 border-b dark:border-neutral-600/60"></div>
+						<div className="flex-1 border-b dark:border-neutral-600/60"></div>
+						<span className="text-sm text-black dark:text-white/90">or</span>
+						<div className="flex-1 border-b dark:border-neutral-600/60"></div>
 					</div>
 					<div className="space-y-2.5">
 						<GoogleAuth />
-						<FacebookAuth />
+						<DiscordAuth />
 					</div>
 					<div className="flex justify-center pt-3">
 						<p className="py-2 text-[.8rem] font-medium text-neutral-500 dark:text-neutral-400/90">

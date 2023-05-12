@@ -2,6 +2,7 @@ import bcrypt from "bcrypt"
 import { AuthOptions } from "next-auth"
 import NextAuth from "next-auth/next"
 import CredentialsProvider from "next-auth/providers/credentials"
+import DiscordProvider from "next-auth/providers/discord"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import client from "@/lib/prismadb"
@@ -17,6 +18,16 @@ export const authOptions: AuthOptions = {
 					id: profile.sub as string,
 					firstName: profile.given_name as string,
 					lastName: profile.family_name as string,
+					email: profile.email as string,
+				}
+			},
+		}),
+		DiscordProvider({
+			clientId: process.env.DISCORD_CLIENT_ID as string,
+			clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
+			profile(profile) {
+				return {
+					id: profile.id as string,
 					email: profile.email as string,
 				}
 			},
