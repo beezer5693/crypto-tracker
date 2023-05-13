@@ -133,7 +133,7 @@ export default function SignIn() {
 						<Button
 							disabled={isLoading}
 							type="submit"
-							className="mb-2 w-full gap-2 border border-emerald-600 bg-emerald-500 px-10 text-white shadow-sm transition duration-300 ease-in-out hover:bg-emerald-600 dark:border-emerald-500 dark:bg-emerald-500/70 dark:hover:border-emerald-500 dark:hover:bg-emerald-500"
+							className="mb-2 w-full gap-2 border border-emerald-500 bg-emerald-500 px-10 text-white shadow-sm transition duration-300 ease-out hover:border-emerald-500/90 hover:bg-emerald-500/90 dark:border-emerald-500 dark:bg-emerald-500/70 dark:hover:border-emerald-500 dark:hover:bg-emerald-500"
 						>
 							{isLoading ? (
 								<>
@@ -147,7 +147,7 @@ export default function SignIn() {
 					</form>
 					<div className="flex items-center justify-center gap-2 pb-2">
 						<div className="w-1/2 border-b dark:border-neutral-600/60"></div>
-						<span className="mb-0.5 text-[.825rem] font-medium text-black dark:text-white/90">or</span>
+						<span className="mb-0.5 text-[.85rem] font-medium text-black dark:text-white/90">or</span>
 						<div className="w-1/2 border-b dark:border-neutral-600/60"></div>
 					</div>
 					<div className="space-y-2.5">
