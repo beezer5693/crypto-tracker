@@ -61,7 +61,7 @@ export default function SignIn() {
 
 	return (
 		<>
-			<div className="mx-auto flex w-[300px] flex-1 flex-col items-center justify-center space-y-7 bg-transparent py-7 sm:w-[400px]">
+			<div className="mx-auto flex w-[350px] flex-1 flex-col items-center justify-center space-y-7 bg-transparent py-7 sm:w-[400px]">
 				<div className="w-full space-y-2">
 					<h1 className="text-2xl text-black dark:text-white sm:text-3xl">Welcome back</h1>
 					<p className="text-xs font-semibold text-neutral-500 dark:text-white/70">Sign in to your account</p>
