@@ -40,7 +40,7 @@ export default function DiscordAuth() {
 			{isLoading ? (
 				<Loader2 className="h-4 w-4 animate-spin text-white" />
 			) : (
-				<FaDiscord className="h-5 w-5 stroke-neutral-700 stroke-1 dark:stroke-neutral-200" />
+				<FaDiscord className="h-5 w-5 fill-neutral-700 dark:fill-neutral-200" />
 			)}
 			<span className="mt-0.5 text-[.95rem] text-neutral-700 dark:text-neutral-200">Continue with Discord</span>
 		</Button>

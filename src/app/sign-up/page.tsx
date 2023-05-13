@@ -1,6 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { signIn, useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { authSignUpSchema } from "@/lib/validators/authform"
@@ -32,6 +34,15 @@ export default function SignUp() {
 		{ regex: /[^A-Za-z0-9]/, isValidated: false },
 		{ regex: /.{8,}/, isValidated: false },
 	])
+
+	const session = useSession()
+	const router = useRouter()
+
+	useEffect(() => {
+		if (session?.status === "authenticated") {
+			router.push("/")
+		}
+	}, [session?.status, router])
 
 	const {
 		register,
@@ -73,7 +84,7 @@ export default function SignUp() {
 		axios
 			.post("/api/register", data)
 			.then(() => {
-				console.log("success")
+				signIn("credentials", data)
 			})
 			.catch(err => {
 				toast({
@@ -82,9 +93,7 @@ export default function SignUp() {
 					variant: "error",
 				})
 			})
-			.finally(() => {
-				setIsLoading(false)
-			})
+			.finally(() => setIsLoading(false))
 	}
 
 	return (
@@ -298,7 +307,7 @@ export default function SignUp() {
 					</form>
 					<div className="flex items-center justify-center gap-2 pb-2">
 						<div className="flex-1 border-b dark:border-neutral-600/60"></div>
-						<span className="text-sm text-black dark:text-white/90">or</span>
+						<span className="mb-0.5 text-[.825rem] font-medium text-black dark:text-white/90">or</span>
 						<div className="flex-1 border-b dark:border-neutral-600/60"></div>
 					</div>
 					<div className="space-y-2.5">

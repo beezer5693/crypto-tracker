@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
-import { signIn } from "next-auth/react"
+import { useEffect, useState } from "react"
+import { signIn, useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
@@ -17,6 +18,15 @@ import DiscordAuth from "@/components/DiscordAuth"
 export default function SignIn() {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [showPassword, setShowPassword] = useState<boolean>(false)
+
+	const session = useSession()
+	const router = useRouter()
+
+	useEffect(() => {
+		if (session?.status === "authenticated") {
+			router.push("/")
+		}
+	}, [session?.status, router])
 
 	const {
 		register,
@@ -43,7 +53,7 @@ export default function SignIn() {
 					})
 				}
 				if (cb?.ok && !cb?.error) {
-					console.log("logged in")
+					router.push("/")
 				}
 			})
 			.finally(() => setIsLoading(false))
@@ -103,7 +113,7 @@ export default function SignIn() {
 									<Button
 										type="button"
 										onClick={showPassword ? () => setShowPassword(false) : () => setShowPassword(true)}
-										className="absolute right-2 top-1/2 h-6 -translate-y-[50%] cursor-pointer rounded border border-neutral-300 bg-white/90 px-2.5 py-1 transition hover:bg-neutral-50 dark:border-neutral-700 dark:bg-[#303030] dark:ring-neutral-700 dark:hover:bg-[#373737] dark:focus:border-neutral-600 dark:focus:ring-1"
+										className="absolute right-2 top-1/2 h-6 -translate-y-[50%] cursor-pointer rounded border border-neutral-300 bg-white/90 px-2.5 py-1 transition hover:bg-neutral-50 dark:border-neutral-700 dark:bg-[#303030] dark:shadow-sm dark:shadow-black/20 dark:ring-neutral-700 dark:hover:bg-[#373737] dark:focus:border-neutral-600 dark:focus:ring-1"
 									>
 										{showPassword ? (
 											<EyeOff className="h-4 w-4 cursor-pointer stroke-neutral-700 stroke-1 dark:stroke-neutral-300" />
@@ -137,7 +147,7 @@ export default function SignIn() {
 					</form>
 					<div className="flex items-center justify-center gap-2 pb-2">
 						<div className="w-1/2 border-b dark:border-neutral-600/60"></div>
-						<span className="mb-0.5 text-sm text-black dark:text-white/90">or</span>
+						<span className="mb-0.5 text-[.825rem] font-medium text-black dark:text-white/90">or</span>
 						<div className="w-1/2 border-b dark:border-neutral-600/60"></div>
 					</div>
 					<div className="space-y-2.5">
