@@ -14,7 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={`${sans.className} relative min-h-screen bg-white antialiased dark:bg-black`}>
+			<body className={`${sans.className} relative min-h-screen scroll-smooth bg-white antialiased dark:bg-black`}>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
 					<AuthContext>
 						{children}

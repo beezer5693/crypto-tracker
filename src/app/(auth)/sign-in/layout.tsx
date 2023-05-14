@@ -14,7 +14,7 @@ interface Props {
 export default function layout({ children }: Props) {
 	return (
 		<div className="relative flex min-h-screen flex-col items-center justify-between bg-white px-6 py-7 dark:bg-[#1c1c1c]">
-			<AuthHeader className="justify-center">
+			<AuthHeader>
 				<Logo />
 			</AuthHeader>
 			{children}

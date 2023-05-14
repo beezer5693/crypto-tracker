@@ -36,7 +36,7 @@ export default function GoogleAuth() {
 			className="w-full gap-1.5 border border-neutral-300 bg-white shadow-sm transition duration-300 ease-out hover:border-neutral-400 hover:ring-2 hover:ring-transparent dark:border-neutral-600/40 dark:bg-neutral-700/50 dark:shadow-sm dark:shadow-black/30 dark:hover:bg-neutral-700/70"
 		>
 			{isLoading ? (
-				<Loader2 className="h-4 w-4 animate-spin text-white" />
+				<Loader2 className="h-4 w-4 animate-spin text-neutral-700 dark:text-neutral-200" />
 			) : (
 				<FaGoogle className="h-[17px] w-[17px] fill-neutral-700 dark:fill-neutral-200" />
 			)}
