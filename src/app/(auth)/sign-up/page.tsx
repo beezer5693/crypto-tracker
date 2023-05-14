@@ -17,6 +17,8 @@ import { Collapse } from "react-collapse"
 import { cn } from "@/lib/utils"
 import { Loader2, EyeOff, Eye, AlertCircle, Circle } from "lucide-react"
 import { AiFillCheckCircle } from "react-icons/ai"
+import { useMutation } from "@tanstack/react-query"
+import { sign } from "crypto"
 
 type ValidationType = {
 	regex: RegExp
@@ -24,7 +26,6 @@ type ValidationType = {
 }
 
 export default function SignUp() {
-	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [showPassword, setShowPassword] = useState<boolean>(false)
 	const [showPasswordValidation, setShowPasswordValidation] = useState<boolean>(false)
 	const [passwordValidationCheck, setPasswordValidationCheck] = useState<ValidationType[]>([
@@ -78,22 +79,26 @@ export default function SignUp() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [passwordInputValue])
 
+	const { mutate, isLoading } = useMutation({
+		mutationFn: async (formData: AuthFormType) => {
+			await axios.post("/api/register", formData)
+		},
+	})
+
 	// Handles form submission
-	const onSubmit: SubmitHandler<AuthFormType> = data => {
-		setIsLoading(true)
-		axios
-			.post("/api/register", data)
-			.then(() => {
-				signIn("credentials", data)
-			})
-			.catch(err => {
+	const onSubmit: SubmitHandler<AuthFormType> = formData => {
+		mutate(formData, {
+			onSuccess: () => {
+				signIn("credentials", formData)
+			},
+			onError: (error: any) => {
 				toast({
-					description: err.response.data,
-					duration: 100000,
+					description: error.response.data,
 					variant: "error",
+					duration: 100000,
 				})
-			})
-			.finally(() => setIsLoading(false))
+			},
+		})
 	}
 
 	return (

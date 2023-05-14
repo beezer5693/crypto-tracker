@@ -21,6 +21,7 @@ export default function SignIn() {
 
 	const session = useSession()
 	const router = useRouter()
+	const { toast } = useToast()
 
 	useEffect(() => {
 		if (session?.status === "authenticated") {
@@ -34,25 +35,23 @@ export default function SignIn() {
 		formState: { errors },
 	} = useForm<AuthFormType>({ resolver: zodResolver(authSignInSchema) })
 
-	const { toast } = useToast()
-
 	// Runs the sign in function from next-auth
 	// See @/api/auth/[...nextauth] for details
-	const onSubmit: SubmitHandler<AuthFormType> = data => {
+	const onSubmit: SubmitHandler<AuthFormType> = formData => {
 		setIsLoading(true)
 		signIn("credentials", {
-			...data,
+			...formData,
 			redirect: false,
 		})
-			.then(cb => {
-				if (cb?.error) {
+			.then(callback => {
+				if (callback?.error) {
 					toast({
 						description: "Invalid login credentials",
 						duration: 100000,
 						variant: "error",
 					})
 				}
-				if (cb?.ok && !cb?.error) {
+				if (callback?.ok && !callback?.error) {
 					router.push("/")
 				}
 			})

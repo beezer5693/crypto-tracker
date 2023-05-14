@@ -1,4 +1,4 @@
-import AuthHeader from "@/components/auth/AuthHeader"
+import Header from "@/components/Header"
 import PrivacyAndTerms from "@/components/auth/PrivacyAndTerms"
 import Logo from "@/components/Logo"
 
@@ -14,9 +14,9 @@ interface Props {
 export default function layout({ children }: Props) {
 	return (
 		<div className="relative flex min-h-screen flex-col items-center justify-between gap-10 bg-white px-6 py-7 dark:bg-[#1c1c1c]">
-			<AuthHeader>
+			<Header>
 				<Logo />
-			</AuthHeader>
+			</Header>
 			{children}
 			<PrivacyAndTerms />
 		</div>
