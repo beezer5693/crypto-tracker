@@ -12,8 +12,8 @@ import Link from "next/link"
 import { AlertCircle, Eye, EyeOff, Loader2 } from "lucide-react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useToast } from "@/components/ui/use-toast"
-import GoogleAuth from "@/components/GoogleAuth"
-import DiscordAuth from "@/components/DiscordAuth"
+import GoogleAuth from "@/components/auth/GoogleAuth"
+import DiscordAuth from "@/components/auth/DiscordAuth"
 
 export default function SignIn() {
 	const [isLoading, setIsLoading] = useState<boolean>(false)

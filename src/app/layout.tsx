@@ -1,6 +1,7 @@
 import "./globals.css"
 import { Public_Sans } from "next/font/google"
 import ThemeProvider from "@/components/providers/theme-provider"
+import QueryProvider from "@/components/providers/query-provider"
 import AuthContext from "@/context/AuthContext"
 import { Toaster } from "@/components/ui/toaster"
 
@@ -16,10 +17,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang="en" suppressHydrationWarning>
 			<body className={`${sans.className} relative min-h-screen scroll-smooth bg-white antialiased dark:bg-black`}>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
-					<AuthContext>
-						{children}
-						<Toaster />
-					</AuthContext>
+					<QueryProvider>
+						<AuthContext>
+							{children}
+							<Toaster />
+						</AuthContext>
+					</QueryProvider>
 				</ThemeProvider>
 			</body>
 		</html>

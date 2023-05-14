@@ -1,5 +1,5 @@
-import AuthHeader from "@/components/AuthHeader"
-import PrivacyAndTerms from "@/components/PrivacyAndTerms"
+import AuthHeader from "@/components/auth/AuthHeader"
+import PrivacyAndTerms from "@/components/auth/PrivacyAndTerms"
 import Logo from "@/components/Logo"
 
 export const metadata = {

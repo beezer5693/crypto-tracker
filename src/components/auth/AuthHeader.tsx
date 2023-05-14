@@ -1,4 +1,3 @@
-import Logo from "./Logo"
 import { cn } from "@/lib/utils"
 
 type AuthHeaderProps = {
