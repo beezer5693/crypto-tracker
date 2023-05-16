@@ -46,17 +46,17 @@ interface Data {
 	}
 }
 
-export default function useFetchMarketLatest() {
+export default function useFetchLatest() {
 	return useQuery({
 		queryKey: ["market-snapshot"],
 		queryFn: async () => {
-			const { data } = await axios.get("/api/crypto", {
+			const { data } = await axios.get("/api/latest/crypto", {
 				headers: {
 					"X-CMC_PRO_API_KEY": process.env.COIN_MARKET_CAP_API_KEY,
 				},
 			})
 
-			return data as Data
+			return data
 		},
 	})
 }

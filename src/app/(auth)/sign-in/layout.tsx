@@ -15,7 +15,7 @@ export default function layout({ children }: Props) {
 	return (
 		<div className="relative flex min-h-screen flex-col items-center justify-between bg-white px-6 py-7 dark:bg-[#1c1c1c]">
 			<Header>
-				<Logo />
+				<Logo height={25} width={25} className="text-[1.1rem]" />
 			</Header>
 			{children}
 			<PrivacyAndTerms />

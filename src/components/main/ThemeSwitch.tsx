@@ -14,15 +14,15 @@ export default function ThemeSwitch() {
 
 	return (
 		<>
-			{theme === "light" ? (
+			{theme === "dark" ? (
 				<Sun
-					onClick={() => setTheme("dark")}
-					className="h-4 w-4 cursor-pointer stroke-1 dark:stroke-neutral-400 hover:dark:stroke-neutral-200"
+					onClick={() => setTheme("light")}
+					className="h-[18px] w-[18px] cursor-pointer stroke-1 transition duration-300 ease-out dark:stroke-neutral-400 hover:dark:stroke-neutral-200"
 				/>
 			) : (
 				<Moon
-					onClick={() => setTheme("light")}
-					className="h-4 w-4 cursor-pointer stroke-1 dark:stroke-neutral-400 hover:dark:stroke-neutral-200"
+					onClick={() => setTheme("dark")}
+					className="h-[18px] w-[18px] cursor-pointer stroke-neutral-500 stroke-1 transition duration-300 ease-out hover:stroke-neutral-900"
 				/>
 			)}
 		</>
