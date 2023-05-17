@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
-export function useQuote() {
+export function useQuoteLatest(...symbols: string[]) {
 	return useQuery({
 		queryKey: ["listings-latest"],
 		queryFn: async () => {
-			const { data } = await axios.get("/api/crypto/quote", {
+			const { data } = await axios.get(`/api/crypto/quote?symbol=${symbols.join(",")}`, {
 				headers: {
 					"X-CMC_PRO_API_KEY": process.env.COIN_MARKET_CAP_API_KEY,
 				},
@@ -26,7 +26,7 @@ export function useGlobalMetrics() {
 				},
 			})
 
-			return data
+			return data as GlobalMetricsData
 		},
 	})
 }

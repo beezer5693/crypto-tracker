@@ -12,7 +12,7 @@ import {
 	CommandShortcut,
 } from "@/components/ui/command"
 import { Search as SearchIcon } from "lucide-react"
-import { Button } from "../ui/button"
+import { Button } from "../../ui/button"
 
 export default function Search() {
 	const [open, setOpen] = useState<boolean>(false)
@@ -28,7 +28,7 @@ export default function Search() {
 	}, [])
 	return (
 		<>
-			<div className="relative w-60">
+			<div className="relative w-80">
 				<SearchIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 stroke-neutral-500 dark:stroke-neutral-400" />
 				<Button
 					onClick={() => setOpen(true)}
@@ -36,7 +36,7 @@ export default function Search() {
 				>
 					Search cryptos...
 				</Button>
-				<div className="absolute right-1.5 top-1/2 flex h-5 -translate-y-1/2 items-center justify-center gap-[.2rem] rounded border border-neutral-300/90 bg-neutral-200/60 px-2 dark:border-neutral-700 dark:bg-[#303030]">
+				<div className="absolute right-1.5 top-1/2 hidden h-5 -translate-y-1/2 items-center justify-center gap-[.2rem] rounded border border-neutral-300/90 bg-neutral-200/60 px-2 dark:border-neutral-700 dark:bg-[#303030] sm:flex">
 					<span className="text-xs">⌘</span>
 					<span className="text-xs">K</span>
 				</div>

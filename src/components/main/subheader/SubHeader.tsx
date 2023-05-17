@@ -1,11 +1,11 @@
 import Link from "next/link"
 import ThemeSwitch from "./ThemeSwitch"
-import { Button } from "../ui/button"
+import { Button } from "../../ui/button"
 import MarketSnapShot from "./MarketSnapShot"
 
 export default function SubHeader() {
 	return (
-		<header className="flex items-center justify-between border-b border-neutral-200/60 bg-neutral-200/10 px-8 py-2 dark:border-neutral-700/50 dark:bg-transparent">
+		<header className="flex items-center justify-between border-b border-neutral-200/60 bg-transparent px-8 py-2  dark:border-neutral-800/70">
 			<MarketSnapShot />
 			<div className="flex shrink-0 items-center gap-3 pl-3">
 				<ThemeSwitch />
