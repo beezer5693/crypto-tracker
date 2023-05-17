@@ -5,7 +5,7 @@ import { PieChart, Star } from "lucide-react"
 
 export default function MainHeader() {
 	return (
-		<Header className="sticky top-0 w-full flex-col gap-5 border-b border-neutral-200/60 bg-transparent px-8 py-3.5 shadow-md shadow-neutral-200/30 backdrop-blur dark:border-neutral-800/70 dark:shadow-black/10 sm:flex-row">
+		<Header className="sticky top-0 flex w-full flex-col gap-5 border-b border-neutral-200/60 bg-transparent px-8 py-3.5 shadow-md shadow-neutral-200/30 backdrop-blur dark:border-neutral-800/70 dark:shadow-black/10 md:flex-row">
 			<Logo height={20} width={20} />
 			<div className="flex flex-col-reverse items-center gap-2.5 sm:flex-row">
 				<div className="flex items-center gap-0.5">

@@ -13,7 +13,7 @@ export default function HeroTitle() {
 	const [isOpened, setIsOpened] = useState<boolean>(false)
 
 	return (
-		<div className="flex flex-col items-center gap-1.5 sm:items-start">
+		<div className="flex flex-col items-center gap-1.5 py-1 sm:items-start">
 			<h1 className="text-sm font-bold text-neutral-800 dark:text-neutral-200 sm:text-xl">
 				{"Today's Cryptocurrency Prices by Market Cap"}
 			</h1>
@@ -70,23 +70,23 @@ export default function HeroTitle() {
 			</div>
 			{data && (
 				<Collapse isOpened={isOpened}>
-					<p className="mt-2 inline-flex flex-wrap items-center text-[.8rem] font-medium text-neutral-600 dark:text-neutral-400 sm:justify-start">
+					<p className="mt-2 text-[.8rem] font-medium text-neutral-600 dark:text-neutral-400 sm:justify-start">
 						The total crypto market volume over the last 24 hours is
 						<span className="mx-1 font-bold text-neutral-600 dark:text-neutral-300">
 							{formatCurrency(data.data.quote.USD.total_volume_24h, "currency", "USD", "compact", 2)},
 						</span>
 						which makes a
 						<span
-							className={`mx-1 inline-flex items-center text-[.8rem] font-bold ${
+							className={`mx-1 inline text-[.8rem] font-bold ${
 								data.data.quote.USD.total_volume_24h_yesterday_percentage_change < 0
 									? "text-red-500"
 									: "text-emerald-500"
 							}`}
 						>
 							{data.data.quote.USD.total_volume_24h_yesterday_percentage_change < 0 ? (
-								<ChevronDown className="h-3 w-3 text-red-500" />
+								<ChevronDown className="inline h-3 w-3 text-red-500" />
 							) : (
-								<ChevronUp className="h-3 w-3 text-emerald-500" />
+								<ChevronUp className="inline h-3 w-3 text-emerald-500" />
 							)}
 							{formatNumber(
 								Math.abs(data.data.quote.USD.total_volume_24h_yesterday_percentage_change),
@@ -135,16 +135,16 @@ export default function HeroTitle() {
 							{data.data.btc_dominance_24h_percentage_change < 0 ? "decrease" : "increase"} of
 						</span>
 						<span
-							className={`mr-1 inline-flex items-center gap-0.5 text-[.8rem] font-bold ${
+							className={`mr-1 inline text-[.8rem] font-bold ${
 								data.data.quote.USD.total_market_cap_yesterday_percentage_change < 0
 									? "text-red-500"
 									: "text-emerald-500"
 							}`}
 						>
 							{data.data.btc_dominance_24h_percentage_change < 0 ? (
-								<ChevronDown className="h-3 w-3 text-red-500" />
+								<ChevronDown className="inline h-3 w-3 text-red-500" />
 							) : (
-								<ChevronUp className="h-3 w-3 text-emerald-500" />
+								<ChevronUp className="inline h-3 w-3 text-emerald-500" />
 							)}
 							{formatNumber(Math.abs(data.data.btc_dominance_24h_percentage_change), "decimal", "standard", 2)}%
 						</span>

@@ -5,12 +5,13 @@ import { Card, CardHeader, CardTitle, CardContent } from "../../ui/card"
 import { useQuoteLatest } from "@/hooks/useQuote"
 import { Skeleton } from "@/components/ui/skeleton"
 import { formatCurrency, formatNumber } from "@/lib/formatNums"
+import Image from "next/image"
 
 export default function HeroCards() {
 	const { data, isLoading } = useQuoteLatest("BTC", "ETH", "SOL", "ADA", "XRP", "DOGE", "AVAX", "XMR", "DOT")
 
 	return (
-		<div className="mt-6 grid grid-cols-1 gap-3.5 sm:grid-cols-3">
+		<div className="mt-3 grid gap-3.5 sm:grid-cols-1 md:grid-cols-3">
 			<Card className="col-span-1 flex flex-col justify-between space-y-5">
 				<CardHeader>
 					<CardTitle className="flex items-center gap-3">
@@ -26,6 +27,11 @@ export default function HeroCards() {
 							<div className="flex items-center gap-3">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">1</div>
 								<div className="flex items-center gap-2">
+									{isLoading ? (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									) : data ? (
+										<Image src={`/crypto-icons/${data.data.BTC[0].symbol}.svg`} height={15} width={15} alt={""} />
+									) : null}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -60,9 +66,14 @@ export default function HeroCards() {
 							</div>
 						</div>
 						<div className="flex items-center justify-between gap-2">
-							<div className="flex items-center gap-3">
+							<div className="flex items-center gap-2.5">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">2</div>
 								<div className="flex items-center gap-2">
+									{isLoading ? (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									) : data ? (
+										<Image src={`/crypto-icons/${data.data.ETH[0].symbol}.svg`} height={15} width={15} alt={""} />
+									) : null}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -97,9 +108,14 @@ export default function HeroCards() {
 							</div>
 						</div>
 						<div className="flex items-center justify-between gap-2">
-							<div className="flex items-center gap-3">
+							<div className="flex items-center gap-2.5">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">3</div>
 								<div className="flex items-center gap-2">
+									{isLoading ? (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									) : data ? (
+										<Image src={`/crypto-icons/${data.data.SOL[0].symbol}.svg`} height={15} width={15} alt={""} />
+									) : null}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -152,6 +168,11 @@ export default function HeroCards() {
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">1</div>
 								<div className="flex items-center gap-2">
 									{isLoading ? (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									) : data ? (
+										<Image src={`/crypto-icons/${data.data.ADA[0].symbol}.svg`} height={15} width={15} alt={""} />
+									) : null}
+									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
 										<div className="text-[.8rem] font-bold text-neutral-800 dark:text-neutral-300">
@@ -183,6 +204,11 @@ export default function HeroCards() {
 							<div className="flex items-center gap-3">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">2</div>
 								<div className="flex items-center gap-2">
+									{isLoading ? (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									) : data ? (
+										<Image src={`/crypto-icons/${data.data.DOGE[0].symbol}.svg`} height={15} width={15} alt={""} />
+									) : null}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -217,6 +243,11 @@ export default function HeroCards() {
 							<div className="flex items-center gap-3">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">3</div>
 								<div className="flex items-center gap-2">
+									{isLoading ? (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									) : data ? (
+										<Image src={`/crypto-icons/${data.data.XMR[0].symbol}.svg`} height={15} width={15} alt={""} />
+									) : null}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -264,6 +295,11 @@ export default function HeroCards() {
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">1</div>
 								<div className="flex items-center gap-2">
 									{isLoading ? (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									) : data ? (
+										<Image src={`/crypto-icons/${data.data.DOT[0].symbol}.svg`} height={15} width={15} alt={""} />
+									) : null}
+									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
 										<div className="text-[.8rem] font-bold text-neutral-800 dark:text-neutral-300">
@@ -301,6 +337,11 @@ export default function HeroCards() {
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">2</div>
 								<div className="flex items-center gap-2">
 									{isLoading ? (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									) : data ? (
+										<Image src={`/crypto-icons/${data.data.XMR[0].symbol}.svg`} height={15} width={15} alt={""} />
+									) : null}
+									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
 										<div className="text-[.8rem] font-bold text-neutral-800 dark:text-neutral-300">
@@ -337,6 +378,11 @@ export default function HeroCards() {
 							<div className="flex items-center gap-3">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">3</div>
 								<div className="flex items-center gap-2">
+									{isLoading ? (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									) : data ? (
+										<Image src={`/crypto-icons/${data.data.AVAX[0].symbol}.svg`} height={15} width={15} alt={""} />
+									) : null}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
