@@ -1,14 +1,29 @@
 "use client"
 
-import { Flame, ChevronUp, ChevronDown, Clock, TrendingUp } from "lucide-react"
+import { Flame, Clock, TrendingUp } from "lucide-react"
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io"
 import { Card, CardHeader, CardTitle, CardContent } from "../../ui/card"
 import { useQuoteLatest } from "@/hooks/useQuote"
 import { Skeleton } from "@/components/ui/skeleton"
 import { formatCurrency, formatNumber } from "@/lib/formatNums"
 import Image from "next/image"
+import axios from "axios"
+import { useQuery } from "@tanstack/react-query"
+
+function getMetaData(...symbols: string[]) {
+	return axios.get("/api/crypto/meta-data?symbol=" + symbols.join(","))
+}
 
 export default function HeroCards() {
 	const { data, isLoading } = useQuoteLatest("BTC", "ETH", "SOL", "ADA", "XRP", "DOGE", "AVAX", "XMR", "DOT")
+
+	const { data: metaData, isLoading: metaDataLoading } = useQuery(
+		["metaData", data],
+		() => getMetaData("BTC", "ETH", "SOL", "ADA", "XRP", "DOGE", "AVAX", "XMR", "DOT"),
+		{
+			enabled: !!data,
+		}
+	)
 
 	return (
 		<div className="mt-3 grid gap-3.5 sm:grid-cols-1 md:grid-cols-3">
@@ -27,11 +42,26 @@ export default function HeroCards() {
 							<div className="flex items-center gap-3">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">1</div>
 								<div className="flex items-center gap-2">
-									{isLoading ? (
+									{metaDataLoading || isLoading ? (
 										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
-									) : data ? (
-										<Image src={`/crypto-icons/${data.data.BTC[0].symbol}.svg`} height={15} width={15} alt={""} />
-									) : null}
+									) : metaData ? (
+										<Image
+											className="rounded-full"
+											src={`${Object.values(metaData?.data.data)
+												.flat()
+												.map((item: any) => {
+													if (item.id === data.data.BTC[0].id) {
+														return item.logo
+													}
+												})
+												.join("")}`}
+											height={15}
+											width={15}
+											alt={data.data.BTC[0].name}
+										/>
+									) : (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									)}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -56,9 +86,9 @@ export default function HeroCards() {
 										}`}
 									>
 										{data.data.BTC[0].quote.USD.percent_change_24h < 0 ? (
-											<ChevronDown className="h-3 w-3 text-red-500" />
+											<IoMdArrowDropdown className="h-5 w-5 text-red-500" />
 										) : (
-											<ChevronUp className="h-3 w-3 text-emerald-500" />
+											<IoMdArrowDropup className="h-5 w-5 text-emerald-500" />
 										)}
 										{formatNumber(Math.abs(data.data.BTC[0].quote.USD.percent_change_24h), "decimal", "standard", 2)}%
 									</div>
@@ -69,11 +99,26 @@ export default function HeroCards() {
 							<div className="flex items-center gap-2.5">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">2</div>
 								<div className="flex items-center gap-2">
-									{isLoading ? (
+									{metaDataLoading || isLoading ? (
 										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
-									) : data ? (
-										<Image src={`/crypto-icons/${data.data.ETH[0].symbol}.svg`} height={15} width={15} alt={""} />
-									) : null}
+									) : metaData ? (
+										<Image
+											className="rounded-full"
+											src={`${Object.values(metaData?.data.data)
+												.flat()
+												.map((item: any) => {
+													if (item.id === data.data.ETH[0].id) {
+														return item.logo
+													}
+												})
+												.join("")}`}
+											height={15}
+											width={15}
+											alt={data.data.ETH[0].name}
+										/>
+									) : (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									)}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -98,9 +143,9 @@ export default function HeroCards() {
 										}`}
 									>
 										{data.data.ETH[0].quote.USD.percent_change_24h < 0 ? (
-											<ChevronDown className="h-3 w-3 text-red-500" />
+											<IoMdArrowDropdown className="h-5 w-5 text-red-500" />
 										) : (
-											<ChevronUp className="h-3 w-3 text-emerald-500" />
+											<IoMdArrowDropup className="h-5 w-5 text-emerald-500" />
 										)}
 										{formatNumber(Math.abs(data.data.ETH[0].quote.USD.percent_change_24h), "decimal", "standard", 2)}%
 									</div>
@@ -111,11 +156,26 @@ export default function HeroCards() {
 							<div className="flex items-center gap-2.5">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">3</div>
 								<div className="flex items-center gap-2">
-									{isLoading ? (
+									{metaDataLoading || isLoading ? (
 										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
-									) : data ? (
-										<Image src={`/crypto-icons/${data.data.SOL[0].symbol}.svg`} height={15} width={15} alt={""} />
-									) : null}
+									) : metaData ? (
+										<Image
+											className="rounded-full"
+											src={`${Object.values(metaData?.data.data)
+												.flat()
+												.map((item: any) => {
+													if (item.id === data.data.SOL[0].id) {
+														return item.logo
+													}
+												})
+												.join("")}`}
+											height={15}
+											width={15}
+											alt={data.data.SOL[0].name}
+										/>
+									) : (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									)}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -140,9 +200,9 @@ export default function HeroCards() {
 										}`}
 									>
 										{data.data.SOL[0].quote.USD.percent_change_24h < 0 ? (
-											<ChevronDown className="h-3 w-3 text-red-500" />
+											<IoMdArrowDropdown className="h-5 w-5 text-red-500" />
 										) : (
-											<ChevronUp className="h-3 w-3 text-emerald-500" />
+											<IoMdArrowDropup className="h-5 w-5 text-emerald-500" />
 										)}
 										{formatNumber(Math.abs(data.data.SOL[0].quote.USD.percent_change_24h), "decimal", "standard", 2)}%
 									</div>
@@ -167,11 +227,26 @@ export default function HeroCards() {
 							<div className="flex items-center gap-3">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">1</div>
 								<div className="flex items-center gap-2">
-									{isLoading ? (
+									{metaDataLoading || isLoading ? (
 										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
-									) : data ? (
-										<Image src={`/crypto-icons/${data.data.ADA[0].symbol}.svg`} height={15} width={15} alt={""} />
-									) : null}
+									) : metaData ? (
+										<Image
+											className="rounded-full"
+											src={`${Object.values(metaData?.data.data)
+												.flat()
+												.map((item: any) => {
+													if (item.id === data.data.ADA[0].id) {
+														return item.logo
+													}
+												})
+												.join("")}`}
+											height={15}
+											width={15}
+											alt={data.data.ADA[0].name}
+										/>
+									) : (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									)}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -201,14 +276,29 @@ export default function HeroCards() {
 							</div>
 						</div>
 						<div className="flex items-center justify-between gap-2">
-							<div className="flex items-center gap-3">
+							<div className="flex items-center gap-2.5">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">2</div>
 								<div className="flex items-center gap-2">
-									{isLoading ? (
+									{metaDataLoading || isLoading ? (
 										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
-									) : data ? (
-										<Image src={`/crypto-icons/${data.data.DOGE[0].symbol}.svg`} height={15} width={15} alt={""} />
-									) : null}
+									) : metaData ? (
+										<Image
+											className="rounded-full"
+											src={`${Object.values(metaData?.data.data)
+												.flat()
+												.map((item: any) => {
+													if (item.id === data.data.DOGE[0].id) {
+														return item.logo
+													}
+												})
+												.join("")}`}
+											height={15}
+											width={15}
+											alt={data.data.DOGE[0].name}
+										/>
+									) : (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									)}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -240,14 +330,29 @@ export default function HeroCards() {
 							</div>
 						</div>
 						<div className="flex items-center justify-between gap-2">
-							<div className="flex items-center gap-3">
+							<div className="flex items-center gap-2.5">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">3</div>
 								<div className="flex items-center gap-2">
-									{isLoading ? (
+									{metaDataLoading || isLoading ? (
 										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
-									) : data ? (
-										<Image src={`/crypto-icons/${data.data.XMR[0].symbol}.svg`} height={15} width={15} alt={""} />
-									) : null}
+									) : metaData ? (
+										<Image
+											className="rounded-full"
+											src={`${Object.values(metaData?.data.data)
+												.flat()
+												.map((item: any) => {
+													if (item.id === data.data.XRP[0].id) {
+														return item.logo
+													}
+												})
+												.join("")}`}
+											height={15}
+											width={15}
+											alt={data.data.XRP[0].name}
+										/>
+									) : (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									)}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -294,11 +399,26 @@ export default function HeroCards() {
 							<div className="flex items-center gap-3">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">1</div>
 								<div className="flex items-center gap-2">
-									{isLoading ? (
+									{metaDataLoading || isLoading ? (
 										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
-									) : data ? (
-										<Image src={`/crypto-icons/${data.data.DOT[0].symbol}.svg`} height={15} width={15} alt={""} />
-									) : null}
+									) : metaData ? (
+										<Image
+											className="rounded-full"
+											src={`${Object.values(metaData?.data.data)
+												.flat()
+												.map((item: any) => {
+													if (item.id === data.data.DOT[0].id) {
+														return item.logo
+													}
+												})
+												.join("")}`}
+											height={15}
+											width={15}
+											alt={data.data.DOT[0].name}
+										/>
+									) : (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									)}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -323,9 +443,9 @@ export default function HeroCards() {
 										}`}
 									>
 										{data.data.DOT[0].quote.USD.percent_change_24h < 0 ? (
-											<ChevronDown className="h-3 w-3 text-red-500" />
+											<IoMdArrowDropdown className="h-5 w-5 text-red-500" />
 										) : (
-											<ChevronUp className="h-3 w-3 text-emerald-500" />
+											<IoMdArrowDropup className="h-5 w-5 text-emerald-500" />
 										)}
 										{formatNumber(Math.abs(data.data.DOT[0].quote.USD.percent_change_24h), "decimal", "standard", 2)}%
 									</div>
@@ -333,14 +453,29 @@ export default function HeroCards() {
 							</div>
 						</div>
 						<div className="flex items-center justify-between gap-2">
-							<div className="flex items-center gap-3">
+							<div className="flex items-center gap-2.5">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">2</div>
 								<div className="flex items-center gap-2">
-									{isLoading ? (
+									{metaDataLoading || isLoading ? (
 										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
-									) : data ? (
-										<Image src={`/crypto-icons/${data.data.XMR[0].symbol}.svg`} height={15} width={15} alt={""} />
-									) : null}
+									) : metaData ? (
+										<Image
+											className="rounded-full"
+											src={`${Object.values(metaData?.data.data)
+												.flat()
+												.map((item: any) => {
+													if (item.id === data.data.XMR[0].id) {
+														return item.logo
+													}
+												})
+												.join("")}`}
+											height={15}
+											width={15}
+											alt={data.data.XMR[0].name}
+										/>
+									) : (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									)}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -365,9 +500,9 @@ export default function HeroCards() {
 										}`}
 									>
 										{data.data.XMR[0].quote.USD.percent_change_24h < 0 ? (
-											<ChevronDown className="h-3 w-3 text-red-500" />
+											<IoMdArrowDropdown className="h-5 w-5 text-red-500" />
 										) : (
-											<ChevronUp className="h-3 w-3 text-emerald-500" />
+											<IoMdArrowDropup className="h-5 w-5 text-emerald-500" />
 										)}
 										{formatNumber(Math.abs(data.data.XMR[0].quote.USD.percent_change_24h), "decimal", "standard", 2)}%
 									</div>
@@ -375,14 +510,29 @@ export default function HeroCards() {
 							</div>
 						</div>
 						<div className="flex items-center justify-between gap-2">
-							<div className="flex items-center gap-3">
+							<div className="flex items-center gap-2.5">
 								<div className="text-[.8rem] text-neutral-500 dark:text-neutral-400">3</div>
 								<div className="flex items-center gap-2">
-									{isLoading ? (
+									{metaDataLoading || isLoading ? (
 										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
-									) : data ? (
-										<Image src={`/crypto-icons/${data.data.AVAX[0].symbol}.svg`} height={15} width={15} alt={""} />
-									) : null}
+									) : metaData ? (
+										<Image
+											className="rounded-full"
+											src={`${Object.values(metaData?.data.data)
+												.flat()
+												.map((item: any) => {
+													if (item.id === data.data.AVAX[0].id) {
+														return item.logo
+													}
+												})
+												.join("")}`}
+											height={15}
+											width={15}
+											alt={data.data.AVAX[0].name}
+										/>
+									) : (
+										<Skeleton className="h-[15px] w-[15px] rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
+									)}
 									{isLoading ? (
 										<Skeleton className="h-3 w-[41px] bg-neutral-200 dark:bg-neutral-700/50" />
 									) : data ? (
@@ -409,9 +559,9 @@ export default function HeroCards() {
 										}`}
 									>
 										{data.data.AVAX[0].quote.USD.percent_change_24h < 0 ? (
-											<ChevronDown className="h-3 w-3 text-red-500" />
+											<IoMdArrowDropdown className="h-5 w-5 text-red-500" />
 										) : (
-											<ChevronUp className="h-3 w-3 text-emerald-500" />
+											<IoMdArrowDropup className="h-5 w-5 text-emerald-500" />
 										)}
 										{formatNumber(Math.abs(data.data.AVAX[0].quote.USD.percent_change_24h), "decimal", "standard", 2)}%
 									</div>

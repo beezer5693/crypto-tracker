@@ -1,12 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
-export default function useFetchLatest() {
-	console.log(process.env.NEXT_PUBLIX_COIN_MARKET_CAP_API_KEY)
+export function useLatest() {
 	return useQuery({
 		queryKey: ["market-snapshot"],
 		queryFn: async () => {
-			const { data } = await axios.get("/api/latest/crypto", {
+			const { data } = await axios.get("/api/crypto/latest", {
 				headers: {
 					"X-CMC_PRO_API_KEY": process.env.COIN_MARKET_CAP_API_KEY,
 				},

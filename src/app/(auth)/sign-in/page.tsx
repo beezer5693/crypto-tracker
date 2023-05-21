@@ -19,15 +19,8 @@ export default function SignIn() {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [showPassword, setShowPassword] = useState<boolean>(false)
 
-	const session = useSession()
 	const router = useRouter()
 	const { toast } = useToast()
-
-	useEffect(() => {
-		if (session?.status === "authenticated") {
-			router.push("/")
-		}
-	}, [session?.status, router])
 
 	const {
 		register,
@@ -131,7 +124,7 @@ export default function SignIn() {
 					<Button
 						disabled={isLoading}
 						type="submit"
-						className="mb-2 gap-2 border border-emerald-500 bg-emerald-500 text-white shadow-sm transition duration-300 ease-out hover:border-emerald-500/90 hover:bg-emerald-500/90 dark:border-emerald-500 dark:bg-emerald-500/70 dark:hover:border-emerald-500 dark:hover:bg-emerald-500"
+						className="mb-2 gap-2 border-x border-t border-emerald-400 bg-emerald-600 text-white shadow-sm transition duration-300 ease-out hover:bg-emerald-400 dark:border-emerald-500 dark:bg-emerald-500/60 dark:hover:border-emerald-500 dark:hover:bg-emerald-500"
 					>
 						{isLoading ? (
 							<>

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useGlobalMetrics } from "@/hooks/useQuote"
 import { Skeleton } from "../../ui/skeleton"
-import { ChevronDown, ChevronUp } from "lucide-react"
+import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io"
 import { formatNumber, formatCurrency } from "@/lib/formatNums"
 import { Button } from "@/components/ui/button"
 import { Collapse } from "react-collapse"
@@ -36,16 +36,16 @@ export default function HeroTitle() {
 						<Skeleton className="h-3 w-[40px] bg-neutral-200 dark:bg-neutral-700/50" />
 					) : data ? (
 						<span
-							className={`inline-flex items-center gap-0.5 text-[.8rem] font-bold ${
-								data.data.quote.USD.total_market_cap_yesterday_percentage_change < 0
+							className={`inline-flex items-center text-[.8rem] font-bold ${
+								Math.sign(data.data.quote.USD.total_market_cap_yesterday_percentage_change) === -1
 									? "text-red-500"
 									: "text-emerald-500"
 							}`}
 						>
-							{data.data.quote.USD.total_market_cap_yesterday_percentage_change < 0 ? (
-								<ChevronDown className="h-3 w-3 text-red-500" />
+							{Math.sign(data.data.quote.USD.total_market_cap_yesterday_percentage_change) === -1 ? (
+								<IoMdArrowDropdown className="h-5 w-5 text-red-500" />
 							) : (
-								<ChevronUp className="h-3 w-3 text-emerald-500" />
+								<IoMdArrowDropup className="h-5 w-5 text-emerald-500" />
 							)}
 							{formatNumber(
 								Math.abs(data.data.quote.USD.total_market_cap_yesterday_percentage_change),
@@ -70,7 +70,7 @@ export default function HeroTitle() {
 			</div>
 			{data && (
 				<Collapse isOpened={isOpened}>
-					<p className="mt-2 text-[.8rem] font-medium text-neutral-600 dark:text-neutral-400 sm:justify-start">
+					<p className="mt-2 max-w-4xl text-[.8rem] font-medium text-neutral-600 dark:text-neutral-400 sm:justify-start">
 						The total crypto market volume over the last 24 hours is
 						<span className="mx-1 font-bold text-neutral-600 dark:text-neutral-300">
 							{formatCurrency(data.data.quote.USD.total_volume_24h, "currency", "USD", "compact", 2)},
@@ -78,15 +78,15 @@ export default function HeroTitle() {
 						which makes a
 						<span
 							className={`mx-1 inline text-[.8rem] font-bold ${
-								data.data.quote.USD.total_volume_24h_yesterday_percentage_change < 0
+								Math.sign(data.data.quote.USD.total_volume_24h_yesterday_percentage_change) === -1
 									? "text-red-500"
 									: "text-emerald-500"
 							}`}
 						>
-							{data.data.quote.USD.total_volume_24h_yesterday_percentage_change < 0 ? (
-								<ChevronDown className="inline h-3 w-3 text-red-500" />
+							{Math.sign(data.data.quote.USD.total_volume_24h_yesterday_percentage_change) === -1 ? (
+								<IoMdArrowDropdown className="inline h-5 w-5 text-red-500" />
 							) : (
-								<ChevronUp className="inline h-3 w-3 text-emerald-500" />
+								<IoMdArrowDropup className="inline h-5 w-5 text-emerald-500" />
 							)}
 							{formatNumber(
 								Math.abs(data.data.quote.USD.total_volume_24h_yesterday_percentage_change),
@@ -136,15 +136,13 @@ export default function HeroTitle() {
 						</span>
 						<span
 							className={`mr-1 inline text-[.8rem] font-bold ${
-								data.data.quote.USD.total_market_cap_yesterday_percentage_change < 0
-									? "text-red-500"
-									: "text-emerald-500"
+								Math.sign(data.data.btc_dominance_24h_percentage_change) === -1 ? "text-red-500" : "text-emerald-500"
 							}`}
 						>
-							{data.data.btc_dominance_24h_percentage_change < 0 ? (
-								<ChevronDown className="inline h-3 w-3 text-red-500" />
+							{Math.sign(data.data.btc_dominance_24h_percentage_change) === -1 ? (
+								<IoMdArrowDropdown className="inline h-5 w-5 text-red-500" />
 							) : (
-								<ChevronUp className="inline h-3 w-3 text-emerald-500" />
+								<IoMdArrowDropup className="inline h-5 w-5 text-emerald-500" />
 							)}
 							{formatNumber(Math.abs(data.data.btc_dominance_24h_percentage_change), "decimal", "standard", 2)}%
 						</span>

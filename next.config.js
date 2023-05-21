@@ -3,7 +3,9 @@ const nextConfig = {
 	reactStrictMode: false,
 	experimental: {
 		appDir: true,
-		serverActions: true,
+	},
+	images: {
+		domains: ["assets.coingecko.com", "s2.coinmarketcap.com"],
 	},
 }
 

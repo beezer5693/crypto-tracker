@@ -32,7 +32,7 @@ export default function Search() {
 				<SearchIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 stroke-neutral-500 dark:stroke-neutral-400" />
 				<Button
 					onClick={() => setOpen(true)}
-					className="h-8 w-full justify-start border bg-neutral-200/20 px-9 text-xs text-neutral-500 transition duration-300 ease-out hover:bg-neutral-200/50 dark:border-neutral-700/60 dark:bg-neutral-800/80 dark:text-neutral-400 dark:hover:bg-neutral-600/30"
+					className="h-8 w-full justify-start border bg-neutral-200/20 px-9 text-xs text-neutral-500 transition duration-300 ease-out hover:bg-neutral-200/40 hover:text-neutral-800  dark:border-neutral-700/60 dark:bg-neutral-800/80 dark:text-neutral-400 dark:hover:bg-neutral-600/30 dark:hover:text-neutral-200"
 				>
 					Search cryptos...
 				</Button>

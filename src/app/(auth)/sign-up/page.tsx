@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { signIn, useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
-import { SubmitHandler, useForm } from "react-hook-form"
+import { SubmitHandler, set, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { authSignUpSchema } from "@/lib/validators/authform"
 import { Button } from "@/components/ui/button"
@@ -17,8 +17,6 @@ import { Collapse } from "react-collapse"
 import { cn } from "@/lib/utils"
 import { Loader2, EyeOff, Eye, AlertCircle, Circle } from "lucide-react"
 import { AiFillCheckCircle } from "react-icons/ai"
-import { useMutation } from "@tanstack/react-query"
-import { sign } from "crypto"
 
 type ValidationType = {
 	regex: RegExp
@@ -26,6 +24,7 @@ type ValidationType = {
 }
 
 export default function SignUp() {
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [showPassword, setShowPassword] = useState<boolean>(false)
 	const [showPasswordValidation, setShowPasswordValidation] = useState<boolean>(false)
 	const [passwordValidationCheck, setPasswordValidationCheck] = useState<ValidationType[]>([
@@ -36,14 +35,8 @@ export default function SignUp() {
 		{ regex: /.{8,}/, isValidated: false },
 	])
 
-	const session = useSession()
 	const router = useRouter()
-
-	useEffect(() => {
-		if (session?.status === "authenticated") {
-			router.push("/")
-		}
-	}, [session?.status, router])
+	const { toast } = useToast()
 
 	const {
 		register,
@@ -51,8 +44,6 @@ export default function SignUp() {
 		watch,
 		formState: { errors },
 	} = useForm<AuthFormType>({ resolver: zodResolver(authSignUpSchema) })
-
-	const { toast } = useToast()
 
 	// Watches password input value on each key press
 	// This is fed into the handlePasswordValidation function
@@ -79,26 +70,26 @@ export default function SignUp() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [passwordInputValue])
 
-	const { mutate, isLoading } = useMutation({
-		mutationFn: async (formData: AuthFormType) => {
-			await axios.post("/api/register", formData)
-		},
-	})
-
 	// Handles form submission
 	const onSubmit: SubmitHandler<AuthFormType> = formData => {
-		mutate(formData, {
-			onSuccess: () => {
-				signIn("credentials", formData)
-			},
-			onError: (error: any) => {
+		setIsLoading(true)
+		axios
+			.post("/api/register", formData)
+			.then(() => {
+				signIn("credentials", {
+					...formData,
+					redirect: false,
+				})
+				router.push("/")
+			})
+			.catch(error => {
 				toast({
 					description: error.response.data,
 					variant: "error",
 					duration: 100000,
 				})
-			},
-		})
+			})
+			.finally(() => setIsLoading(false))
 	}
 
 	return (
@@ -297,7 +288,7 @@ export default function SignUp() {
 					<Button
 						disabled={isLoading}
 						type="submit"
-						className="mb-2 w-full gap-2 border border-emerald-500 bg-emerald-500 px-10 text-white shadow-sm transition duration-300 ease-out hover:border-emerald-500/90 hover:bg-emerald-500/90 dark:border-emerald-500 dark:bg-emerald-500/70 dark:hover:border-emerald-500 dark:hover:bg-emerald-500"
+						className="mb-2 gap-2 border-x border-t border-emerald-400 bg-emerald-600 text-white shadow-sm transition duration-300 ease-out hover:bg-emerald-400 dark:border-emerald-500 dark:bg-emerald-500/60 dark:hover:border-emerald-500 dark:hover:bg-emerald-500"
 					>
 						{isLoading ? (
 							<>

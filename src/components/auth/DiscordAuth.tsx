@@ -35,7 +35,7 @@ export default function DiscordAuth() {
 	return (
 		<Button
 			onClick={handleDiscordAuth}
-			className="w-full gap-1.5 border border-neutral-300 bg-white shadow-sm transition duration-300 ease-out hover:border-neutral-400 hover:ring-2 hover:ring-transparent dark:border-neutral-600/40 dark:bg-neutral-700/50 dark:shadow-sm dark:shadow-black/30 dark:hover:bg-neutral-700/70"
+			className="w-full gap-1.5 border border-neutral-300 bg-white transition duration-300 ease-out hover:border-neutral-400/50 hover:bg-neutral-200/30 hover:ring-2 hover:ring-transparent dark:border-neutral-600/40 dark:border-b-transparent dark:bg-neutral-700/50 dark:shadow-sm dark:shadow-black/30 dark:hover:border-neutral-600/50 dark:hover:bg-neutral-700/70"
 		>
 			{isLoading ? (
 				<Loader2 className="h-4 w-4 animate-spin stroke-neutral-700 dark:stroke-neutral-200" />
