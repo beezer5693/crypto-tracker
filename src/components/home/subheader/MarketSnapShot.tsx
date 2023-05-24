@@ -1,6 +1,6 @@
 "use client"
 
-import { useGlobalMetrics } from "@/hooks/useQuote"
+import { useGlobalMetrics } from "@/hooks/useFetch"
 import { Skeleton } from "@/components/ui/skeleton"
 import { formatNumber, formatCurrency } from "@/lib/formatNums"
 

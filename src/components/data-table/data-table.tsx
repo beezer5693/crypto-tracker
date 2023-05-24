@@ -1,6 +1,6 @@
 "use client"
 
-import React, { ReactNode } from "react"
+import React from "react"
 import {
 	ColumnDef,
 	SortingState,
@@ -12,9 +12,9 @@ import {
 } from "@tanstack/react-table"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import Pagination from "../Pagination"
 import { Button } from "../ui/button"
-import { cn } from "@/lib/utils"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
@@ -42,7 +42,10 @@ export function DataTable<TData, TValue>(this: any, { columns, data }: DataTable
 		onPaginationChange: setPagination,
 	})
 
-	const pages = new Array(table.getPageCount()).fill(0).map((_, i) => i + 1)
+	const paginate = (pageNumber: number) => {
+		setPagination({ pageIndex: pageNumber, pageSize })
+	}
+
 	const start = (pageIndex + 1) * pageSize - (pageSize - 1)
 	const end = Math.min(start + pageSize - 1, table.getFilteredRowModel().rows.length)
 
@@ -99,21 +102,14 @@ export function DataTable<TData, TValue>(this: any, { columns, data }: DataTable
 						<span className="sr-only">Go to previous page</span>
 						<ChevronLeft className="h-4 w-4 stroke-neutral-600  dark:stroke-neutral-400" />
 					</Button>
-					{pages.map((page, i) => (
-						<Button
-							className={cn(
-								"h-6 w-6 rounded p-2.5 text-[.8rem] font-semibold text-neutral-600 transition duration-200 ease-out hover:bg-neutral-300/50 hover:text-neutral-800 dark:text-neutral-400 hover:dark:bg-neutral-700/50 hover:dark:text-neutral-100",
-								{
-									"cursor-auto bg-neutral-300/50 text-neutral-800 hover:bg-neutral-300/50 dark:bg-neutral-700/50 dark:text-neutral-100 hover:dark:bg-neutral-700/50":
-										pageIndex === i,
-								}
-							)}
-							onClick={() => table.setPageIndex(i)}
-							key={page}
-						>
-							{page}
-						</Button>
-					))}
+					<Pagination
+						pageSize={table.getState().pagination.pageSize}
+						siblingCount={1}
+						totalCount={table.getFilteredRowModel().rows.length}
+						currentPage={pageIndex + 1}
+						onPageChange={paginate}
+					/>
+
 					<Button
 						className="h-6 w-6 px-1 py-0.5 transition"
 						onClick={() => table.nextPage()}

@@ -29,6 +29,12 @@ export async function POST(request: Request) {
 				lastName: lastname,
 				email,
 				hashedPassword,
+				watchlists: {
+					create: {
+						name: `${firstname}'s Watchlist`,
+						coins: {},
+					},
+				},
 			},
 		})
 

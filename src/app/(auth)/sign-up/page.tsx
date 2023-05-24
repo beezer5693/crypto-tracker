@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { signIn, useSession } from "next-auth/react"
+import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
-import { SubmitHandler, set, useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { authSignUpSchema } from "@/lib/validators/authform"
 import { Button } from "@/components/ui/button"

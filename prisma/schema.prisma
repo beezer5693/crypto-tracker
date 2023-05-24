@@ -17,10 +17,11 @@ model User {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   accounts          Account[]
+  watchlists        Watchlist[]
 }
 model Account {
   id                String @id @default(auto()) @map("_id") @db.ObjectId
-  userId           String @db.ObjectId
+  userId            String @db.ObjectId
   type              String
   provider          String
   providerAccountId String
@@ -33,5 +34,21 @@ model Account {
   session_state     String?
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@unique([provider, providerAccountId])
+}
+
+model Watchlist {
+  id                String @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String @db.ObjectId
+  name              String?
+  coins             Coin[]
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Coin {
+  id                String @id @default(auto()) @map("_id") @db.ObjectId
+  coinId            Int
+  name              String?
+  watchlistId       String @db.ObjectId
+  watchlist Watchlist @relation(fields: [watchlistId], references: [id], onDelete: Cascade)
 }
 

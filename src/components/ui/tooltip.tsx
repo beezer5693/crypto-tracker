@@ -10,7 +10,7 @@ type Props = {
 const TooltipDemo = ({ children, content, side, asChild }: Props) => {
 	return (
 		<Tooltip.Provider>
-			<Tooltip.Root delayDuration={100}>
+			<Tooltip.Root delayDuration={0}>
 				<Tooltip.Trigger asChild={asChild}>{children}</Tooltip.Trigger>
 				<Tooltip.Portal>
 					<Tooltip.Content

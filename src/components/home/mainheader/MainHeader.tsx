@@ -5,7 +5,7 @@ import { FiPieChart, FiStar } from "react-icons/fi"
 
 export default function MainHeader() {
 	return (
-		<Header className="sticky top-0 z-50 flex w-full flex-col gap-5 border-b border-neutral-200/60 bg-transparent px-8 py-3.5 shadow-neutral-200/30 backdrop-blur dark:border-neutral-800/70 md:flex-row">
+		<Header className="sticky top-0 z-50 flex w-full flex-col gap-5 border-b border-neutral-200/60 bg-transparent px-6 py-3.5 shadow-neutral-200/30 backdrop-blur dark:border-neutral-700/50 md:flex-row">
 			<Logo height={20} width={20} />
 			<div className="flex flex-col-reverse items-center gap-2.5 sm:flex-row">
 				<div className="flex items-center gap-0.5">

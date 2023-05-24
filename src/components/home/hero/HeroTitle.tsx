@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { useGlobalMetrics } from "@/hooks/useQuote"
+import { useGlobalMetrics } from "@/hooks/useFetch"
 import { Skeleton } from "../../ui/skeleton"
-import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io"
+import { ChevronUp, ChevronDown } from "lucide-react"
 import { formatNumber, formatCurrency } from "@/lib/formatNums"
 import { Button } from "@/components/ui/button"
 import { Collapse } from "react-collapse"
@@ -13,7 +13,7 @@ export default function HeroTitle() {
 	const [isOpened, setIsOpened] = useState<boolean>(false)
 
 	return (
-		<div className="flex flex-col items-center gap-1.5 py-1 sm:items-start">
+		<div className="flex flex-col items-center gap-1 pb-5 sm:items-start">
 			<h1 className="text-sm font-bold text-neutral-800 dark:text-neutral-200 sm:text-xl">
 				{"Today's Cryptocurrency Prices by Market Cap"}
 			</h1>
@@ -43,9 +43,9 @@ export default function HeroTitle() {
 							}`}
 						>
 							{Math.sign(data.data.quote.USD.total_market_cap_yesterday_percentage_change) === -1 ? (
-								<IoMdArrowDropdown className="h-5 w-5 text-red-500" />
+								<ChevronDown className="h-4 w-4 text-red-500" />
 							) : (
-								<IoMdArrowDropup className="h-5 w-5 text-emerald-500" />
+								<ChevronUp className="h-4 w-4 text-emerald-500" />
 							)}
 							{formatNumber(
 								Math.abs(data.data.quote.USD.total_market_cap_yesterday_percentage_change),
@@ -84,9 +84,9 @@ export default function HeroTitle() {
 							}`}
 						>
 							{Math.sign(data.data.quote.USD.total_volume_24h_yesterday_percentage_change) === -1 ? (
-								<IoMdArrowDropdown className="inline h-5 w-5 text-red-500" />
+								<ChevronDown className="inline h-4 w-4 text-red-500" />
 							) : (
-								<IoMdArrowDropup className="inline h-5 w-5 text-emerald-500" />
+								<ChevronUp className="inline h-4 w-4 text-emerald-500" />
 							)}
 							{formatNumber(
 								Math.abs(data.data.quote.USD.total_volume_24h_yesterday_percentage_change),
@@ -140,9 +140,9 @@ export default function HeroTitle() {
 							}`}
 						>
 							{Math.sign(data.data.btc_dominance_24h_percentage_change) === -1 ? (
-								<IoMdArrowDropdown className="inline h-5 w-5 text-red-500" />
+								<ChevronDown className="inline h-4 w-4 text-red-500" />
 							) : (
-								<IoMdArrowDropup className="inline h-5 w-5 text-emerald-500" />
+								<ChevronUp className="inline h-4 w-4 text-emerald-500" />
 							)}
 							{formatNumber(Math.abs(data.data.btc_dominance_24h_percentage_change), "decimal", "standard", 2)}%
 						</span>

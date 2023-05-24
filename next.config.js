@@ -5,7 +5,7 @@ const nextConfig = {
 		appDir: true,
 	},
 	images: {
-		domains: ["assets.coingecko.com", "s2.coinmarketcap.com"],
+		domains: ["s2.coinmarketcap.com"],
 	},
 }
 
