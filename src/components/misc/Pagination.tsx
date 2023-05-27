@@ -1,6 +1,6 @@
 import { usePagination } from "@/hooks/usePagination"
 import { cn } from "@/lib/utils"
-import { v4 as uuidv4 } from "uuid"
+import { nanoid } from "nanoid"
 
 type PaginationProps = {
 	pageSize: number
@@ -46,7 +46,7 @@ export default function Pagination({
 
 						return (
 							<li
-								key={uuidv4()}
+								key={nanoid()}
 								onClick={() => onPageChange((number as number) - 1)}
 								className={cn(
 									"inline-flex h-6 w-6 cursor-pointer items-center justify-center rounded p-2.5 text-[.8rem] font-semibold text-neutral-600 transition duration-200 ease-out hover:bg-neutral-300/50 hover:text-neutral-800 dark:text-neutral-400 hover:dark:bg-neutral-700/50 hover:dark:text-neutral-100",

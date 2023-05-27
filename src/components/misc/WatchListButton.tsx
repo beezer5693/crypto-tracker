@@ -5,19 +5,20 @@ import axios from "axios"
 import { useContext } from "react"
 import { WatchlistContext } from "@/context/WatchListContext"
 import { useSession } from "next-auth/react"
-import { Button } from "./ui/button"
+import { Button } from "@/components/ui/button"
 import { Star } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Loader2 } from "lucide-react"
-import Tooltip from "./ui/tooltip"
+import Tooltip from "@/components/ui/tooltip"
 
 type WatchListButtonProps = {
 	coinId: number
 	name?: string
 	className?: string
+	className2?: string
 }
 
-export default function WatchListButton({ coinId, name, className }: WatchListButtonProps) {
+export default function WatchListButton({ coinId, name, className, className2 }: WatchListButtonProps) {
 	const [isLoading, setIsLoading] = React.useState<boolean>(false)
 	const session = useSession()
 	const {
@@ -68,7 +69,7 @@ export default function WatchListButton({ coinId, name, className }: WatchListBu
 				side="top"
 				asChild={true}
 				content={
-					watchlist?.flat().includes(coinId) ? (
+					watchlist?.includes(coinId) ? (
 						<p className="p-2 text-xs text-neutral-800 dark:text-neutral-100">Remove from watchlist</p>
 					) : (
 						<p className="p-2 text-xs text-neutral-800 dark:text-neutral-100">Add to watchlist and follow coin</p>
@@ -76,9 +77,13 @@ export default function WatchListButton({ coinId, name, className }: WatchListBu
 				}
 			>
 				{isLoading ? (
-					<Loader2 className="h-3 w-3 animate-spin text-neutral-800 dark:text-neutral-100" />
+					<Loader2 className={cn("h-3 w-3 animate-spin text-neutral-800 dark:text-neutral-100", className2)} />
 				) : (
-					<Star className={cn("h-3 w-3 transition duration-200 ease-out group-hover:stroke-emerald-500", className)} />
+					<Star
+						className={cn("h-3 w-3 transition duration-200 ease-out group-hover:stroke-emerald-500", className, {
+							"fill-emerald-500 stroke-emerald-500": watchlist?.includes(coinId),
+						})}
+					/>
 				)}
 			</Tooltip>
 		</Button>

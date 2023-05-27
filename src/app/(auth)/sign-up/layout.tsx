@@ -1,6 +1,6 @@
-import Header from "@/components/Header"
+import Header from "@/components/misc/Header"
 import PrivacyAndTerms from "@/components/auth/PrivacyAndTerms"
-import Logo from "@/components/Logo"
+import Logo from "@/components/misc/Logo"
 
 export const metadata = {
 	title: "CoinTracker",

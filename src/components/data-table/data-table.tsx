@@ -13,7 +13,7 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import Pagination from "../Pagination"
+import Pagination from "../misc/Pagination"
 import { Button } from "../ui/button"
 
 interface DataTableProps<TData, TValue> {

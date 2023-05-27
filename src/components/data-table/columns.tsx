@@ -2,12 +2,13 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { formatNumber, formatCurrency } from "@/lib/formatNums"
-import WatchListButton from "../WatchListButton"
+import WatchListButton from "../misc/WatchListButton"
 import Image from "next/image"
 import Tooltip from "../ui/tooltip"
 import { Progress } from "../ui/progress"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import { BsInfoCircleFill } from "react-icons/bs"
+import Link from "next/link"
 
 export type Crypto = {
 	id: string
@@ -47,16 +48,8 @@ export const columns: ColumnDef<Crypto>[] = [
 		accessorKey: "watchlist",
 		header: () => <div className="w-0"></div>,
 		cell: ({ row }) => {
-			const { coinId, name, isWatchlisted } = row.original
-			return (
-				<WatchListButton
-					className={
-						isWatchlisted ? "fill-emerald-500 stroke-emerald-500" : "stroke-neutral-400 dark:stroke-neutral-500"
-					}
-					name={name}
-					coinId={Number(coinId)}
-				/>
-			)
+			const { coinId, name } = row.original
+			return <WatchListButton name={name} coinId={Number(coinId)} />
 		},
 	},
 	{
@@ -107,15 +100,17 @@ export const columns: ColumnDef<Crypto>[] = [
 			)
 		},
 		cell: ({ row }) => {
-			const { name, symbol, icon } = row.original
+			const { name, symbol, icon, coinId } = row.original
 			return (
 				<p className="space-x-1.5 text-left">
 					<span className="inline-block align-middle">
 						{icon ? <Image className="rounded-full" src={icon} height={20} width={20} alt={name} /> : null}
 					</span>
-					<span className="inline-block align-middle font-semibold  text-neutral-800 dark:text-neutral-100">
-						{name}
-					</span>
+					<Link href={`/currency/${coinId}`}>
+						<span className="inline-block align-middle font-semibold  text-neutral-800 dark:text-neutral-100">
+							{name}
+						</span>
+					</Link>
 					<span className="inline-block align-middle font-medium  text-neutral-500/90 dark:text-neutral-500">
 						{symbol}
 					</span>

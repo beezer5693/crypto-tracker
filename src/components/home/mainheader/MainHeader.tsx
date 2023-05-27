@@ -1,6 +1,6 @@
-import Header from "../../Header"
+import Header from "../../misc/Header"
 import Search from "./Search"
-import Logo from "../../Logo"
+import Logo from "../../misc/Logo"
 import { FiPieChart, FiStar } from "react-icons/fi"
 
 export default function MainHeader() {
