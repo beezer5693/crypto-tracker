@@ -5,9 +5,10 @@ type Props = {
 	content: React.ReactNode
 	asChild?: boolean
 	side?: "top" | "right" | "bottom" | "left"
+	sideOffset?: number
 }
 
-const TooltipDemo = ({ children, content, side, asChild }: Props) => {
+const TooltipDemo = ({ children, content, side, sideOffset = 5, asChild }: Props) => {
 	return (
 		<Tooltip.Provider>
 			<Tooltip.Root delayDuration={0}>
@@ -15,11 +16,11 @@ const TooltipDemo = ({ children, content, side, asChild }: Props) => {
 				<Tooltip.Portal>
 					<Tooltip.Content
 						side={side}
-						className="TooltipContent rounded-md bg-white shadow-lg shadow-neutral-400/30 dark:bg-[#2c2c2c] dark:text-neutral-300 dark:shadow-black/20"
-						sideOffset={5}
+						className="TooltipContent z-50 rounded bg-white shadow-md shadow-neutral-400/30 dark:bg-[#252525] dark:text-neutral-300 dark:shadow-black/20"
+						sideOffset={sideOffset}
 					>
 						{content}
-						<Tooltip.Arrow className="TooltipArrow fill-white dark:fill-[#2c2c2c]" />
+						<Tooltip.Arrow className="TooltipArrow fill-white dark:fill-[#252525]" />
 					</Tooltip.Content>
 				</Tooltip.Portal>
 			</Tooltip.Root>

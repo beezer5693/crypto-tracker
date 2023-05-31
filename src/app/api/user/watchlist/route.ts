@@ -13,6 +13,9 @@ export async function GET(request: Request) {
 				where: {
 					userId: user.id,
 				},
+				include: {
+					coins: true,
+				},
 			})
 
 			if (watchlist) {
@@ -23,6 +26,8 @@ export async function GET(request: Request) {
 				})
 
 				return NextResponse.json(coins)
+			} else {
+				return NextResponse.json([])
 			}
 		}
 	} catch (error) {

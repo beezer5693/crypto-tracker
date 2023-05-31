@@ -20,7 +20,7 @@ export default function ProfileSection() {
 
 	// TODO - once successfully logged out show a toast message
 	if (session.status === "loading") {
-		return <Loader2 className="h-5 w-5 animate-spin" />
+		return null
 	}
 
 	if (session.status === "authenticated") {
@@ -28,14 +28,20 @@ export default function ProfileSection() {
 			<DropdownMenu>
 				<DropdownMenuTrigger className="cursor-pointer" asChild>
 					<Avatar className="h-7 w-7 border border-neutral-400/50 dark:border-neutral-700/50">
-						<AvatarImage src="/avatar/avatar.png" alt="@shadcn" />
+						<AvatarImage
+							src={`https://robohash.org/${session.data.user?.email}.png?set=set1&size=100x100`}
+							alt="@shadcn"
+						/>
 						<AvatarFallback>CD</AvatarFallback>
 					</Avatar>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent className="w-60">
 					<DropdownMenuLabel className="flex items-center gap-3 text-xs text-neutral-500 dark:text-neutral-400">
 						<Avatar className="h-12 w-12 border border-neutral-400/50 dark:border-neutral-700/50">
-							<AvatarImage src="/avatar/avatar.png" alt="@shadcn" />
+							<AvatarImage
+								src={`https://robohash.org/${session.data.user?.email}.png?set=set1&size=100x100`}
+								alt="@shadcn"
+							/>
 							<AvatarFallback>CD</AvatarFallback>
 						</Avatar>
 						{session.data.user && (
@@ -73,7 +79,7 @@ export default function ProfileSection() {
 				</Button>
 			</Link>
 			<Link href={"/sign-up"}>
-				<Button className="h-6 border-x border-b border-t border-emerald-400 bg-emerald-600 px-2.5 text-[.7rem] text-white transition duration-200 ease-out hover:border-emerald-400 hover:bg-emerald-400 dark:border-emerald-500 dark:border-b-transparent dark:bg-emerald-600/80 dark:shadow-sm dark:shadow-black/30 dark:hover:border-emerald-500 dark:hover:bg-emerald-500">
+				<Button className="h-6 border-x border-b border-t border-emerald-400 bg-emerald-500 px-2.5 text-[.7rem] text-white transition duration-200 ease-out hover:border-emerald-400 hover:bg-emerald-400 dark:border-emerald-500 dark:border-b-transparent dark:bg-emerald-600/80 dark:shadow-sm dark:shadow-black/30 dark:hover:border-emerald-500 dark:hover:bg-emerald-500">
 					Get started
 				</Button>
 			</Link>

@@ -1,11 +1,10 @@
 "use client"
 
+import React from "react"
 import { useSession } from "next-auth/react"
-import { createContext, useReducer, useEffect, ReactElement, ReactNode, use } from "react"
+import { createContext, useReducer, useEffect, ReactElement, ReactNode } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { getCurrentUserWatchlist } from "@/lib/getCurrentUserWatchlist"
-import React from "react"
-import { watch } from "fs"
 
 type StateType = {
 	watchlist: number[]

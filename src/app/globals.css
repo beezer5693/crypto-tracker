@@ -6,13 +6,3 @@
 .ReactCollapse--collapse {
 	transition: height 300ms;
 }
-
-.swiper-slide {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.swiper-pagination-bullet-active {
-	background-color: #10b981 !important;
-}

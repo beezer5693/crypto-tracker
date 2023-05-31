@@ -1,26 +1,32 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import React from "react"
+import Link from "next/link"
+import GoogleAuth from "../components/GoogleAuth"
 import { signIn, useSession } from "next-auth/react"
+import { SubmitHandler, useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
 import { authSignInSchema } from "@/lib/validators/authform"
 import { zodResolver } from "@hookform/resolvers/zod"
-import Link from "next/link"
 import { AlertCircle, Eye, EyeOff, Loader2 } from "lucide-react"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { useToast } from "@/components/ui/use-toast"
-import GoogleAuth from "@/components/auth/GoogleAuth"
-import DiscordAuth from "@/components/auth/DiscordAuth"
 
 export default function SignIn() {
-	const [isLoading, setIsLoading] = useState<boolean>(false)
-	const [showPassword, setShowPassword] = useState<boolean>(false)
+	const [isLoading, setIsLoading] = React.useState<boolean>(false)
+	const [showPassword, setShowPassword] = React.useState<boolean>(false)
 
+	const session = useSession()
 	const router = useRouter()
 	const { toast } = useToast()
+
+	React.useEffect(() => {
+		if (session.status === "authenticated") {
+			router.push("/")
+		}
+	}, [router, session.status])
 
 	const {
 		register,
@@ -35,20 +41,16 @@ export default function SignIn() {
 		signIn("credentials", {
 			...formData,
 			redirect: false,
+		}).then(callback => {
+			if (callback?.error) {
+				toast({
+					description: "Invalid login credentials",
+					duration: 100000,
+					variant: "error",
+				})
+				setIsLoading(false)
+			}
 		})
-			.then(callback => {
-				if (callback?.error) {
-					toast({
-						description: "Invalid login credentials",
-						duration: 100000,
-						variant: "error",
-					})
-				}
-				if (callback?.ok && !callback?.error) {
-					router.push("/")
-				}
-			})
-			.finally(() => setIsLoading(false))
 	}
 
 	return (
@@ -76,7 +78,7 @@ export default function SignIn() {
 								placeholder={"you@example.com"}
 							/>
 							<AlertCircle
-								className={cn("invisible absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 stroke-red-500", {
+								className={cn("-tranneutral-y-1/2 invisible absolute right-3 top-1/2 h-5 w-5 stroke-red-500", {
 									visible: errors.email,
 								})}
 							/>
@@ -113,7 +115,7 @@ export default function SignIn() {
 									)}
 								</Button>
 								<AlertCircle
-									className={cn("invisible absolute right-14 top-1/2 h-5 w-5 -translate-y-1/2 stroke-red-500", {
+									className={cn("-tranneutral-y-1/2 invisible absolute right-14 top-1/2 h-5 w-5 stroke-red-500", {
 										visible: errors.password,
 									})}
 								/>
@@ -143,7 +145,6 @@ export default function SignIn() {
 				</div>
 				<div className="space-y-2.5">
 					<GoogleAuth />
-					<DiscordAuth />
 				</div>
 				<div className="flex justify-center pt-3">
 					<p className="py-2 text-[.8rem] font-medium text-neutral-500 dark:text-neutral-400/90">

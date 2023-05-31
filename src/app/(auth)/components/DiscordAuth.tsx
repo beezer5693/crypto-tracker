@@ -1,16 +1,25 @@
 "use client"
 
-import { useState } from "react"
-import { signIn } from "next-auth/react"
-import { useToast } from "../ui/use-toast"
-import { Button } from "../ui/button"
+import React from "react"
+import { signIn, useSession } from "next-auth/react"
+import { useToast } from "@/components/ui/use-toast"
+import { Button } from "@/components/ui/button"
 import { FaDiscord } from "react-icons/fa"
 import { Loader2 } from "lucide-react"
 
 export default function DiscordAuth() {
-	const [isLoading, setIsLoading] = useState<boolean>(false)
+	const [isLoading, setIsLoading] = React.useState<boolean>(true)
 
 	const { toast } = useToast()
+	const session = useSession()
+
+	React.useEffect(() => {
+		if (session.status === "unauthenticated") {
+			setIsLoading(false)
+		} else if (session.status === "loading") {
+			setIsLoading(true)
+		}
+	}, [session.status])
 
 	const handleDiscordAuth = () => {
 		setIsLoading(true)
@@ -24,10 +33,6 @@ export default function DiscordAuth() {
 					duration: 100000,
 					variant: "error",
 				})
-			}
-
-			if (callback?.ok && !callback?.error) {
-				console.log("logged in")
 			}
 		})
 	}

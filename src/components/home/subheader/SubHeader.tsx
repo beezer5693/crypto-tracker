@@ -15,7 +15,7 @@ export default async function SubHeader() {
 	const globalMetrics: GlobalMetricsData = await getGlobalMetrics()
 
 	return (
-		<header className="flex w-full items-center justify-between border-b border-neutral-200/60 bg-transparent px-6 py-2.5 dark:border-neutral-700/50">
+		<header className="flex w-full items-center justify-between border-b border-neutral-200/60 bg-white px-6 py-2.5 dark:border-neutral-700/50 dark:bg-[#1c1c1c]">
 			<SnapShot globalMetrics={globalMetrics} />
 			<div className="flex shrink-0 items-center gap-3 pl-3">
 				<ThemeSwitch />

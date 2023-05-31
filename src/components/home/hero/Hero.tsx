@@ -1,6 +1,6 @@
 import Title from "./Title"
 import Cards from "./Cards"
-import LoadingCardUI from "./LoadingCardUI"
+import LoadingUI from "./LoadingUI"
 import { Suspense } from "react"
 
 async function getGlobalMetrics() {
@@ -67,10 +67,10 @@ export default async function Hero() {
 	}
 
 	return (
-		<section className="w-full border-b border-neutral-200/50 bg-neutral-100/50 px-5 dark:border-neutral-700/50 dark:bg-[#1a1a1a]">
-			<div className="relative mx-auto max-w-screen-2xl flex-col justify-start pb-9 pt-7">
+		<section className="w-full px-5">
+			<div className="relative mx-auto max-w-screen-xl flex-col justify-start pb-9 pt-7">
 				<Title globalMetrics={globalMetrics} />
-				<Suspense fallback={<LoadingCardUI />}>
+				<Suspense fallback={<LoadingUI />}>
 					{/* @ts-expect-error Async Server Component */}
 					<Cards coins={coinData} news={news} promise={metaData} />
 				</Suspense>

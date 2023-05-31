@@ -1,4 +1,4 @@
-import { Crypto, columns } from "./columns"
+import { columns } from "./columns"
 import { DataTable } from "./data-table"
 
 async function getCoinData() {
@@ -47,7 +47,7 @@ export default async function DataTableMain() {
 
 	return (
 		<section className="mt-44 w-full bg-transparent px-5">
-			<div className="mx-auto max-w-screen-2xl overflow-x-auto">
+			<div className="mx-auto max-w-screen-xl overflow-x-auto">
 				{cryptoData && <DataTable columns={columns} data={cryptoData} />}
 			</div>
 		</section>

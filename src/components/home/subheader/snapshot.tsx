@@ -31,7 +31,7 @@ export default function SnapShot({ globalMetrics }: { globalMetrics: GlobalMetri
 			<div className="flex shrink-0 items-center gap-1 text-[.7rem]">
 				<span className="font-medium text-neutral-800 dark:text-neutral-200">Dominance:</span>
 				<span className="font-medium text-emerald-600 dark:text-emerald-500">
-					BTC: {globalMetricsData.btcDominance} ETH: {globalMetricsData.ethDominance}%
+					BTC: {globalMetricsData.btcDominance} ETH: {globalMetricsData.ethDominance}
 				</span>
 			</div>
 		</div>

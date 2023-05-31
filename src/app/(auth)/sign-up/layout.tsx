@@ -1,5 +1,5 @@
 import Header from "@/components/misc/Header"
-import PrivacyAndTerms from "@/components/auth/PrivacyAndTerms"
+import PrivacyAndTerms from "@/app/(auth)/components/PrivacyAndTerms"
 import Logo from "@/components/misc/Logo"
 
 export const metadata = {

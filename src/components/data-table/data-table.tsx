@@ -15,6 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import Pagination from "../misc/Pagination"
 import { Button } from "../ui/button"
+import { cn } from "@/lib/utils"
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
@@ -50,12 +51,12 @@ export function DataTable<TData, TValue>(this: any, { columns, data }: DataTable
 	const end = Math.min(start + pageSize - 1, table.getFilteredRowModel().rows.length)
 
 	return (
-		<div>
+		<div className="rounded-lg border dark:border-neutral-700/50 xl:border-none">
 			<div>
 				<Table className="min-w-[1250px]">
 					<TableHeader>
 						{table.getHeaderGroups().map(headerGroup => (
-							<TableRow className="shrink-0 border-neutral-200/60 dark:border-neutral-700/50" key={headerGroup.id}>
+							<TableRow className="rounded border-neutral-200/60 dark:border-neutral-700/50" key={headerGroup.id}>
 								{headerGroup.headers.map(header => {
 									return (
 										<TableHead key={header.id}>
@@ -89,13 +90,15 @@ export function DataTable<TData, TValue>(this: any, { columns, data }: DataTable
 					</TableBody>
 				</Table>
 			</div>
-			<div className="flex w-full items-center justify-between space-x-2 py-4">
-				<p className="text-[.8rem] text-neutral-800 dark:text-neutral-300">
+			<div className="flex w-full items-center justify-between space-x-4 overflow-x-auto px-4 py-4 xl:px-0">
+				<p className="shrink-0 text-[.8rem] text-neutral-800 dark:text-neutral-300">
 					Showing {start} - {end} out of {table.getFilteredRowModel().rows.length}
 				</p>
 				<div className="flex items-center space-x-2">
 					<Button
-						className="h-6 w-6 px-1 py-0.5"
+						className={cn("h-6 w-6 px-1 py-0.5", {
+							hidden: table.getFilteredRowModel().rows.length <= pageSize,
+						})}
 						onClick={() => table.previousPage()}
 						disabled={!table.getCanPreviousPage()}
 					>
@@ -111,7 +114,9 @@ export function DataTable<TData, TValue>(this: any, { columns, data }: DataTable
 					/>
 
 					<Button
-						className="h-6 w-6 px-1 py-0.5 transition"
+						className={cn("h-6 w-6 px-1 py-0.5", {
+							hidden: table.getFilteredRowModel().rows.length <= pageSize,
+						})}
 						onClick={() => table.nextPage()}
 						disabled={!table.getCanNextPage()}
 					>
@@ -119,7 +124,7 @@ export function DataTable<TData, TValue>(this: any, { columns, data }: DataTable
 						<ChevronRight className="h-4 w-4 stroke-neutral-600 dark:stroke-neutral-400" />
 					</Button>
 				</div>
-				<div className="flex items-center space-x-2">
+				<div className="flex shrink-0 items-center space-x-2">
 					<p className="text-[.8rem] text-neutral-800 dark:text-neutral-300">Show rows</p>
 					<Select
 						value={`${table.getState().pagination.pageSize}`}

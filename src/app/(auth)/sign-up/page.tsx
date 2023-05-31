@@ -1,17 +1,15 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { signIn } from "next-auth/react"
+import React from "react"
 import { useRouter } from "next/navigation"
-import { SubmitHandler, useForm } from "react-hook-form"
+import { signIn, useSession } from "next-auth/react"
+import { SubmitHandler, set, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { authSignUpSchema } from "@/lib/validators/authform"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
-import GoogleAuth from "@/components/auth/GoogleAuth"
-import DiscordAuth from "@/components/auth/DiscordAuth"
-import axios from "axios"
+import GoogleAuth from "../components/GoogleAuth"
 import Link from "next/link"
 import { Collapse } from "react-collapse"
 import { cn } from "@/lib/utils"
@@ -24,10 +22,10 @@ type ValidationType = {
 }
 
 export default function SignUp() {
-	const [isLoading, setIsLoading] = useState<boolean>(false)
-	const [showPassword, setShowPassword] = useState<boolean>(false)
-	const [showPasswordValidation, setShowPasswordValidation] = useState<boolean>(false)
-	const [passwordValidationCheck, setPasswordValidationCheck] = useState<ValidationType[]>([
+	const [isLoading, setIsLoading] = React.useState<boolean>(false)
+	const [showPassword, setShowPassword] = React.useState<boolean>(false)
+	const [showPasswordValidation, setShowPasswordValidation] = React.useState<boolean>(false)
+	const [passwordValidationCheck, setPasswordValidationCheck] = React.useState<ValidationType[]>([
 		{ regex: /[A-Z]/, isValidated: false },
 		{ regex: /[a-z]/, isValidated: false },
 		{ regex: /[0-9]/, isValidated: false },
@@ -35,8 +33,15 @@ export default function SignUp() {
 		{ regex: /.{8,}/, isValidated: false },
 	])
 
+	const session = useSession()
 	const router = useRouter()
 	const { toast } = useToast()
+
+	React.useEffect(() => {
+		if (session.status === "authenticated") {
+			router.push("/")
+		}
+	}, [router, session.status])
 
 	const {
 		register,
@@ -51,7 +56,7 @@ export default function SignUp() {
 	// meets the validation criteria
 	const passwordInputValue = watch("password")
 
-	useEffect(() => {
+	React.useEffect(() => {
 		const handlePasswordValidation = (inputVal: string) => {
 			const value = inputVal
 			const isValidated = passwordValidationCheck.map(validationCheck => {
@@ -73,14 +78,19 @@ export default function SignUp() {
 	// Handles form submission
 	const onSubmit: SubmitHandler<AuthFormType> = formData => {
 		setIsLoading(true)
-		axios
-			.post("/api/register", formData)
+
+		fetch("/api/register", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(formData),
+		})
 			.then(() => {
 				signIn("credentials", {
 					...formData,
 					redirect: false,
 				})
-				router.push("/")
 			})
 			.catch(error => {
 				toast({
@@ -88,8 +98,8 @@ export default function SignUp() {
 					variant: "error",
 					duration: 100000,
 				})
+				setIsLoading(false)
 			})
-			.finally(() => setIsLoading(false))
 	}
 
 	return (
@@ -117,7 +127,7 @@ export default function SignUp() {
 								placeholder="Enter your first name"
 							/>
 							<AlertCircle
-								className={cn("invisible absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 stroke-red-500", {
+								className={cn("-tranneutral-y-1/2 invisible absolute right-3 top-1/2 h-5 w-5 stroke-red-500", {
 									visible: errors.firstname,
 								})}
 							/>
@@ -141,7 +151,7 @@ export default function SignUp() {
 								placeholder="Enter your last name"
 							/>
 							<AlertCircle
-								className={cn("invisible absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 stroke-red-500", {
+								className={cn("-tranneutral-y-1/2 invisible absolute right-3 top-1/2 h-5 w-5 stroke-red-500", {
 									visible: errors.lastname,
 								})}
 							/>
@@ -165,7 +175,7 @@ export default function SignUp() {
 								placeholder="you@example.com"
 							/>
 							<AlertCircle
-								className={cn("invisible absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 stroke-red-500", {
+								className={cn("-tranneutral-y-1/2 invisible absolute right-3 top-1/2 h-5 w-5 stroke-red-500", {
 									visible: errors.email,
 								})}
 							/>
@@ -203,7 +213,7 @@ export default function SignUp() {
 									)}
 								</Button>
 								<AlertCircle
-									className={cn("invisible absolute right-14 top-1/2 h-5 w-5 -translate-y-1/2 stroke-red-500", {
+									className={cn("-tranneutral-y-1/2 invisible absolute right-14 top-1/2 h-5 w-5 stroke-red-500", {
 										visible: errors.password,
 									})}
 								/>
@@ -307,7 +317,6 @@ export default function SignUp() {
 				</div>
 				<div className="space-y-2.5">
 					<GoogleAuth />
-					<DiscordAuth />
 				</div>
 				<div className="flex justify-center pt-3">
 					<p className="py-2 text-[.8rem] font-medium text-neutral-500 dark:text-neutral-400/90">

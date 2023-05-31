@@ -91,9 +91,9 @@ export default function Title({ globalMetrics }: TitleProps) {
 					</span>
 					which is
 					<span className="mx-1 font-semibold text-neutral-600 dark:text-neutral-300">
-						{formatNumber(globalMetrics.defiVolumePercentage, "decimal", "standard", 2)}% of the total crypto market
-						24-hour volume. The volume of all stable coins is now
+						{formatNumber(globalMetrics.defiVolumePercentage, "decimal", "standard", 2)}%
 					</span>
+					of the total crypto market 24-hour volume. The volume of all stable coins is now
 					<span className="mx-1 font-bold text-neutral-600 dark:text-neutral-300">
 						{formatCurrency(globalMetrics.totalStableCoinVolume24h, "currency", "USD", "compact", 2)},
 					</span>

@@ -3,12 +3,11 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { formatNumber, formatCurrency } from "@/lib/formatNums"
 import WatchListButton from "../misc/WatchListButton"
+import Link from "next/link"
 import Image from "next/image"
 import Tooltip from "../ui/tooltip"
 import { Progress } from "../ui/progress"
-import { ChevronDown, ChevronUp } from "lucide-react"
-import { BsInfoCircleFill } from "react-icons/bs"
-import Link from "next/link"
+import { ChevronDown, ChevronUp, Info } from "lucide-react"
 
 export type Crypto = {
 	id: string
@@ -49,7 +48,7 @@ export const columns: ColumnDef<Crypto>[] = [
 		header: () => <div className="w-0"></div>,
 		cell: ({ row }) => {
 			const { coinId, name } = row.original
-			return <WatchListButton name={name} coinId={Number(coinId)} />
+			return <WatchListButton side="bottom" name={name} coinId={Number(coinId)} />
 		},
 	},
 	{
@@ -141,7 +140,13 @@ export const columns: ColumnDef<Crypto>[] = [
 		},
 		cell: ({ row }) => {
 			const price = parseFloat(row.getValue("price"))
-			const formattedPrice = formatCurrency(price, "currency", "USD", "standard", price < 1 ? 4 : 2)
+			const formattedPrice = formatCurrency(
+				price,
+				"currency",
+				"USD",
+				"standard",
+				price >= 1 ? 2 : price >= 0.1 ? 4 : price >= 0.01 ? 6 : 8
+			)
 			return <p className="text-right font-medium text-neutral-800 dark:text-neutral-100">{formattedPrice}</p>
 		},
 	},
@@ -273,18 +278,16 @@ export const columns: ColumnDef<Crypto>[] = [
 		accessorKey: "marketCap",
 		header: ({ column }) => {
 			const marketCapText = (
-				<div className="p-2">
-					<p className="max-w-[18rem] text-xs text-neutral-800 dark:text-neutral-200">
-						<span>
-							{
-								"The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market."
-							}
-						</span>
-						<br />
-						<br />
-						<span>Market Cap = Current Price x Circulating Supply.</span>
-					</p>
-				</div>
+				<p className="max-w-[18rem] p-3 text-xs font-medium text-neutral-800 dark:text-neutral-200">
+					<span>
+						{
+							"The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market."
+						}
+					</span>
+					<br />
+					<br />
+					<span>Market Cap = Current Price x Circulating Supply.</span>
+				</p>
 			)
 			return (
 				<p className="text-right">
@@ -301,8 +304,8 @@ export const columns: ColumnDef<Crypto>[] = [
 					>
 						Market Cap
 					</span>
-					<Tooltip side="top" content={marketCapText}>
-						<BsInfoCircleFill className="ml-1 inline-block h-[12.5px] w-[12.5px] fill-neutral-400/80 align-middle dark:fill-neutral-400" />
+					<Tooltip side="bottom" content={marketCapText}>
+						<Info className="ml-1 inline-block h-[14px] w-[14px] stroke-neutral-500/80 align-middle dark:stroke-neutral-400" />
 					</Tooltip>
 				</p>
 			)
@@ -317,7 +320,7 @@ export const columns: ColumnDef<Crypto>[] = [
 		accessorKey: "volume",
 		header: ({ column }) => {
 			const volumeText = (
-				<p className="max-w-[18rem] p-2 text-xs text-neutral-800 dark:text-neutral-200">
+				<p className="max-w-[18rem] p-3 text-xs font-medium text-neutral-800 dark:text-neutral-200">
 					A measure of how much of a cryptocurrency was traded in the last 24 hours.
 				</p>
 			)
@@ -336,8 +339,8 @@ export const columns: ColumnDef<Crypto>[] = [
 					>
 						Volume(24h)
 					</span>
-					<Tooltip side="top" content={volumeText}>
-						<BsInfoCircleFill className="ml-1 inline-block h-[12.5px] w-[12.5px] fill-neutral-400/80 align-middle dark:fill-neutral-400" />
+					<Tooltip side="bottom" content={volumeText}>
+						<Info className="ml-1 inline-block h-[14px] w-[14px] stroke-neutral-500/80 align-middle dark:stroke-neutral-400" />
 					</Tooltip>
 				</p>
 			)
@@ -361,7 +364,7 @@ export const columns: ColumnDef<Crypto>[] = [
 		accessorKey: "circulatingSupply",
 		header: ({ column }) => {
 			const circulatingSupplyText = (
-				<p className="max-w-[18rem] p-2 text-xs text-neutral-800 dark:text-neutral-200">
+				<p className="max-w-[18rem] p-3 text-xs font-medium text-neutral-800 dark:text-neutral-200">
 					The amount of coins that are circulating in the market and are in public hands. It is analogous to the flowing
 					shares in the stock market.
 				</p>
@@ -381,8 +384,8 @@ export const columns: ColumnDef<Crypto>[] = [
 					>
 						Circulating Supply
 					</span>
-					<Tooltip side="top" content={circulatingSupplyText}>
-						<BsInfoCircleFill className="ml-1 inline-block h-[12.5px] w-[12.5px] fill-neutral-400/80 align-middle dark:fill-neutral-400" />
+					<Tooltip side="bottom" content={circulatingSupplyText}>
+						<Info className="ml-1 inline-block h-[14px] w-[14px] stroke-neutral-500/80 align-middle dark:stroke-neutral-400" />
 					</Tooltip>
 				</p>
 			)

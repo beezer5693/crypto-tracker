@@ -19,6 +19,12 @@ export const authOptions: AuthOptions = {
 					firstName: profile.given_name as string,
 					lastName: profile.family_name as string,
 					email: profile.email as string,
+					watchlists: {
+						create: {
+							name: `${profile.given_name}'s Watchlist`,
+							coins: {},
+						},
+					},
 				}
 			},
 		}),
@@ -29,6 +35,12 @@ export const authOptions: AuthOptions = {
 				return {
 					id: profile.id as string,
 					email: profile.email as string,
+					watchlists: {
+						create: {
+							name: `Watchlist`,
+							coins: {},
+						},
+					},
 				}
 			},
 		}),

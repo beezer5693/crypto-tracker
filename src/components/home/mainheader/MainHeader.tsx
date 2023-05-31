@@ -1,25 +1,62 @@
+"use client"
+
+import React from "react"
 import Header from "../../misc/Header"
 import Search from "./Search"
+import WatchListButton from "./WatchlistButton"
 import Logo from "../../misc/Logo"
-import { FiPieChart, FiStar } from "react-icons/fi"
+import NavMenu from "./NavMenu"
+import { cn } from "@/lib/utils"
+import { FiPieChart } from "react-icons/fi"
+import { ChevronDown } from "lucide-react"
 
 export default function MainHeader() {
+	const [isOpen, setIsOpen] = React.useState(false)
+
 	return (
-		<Header className="sticky top-0 z-50 flex w-full flex-col gap-5 border-b border-neutral-200/60 bg-transparent px-6 py-3.5 shadow-neutral-200/30 backdrop-blur dark:border-neutral-700/50 md:flex-row">
-			<Logo height={20} width={20} />
-			<div className="flex flex-col-reverse items-center gap-2.5 sm:flex-row">
-				<div className="flex items-center gap-0.5">
-					<div className="group flex cursor-pointer items-center gap-1.5 rounded px-2 py-1 transition duration-300 ease-out hover:bg-neutral-200/40 dark:hover:bg-neutral-700/50">
-						<FiStar className="h-3 w-3 cursor-pointer stroke-neutral-800 transition duration-300 ease-out dark:stroke-neutral-400 group-hover:dark:stroke-neutral-200" />
-						<span className="text-[.7rem] font-medium text-neutral-800 dark:text-neutral-200">Watchlist</span>
-					</div>
-					<div className="group flex cursor-pointer items-center gap-1.5 rounded px-2 py-1 transition duration-300 ease-out hover:bg-neutral-200/40 dark:hover:bg-neutral-700/50">
-						<FiPieChart className="h-3 w-3 cursor-pointer stroke-neutral-900 transition duration-300 ease-out dark:stroke-neutral-300 group-hover:dark:stroke-neutral-100" />
-						<span className="text-[.7rem] font-medium text-neutral-800 dark:text-neutral-200">Portfolio</span>
-					</div>
+		<div className="sticky top-0 z-50 w-full">
+			<Header className="flex w-full flex-col gap-5 border-b border-neutral-200/60 bg-white px-6 py-3.5  dark:border-neutral-700/50 dark:bg-[#1c1c1c] lg:flex-row">
+				<div className="flex items-center gap-20">
+					<Logo height={20} width={20} />
+					<nav className="flex items-center">
+						<ul className="flex items-center space-x-7">
+							<li
+								className="flex cursor-pointer items-center gap-1.5 text-[.8rem] font-medium text-neutral-800 transition duration-200 ease-out hover:text-emerald-500 dark:text-neutral-100 dark:hover:text-emerald-400"
+								onClick={() => setIsOpen(prev => !prev)}
+							>
+								<span>Cryptocurrencies</span>
+								<ChevronDown
+									className={cn("stroke-neutral-400", { "-rotate-180 transition duration-200 ease-in-out": isOpen })}
+									size={12}
+								/>
+							</li>
+							<li className="flex cursor-not-allowed items-center gap-1.5 text-[.8rem] font-medium text-neutral-600 transition duration-200 ease-out  dark:text-neutral-400">
+								<span>Exchanges</span>
+								<ChevronDown className={cn("stroke-neutral-400")} size={12} />
+							</li>
+							<li className="flex cursor-not-allowed items-center gap-1.5 text-[.8rem] font-medium text-neutral-600 transition duration-200 ease-out  dark:text-neutral-400">
+								<span>Community</span>
+								<ChevronDown className={cn("stroke-neutral-400")} size={12} />
+							</li>
+							<li className="flex cursor-not-allowed items-center gap-1.5 text-[.8rem] font-medium text-neutral-600 transition duration-200 ease-out  dark:text-neutral-400">
+								<span>Products</span>
+								<ChevronDown className={cn("stroke-neutral-400")} size={12} />
+							</li>
+						</ul>
+					</nav>
 				</div>
-				<Search />
-			</div>
-		</Header>
+				<div className="flex flex-col-reverse items-center gap-2.5 sm:flex-row">
+					<div className="flex items-center gap-0.5">
+						<WatchListButton />
+						<div className="group flex cursor-pointer items-center gap-1.5 rounded px-2 py-1 transition duration-300 ease-out hover:bg-neutral-200/40 dark:hover:bg-neutral-700/40">
+							<FiPieChart className="h-3 w-3 cursor-pointer stroke-neutral-900 transition duration-300 ease-out dark:stroke-neutral-300 group-hover:dark:stroke-neutral-100" />
+							<span className="text-[.7rem] font-medium text-neutral-800 dark:text-neutral-200">Portfolio</span>
+						</div>
+					</div>
+					<Search />
+				</div>
+			</Header>
+			<NavMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
+		</div>
 	)
 }

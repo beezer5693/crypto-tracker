@@ -9,15 +9,35 @@ import {
 	CommandItem,
 	CommandList,
 } from "@/components/ui/command"
+import { formatCurrency } from "@/lib/formatNums"
 import { Search as SearchIcon } from "lucide-react"
+import { BsArrowRightShort } from "react-icons/bs"
 import { Button } from "../../ui/button"
-import { useLatest } from "@/hooks/useLatest"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
+
+async function getCoinData() {
+	const res = await fetch("/api/crypto/latest", {
+		headers: {
+			"X-CMC_PRO_API_KEY": process.env.COIN_MARKET_CAP_API_KEY as string,
+		},
+	})
+
+	return res.json()
+}
 
 export default function Search() {
 	const [open, setOpen] = React.useState<boolean>(false)
+	const [coinList, setCoinList] = React.useState<any>({})
 
-	const { data: crypto, isLoading } = useLatest()
+	React.useEffect(() => {
+		async function handleCoinList() {
+			const coinList = await getCoinData()
+			setCoinList(coinList)
+		}
+
+		handleCoinList()
+	}, [])
 
 	React.useEffect(() => {
 		const down = (e: KeyboardEvent) => {
@@ -35,7 +55,7 @@ export default function Search() {
 				<SearchIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 stroke-neutral-500 dark:stroke-neutral-400" />
 				<Button
 					onClick={() => setOpen(true)}
-					className="h-8 w-full justify-start border bg-neutral-200/20 px-9 text-xs text-neutral-500 transition duration-300 ease-out hover:bg-neutral-200/40 hover:text-neutral-800  dark:border-neutral-700/60 dark:bg-neutral-800/80 dark:text-neutral-400 dark:hover:bg-neutral-600/30 dark:hover:text-neutral-200"
+					className="h-8 w-full justify-start border bg-neutral-200/20 px-9 text-xs text-neutral-500 transition duration-300 ease-out hover:bg-neutral-200/40 hover:text-neutral-800  dark:border-neutral-700/60 dark:bg-neutral-800/10 dark:text-neutral-400 dark:hover:bg-neutral-700/30 dark:hover:text-neutral-200"
 				>
 					Search currencies, coins...
 				</Button>
@@ -44,38 +64,96 @@ export default function Search() {
 					<span className="text-xs">K</span>
 				</div>
 			</div>
-			{crypto && (
+			{!!coinList?.data?.length && (
 				<CommandDialog open={open} onOpenChange={setOpen}>
-					<CommandInput placeholder="Search the top 100 cryptocurrencies..." />
+					<CommandInput placeholder="Search cryptocurrencies..." />
 					<CommandList>
 						<CommandEmpty>
 							<p>No results found.</p>
 						</CommandEmpty>
 						<CommandGroup className="text-neutral-600" heading="Suggestions">
-							<Link href={`/currency/${crypto?.data[0].id}`}>
+							<Link href={`/currency/${coinList.data[0].id}`}>
 								<CommandItem className="cursor-pointer space-x-1.5">
-									<span>{crypto?.data && crypto.data[0].name}</span>
-									<span className="text-neutral-600 dark:text-neutral-400">
-										{crypto?.data && crypto.data[0].symbol}
+									<BsArrowRightShort className="stroke-neutral-600 dark:stroke-neutral-400" />
+									<span>{coinList.data[0].name}</span>
+									<span className="text-neutral-600 dark:text-neutral-400">{coinList.data[0].symbol}</span>
+									<span
+										className={cn({
+											"text-red-500": Math.sign(coinList.data[0].quote.USD.percent_change_24h) === -1,
+											"text-emerald-500": Math.sign(coinList.data[0].quote.USD.percent_change_24h) === 1,
+										})}
+									>
+										{formatCurrency(
+											coinList.data[0].quote.USD.price,
+											"currency",
+											"USD",
+											"standard",
+											coinList.data[0].quote.USD.price >= 1
+												? 2
+												: coinList.data[0].quote.USD.price >= 0.1
+												? 4
+												: coinList.data[0].quote.USD.price >= 0.01
+												? 6
+												: 8
+										)}
 									</span>
 								</CommandItem>
 							</Link>
-							<Link href={`/currency/${crypto?.data[1].id}`}>
+							<Link href={`/currency/${coinList.data[1].id}`}>
 								<CommandItem className="cursor-pointer space-x-1.5">
-									<span>{crypto?.data && crypto.data[1].name}</span>
-									<span className="text-neutral-600 dark:text-neutral-400">
-										{crypto?.data && crypto.data[1].symbol}
+									<BsArrowRightShort className="stroke-neutral-600 dark:stroke-neutral-400" />
+									<span>{coinList.data[1].name}</span>
+									<span className="text-neutral-600 dark:text-neutral-400">{coinList.data[1].symbol}</span>
+									<span
+										className={cn({
+											"text-red-500": Math.sign(coinList.data[1].quote.USD.percent_change_24h) === -1,
+											"text-emerald-500": Math.sign(coinList.data[1].quote.USD.percent_change_24h) === 1,
+										})}
+									>
+										{formatCurrency(
+											coinList.data[1].quote.USD.price,
+											"currency",
+											"USD",
+											"standard",
+											coinList.data[1].quote.USD.price >= 1
+												? 2
+												: coinList.data[1].quote.USD.price >= 0.1
+												? 4
+												: coinList.data[1].quote.USD.price >= 0.01
+												? 6
+												: 8
+										)}
 									</span>
 								</CommandItem>
 							</Link>
 						</CommandGroup>
 						{
 							<CommandGroup className="text-neutral-600" heading="All cryptocurrencies">
-								{crypto?.data.map((coin: Coin) => (
+								{coinList.data.map((coin: Coin) => (
 									<Link key={coin.id} href={`/currency/${coin.id}`}>
 										<CommandItem className="cursor-pointer space-x-1.5">
 											<span>{coin.name}</span>
 											<span className="text-neutral-600 dark:text-neutral-400">{coin.symbol}</span>
+											<span
+												className={cn({
+													"text-red-500": Math.sign(coin.quote.USD.percent_change_24h) === -1,
+													"text-emerald-500": Math.sign(coin.quote.USD.percent_change_24h) === 1,
+												})}
+											>
+												{formatCurrency(
+													coin.quote.USD.price,
+													"currency",
+													"USD",
+													"standard",
+													coin.quote.USD.price >= 1
+														? 2
+														: coin.quote.USD.price >= 0.1
+														? 4
+														: coin.quote.USD.price >= 0.01
+														? 6
+														: 8
+												)}
+											</span>
 										</CommandItem>
 									</Link>
 								))}

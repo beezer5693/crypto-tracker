@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Clock, Flame, Newspaper } from "lucide-react"
 
-export default function LoadingCardUI() {
+export default function LoadingUI() {
 	return (
 		<div className="-mb-[175px] grid grid-cols-1 gap-3.5 lg:grid-cols-3">
 			<Card className="col-span-1 flex flex-col justify-between gap-8">
