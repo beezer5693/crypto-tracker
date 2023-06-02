@@ -54,12 +54,14 @@ export default function ProfileSection() {
 						)}
 					</DropdownMenuLabel>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem className="mt-2 cursor-pointer">
-						<div className="flex items-center gap-2">
-							<Star className="h-3 w-3 stroke-neutral-800 dark:stroke-neutral-100" />
-							<p className="text-xs font-medium text-neutral-800 dark:text-neutral-100">Watchlist</p>
-						</div>
-					</DropdownMenuItem>
+					<Link href="/watchlist">
+						<DropdownMenuItem className="mt-2 cursor-pointer">
+							<div className="flex items-center gap-2">
+								<Star className="h-3 w-3 stroke-neutral-800 dark:stroke-neutral-100" />
+								<p className="text-xs font-medium text-neutral-800 dark:text-neutral-100">Watchlist</p>
+							</div>
+						</DropdownMenuItem>
+					</Link>
 					<DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>
 						<div className="flex items-center gap-2">
 							<LogOut className="h-3 w-3 stroke-neutral-800 dark:stroke-neutral-100" />
