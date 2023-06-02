@@ -8,7 +8,7 @@ export default function Loading() {
 	return (
 		<div className="flex w-full max-w-screen-xl flex-col gap-9 px-5 py-7">
 			<div className="group cursor-pointer space-x-1 self-start text-xs text-emerald-500">
-				<ChevronLeft className="group-hover:-transition-x-1 inline-block h-3 w-3 transform align-middle transition-transform duration-300" />
+				<ChevronLeft className="inline-block h-3 w-3 transform align-middle transition-transform duration-300 group-hover:-translate-x-1" />
 				<span className="-ml-1 inline-block align-middle">Back to Home</span>
 			</div>
 			<div className="flex min-w-[336px] max-w-screen-xl flex-col items-center justify-center gap-5 xl:flex-row xl:items-start">

@@ -78,7 +78,7 @@ export default function SignIn() {
 								placeholder={"you@example.com"}
 							/>
 							<AlertCircle
-								className={cn("-transition-y-1/2 invisible absolute right-3 top-1/2 h-5 w-5 stroke-red-500", {
+								className={cn("invisible absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 stroke-red-500", {
 									visible: errors.email,
 								})}
 							/>
@@ -115,7 +115,7 @@ export default function SignIn() {
 									)}
 								</Button>
 								<AlertCircle
-									className={cn("-transition-y-1/2 invisible absolute right-14 top-1/2 h-5 w-5 stroke-red-500", {
+									className={cn("invisible absolute right-14 top-1/2 h-5 w-5 -translate-y-1/2 stroke-red-500", {
 										visible: errors.password,
 									})}
 								/>

@@ -2,6 +2,7 @@ import { formatCurrency, formatNumber } from "@/lib/formatNums"
 import { ChevronDown, ChevronUp, Flame, Clock, Newspaper, ChevronRight } from "lucide-react"
 import { Card, CardHeader, CardTitle, CardContent } from "../../ui/card"
 import Image from "next/image"
+import Link from "next/link"
 
 type CardProps = {
 	coins: any
@@ -242,7 +243,7 @@ export default async function Cards({ coins, news, promise }: CardProps) {
 					</CardTitle>
 				</CardHeader>
 				<CardContent>
-					{/* {news.articles.slice(0, 1).map((article: any, i: number) => (
+					{news.articles.slice(0, 1).map((article: any, i: number) => (
 						<div key={i} className="flex items-start justify-around gap-4">
 							<Image
 								priority
@@ -272,12 +273,12 @@ export default async function Cards({ coins, news, promise }: CardProps) {
 										<p className="text-emerald-600 transition duration-200 ease-out group-hover:text-neutral-800 dark:text-emerald-500 group-hover:dark:text-neutral-100">
 											Read more
 										</p>
-										<ChevronRight className="h-3 w-3 stroke-emerald-600 transition-all ease-out group-hover:transition-x-1 group-hover:stroke-neutral-800 dark:stroke-emerald-500 group-hover:dark:stroke-neutral-100" />
+										<ChevronRight className="h-3 w-3 stroke-emerald-600 transition-all ease-out group-hover:translate-x-1 group-hover:stroke-neutral-800 dark:stroke-emerald-500 group-hover:dark:stroke-neutral-100" />
 									</div>
 								</Link>
 							</div>
 						</div>
-					))} */}
+					))}
 				</CardContent>
 			</Card>
 		</div>
