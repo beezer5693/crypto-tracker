@@ -1,6 +1,17 @@
 import { formatNumber, formatCurrency } from "@/lib/formatNums"
 
-export default function SnapShot({ globalMetrics }: { globalMetrics: GlobalMetricsData }) {
+async function getGlobalMetrics() {
+	const res = await fetch(
+		`https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/latest?CMC_PRO_API_KEY=${process.env.COIN_MARKET_CAP_API_KEY}`,
+		{ next: { revalidate: 60 } }
+	)
+
+	return res.json()
+}
+
+export default async function SnapShot() {
+	const globalMetrics: GlobalMetricsData = await getGlobalMetrics()
+
 	const globalMetricsData = {
 		totalCryptos: formatNumber(globalMetrics.data.total_cryptocurrencies, "decimal", "standard", 0),
 		totalExchanges: formatNumber(globalMetrics.data.active_exchanges, "decimal", "standard", 0),
