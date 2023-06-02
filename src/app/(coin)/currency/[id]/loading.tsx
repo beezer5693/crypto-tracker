@@ -1,7 +1,8 @@
 import ChartLoading from "@/components/line-chart/loading"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
-import { ChevronLeft, Loader2 } from "lucide-react"
+import { ChevronLeft } from "lucide-react"
 
 export default function Loading() {
 	return (
@@ -10,11 +11,12 @@ export default function Loading() {
 				<ChevronLeft className="group-hover:-transition-x-1 inline-block h-3 w-3 transform align-middle transition-transform duration-300" />
 				<span className="-ml-1 inline-block align-middle">Back to Home</span>
 			</div>
-			<div className="flex min-w-[380px] max-w-screen-xl flex-col items-center justify-center gap-5 xl:flex-row">
-				<div className="flex w-full max-w-[600px] flex-1 flex-col gap-5 xl:max-w-none">
+			<div className="flex min-w-[336px] max-w-screen-xl flex-col items-center justify-center gap-5 xl:flex-row xl:items-start">
+				<div className="flex w-full max-w-[800px] flex-1 flex-col gap-5 xl:max-w-none">
 					<Card className="min-w-[380px]">
 						<CardHeader>
 							<CardTitle className="space-y-3">
+								<Skeleton className="h-4 w-[70px] bg-neutral-200 dark:bg-neutral-700/50" />
 								<div className="flex items-center gap-2">
 									<Skeleton className="h-10 w-10 rounded-full bg-neutral-200 dark:bg-neutral-700/50" />
 									<Skeleton className="h-4 w-[100px] bg-neutral-200 dark:bg-neutral-700/50" />
@@ -63,7 +65,7 @@ export default function Loading() {
 						</CardContent>
 					</Card>
 				</div>
-				<div className="flex w-full min-w-[380px] max-w-[600px] flex-col items-center gap-5 xl:max-w-[400px] xl:flex-none xl:self-start">
+				<div className="flex w-full min-w-[380px] max-w-[800px] flex-col items-center gap-5 xl:max-w-[400px] xl:flex-none xl:self-start">
 					<Card className="w-full">
 						<CardHeader>
 							<CardTitle>
@@ -151,6 +153,21 @@ export default function Loading() {
 										<Skeleton className="h-4 w-[50px] bg-neutral-200 dark:bg-neutral-700/50" />
 									</div>
 								</div>
+							</div>
+						</CardContent>
+					</Card>
+					<Card className="w-full">
+						<CardHeader>
+							<CardTitle>
+								<Skeleton className="h-4 w-[200px] bg-neutral-200 dark:bg-neutral-700/50" />
+							</CardTitle>
+						</CardHeader>
+						<CardContent className="mt-3 space-y-2">
+							<div className="relative">
+								<Input type="text" placeholder="0" className="w-full" value={"0"} readOnly />
+							</div>
+							<div className="relative">
+								<Input placeholder="0" type="text" className="w-full" value={"0"} readOnly />
 							</div>
 						</CardContent>
 					</Card>

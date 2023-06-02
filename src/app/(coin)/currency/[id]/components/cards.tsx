@@ -8,6 +8,7 @@ import { formatCurrency, formatNumber } from "@/lib/formatNums"
 import { cn } from "@/lib/utils"
 import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, FileText, Github, Globe, Twitter } from "lucide-react"
 import { TbBrandReddit } from "react-icons/tb"
+import Converter from "./converter"
 
 type CardProps = {
 	currencyData: any
@@ -92,17 +93,28 @@ export default async function Cards({ currencyData, currencyMetaData, id }: Card
 					Back to Home
 				</span>
 			</Link>
-			<div className="flex min-w-[336px] max-w-screen-xl flex-col items-center justify-center gap-5 xl:flex-row">
-				<div className="flex w-full max-w-[600px] flex-1 flex-col gap-5 xl:max-w-none">
+			<div className="flex min-w-[336px] max-w-screen-xl flex-col items-center justify-center gap-5 xl:flex-row xl:items-start">
+				<div className="flex w-full max-w-[800px] flex-1 flex-col gap-5 xl:max-w-none">
 					{/* Card for coin name and price */}
 					<Card className="w-full">
 						<CardHeader>
 							<CardTitle className="space-y-2">
 								<div className="flex flex-col items-start gap-2">
-									<p className="mb-2 rounded bg-neutral-800 px-1 py-0.5 text-xs text-white dark:bg-neutral-600/50 dark:text-neutral-100">
-										Rank #{coin.rank}
-									</p>
-									<div className="flex w-full items-start justify-between gap-2">
+									<div className="flex w-full justify-between">
+										<p className="mb-0.5 rounded bg-neutral-800 px-1 py-0.5 text-xs text-white dark:bg-neutral-600/50 dark:text-neutral-100">
+											Rank #{coin.rank}
+										</p>
+										<WatchListButton
+											className={cn("h-4 w-4")}
+											className2="h-3 w-3"
+											className3="mr-1.5 inline-flex items-center justify-center"
+											icon={metaData.logo}
+											name={coin.name}
+											coinId={Number(coin.id)}
+											side="bottom"
+										/>
+									</div>
+									<div className="flex w-full items-start">
 										<div className="-mt-1 space-x-2">
 											<Image
 												className="inline-block rounded-full align-middle"
@@ -116,15 +128,6 @@ export default async function Cards({ currencyData, currencyMetaData, id }: Card
 												<span className="text-sm text-neutral-800 dark:text-neutral-400">{coin.symbol}</span>
 											</p>
 										</div>
-										<WatchListButton
-											className={cn("h-4 w-4")}
-											className2="h-3 w-3"
-											className3="mr-1.5 inline-flex items-center justify-center"
-											icon={metaData.logo}
-											name={coin.name}
-											coinId={Number(coin.id)}
-											side="bottom"
-										/>
 									</div>
 									<div>
 										<div className="flex items-center gap-2">
@@ -242,7 +245,7 @@ export default async function Cards({ currencyData, currencyMetaData, id }: Card
 					</Card>
 				</div>
 				{/* Card for overview section */}
-				<div className="flex w-full min-w-[336px] max-w-[600px] flex-col items-center gap-5 xl:max-w-[400px] xl:flex-none xl:self-start">
+				<div className="flex w-full min-w-[336px] max-w-[800px] flex-col items-center gap-5 xl:max-w-[400px] xl:flex-none xl:self-start">
 					<Card className="w-full">
 						<CardHeader>
 							<CardTitle>
@@ -461,6 +464,7 @@ export default async function Cards({ currencyData, currencyMetaData, id }: Card
 							</div>
 						</CardContent>
 					</Card>
+					<Converter coinId={id} symbol={coin.symbol} />
 				</div>
 			</div>
 		</div>

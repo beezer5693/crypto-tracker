@@ -35,7 +35,7 @@ export default function NavMenu({ isOpen, onClose }: Props) {
 	})
 
 	React.useEffect(() => {
-		if (categoryMetaData) {
+		if (categoryMetaData?.data) {
 			setMetaData(Object.values(categoryMetaData.data).map((coin: any) => coin))
 		}
 	}, [categoryMetaData])
