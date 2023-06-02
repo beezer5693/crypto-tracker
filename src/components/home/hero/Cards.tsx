@@ -248,7 +248,7 @@ export default async function Cards({ coins, news, promise }: CardProps) {
 							<Image
 								priority
 								className="rounded dark:border dark:border-neutral-700/50"
-								src={`/images/image${i + 1}.png`}
+								src={`/images/ethereum.png`}
 								height={175}
 								width={175}
 								alt="article image"
