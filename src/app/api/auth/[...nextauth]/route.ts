@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt"
-import { AuthOptions } from "next-auth"
-import NextAuth from "next-auth/next"
+import NextAuth, { AuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import DiscordProvider from "next-auth/providers/discord"
 import GoogleProvider from "next-auth/providers/google"
