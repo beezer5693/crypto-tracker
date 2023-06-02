@@ -249,8 +249,8 @@ export default async function Cards({ coins, news, promise }: CardProps) {
 								priority
 								className="rounded dark:border dark:border-neutral-700/50"
 								src={`/images/image${i + 1}.png`}
-								height={150}
-								width={150}
+								height={175}
+								width={175}
 								alt="article image"
 							/>
 							<div className="flex flex-col justify-start space-y-2">
