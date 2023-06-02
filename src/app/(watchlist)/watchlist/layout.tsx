@@ -1,5 +1,5 @@
 import MainHeader from "@/components/home/mainheader/MainHeader"
-import SubHeader from "@/components/home/subheader/subheader"
+import SubHeader from "../../../components/home/subheader/subheader"
 
 type Props = {
 	children: React.ReactNode
