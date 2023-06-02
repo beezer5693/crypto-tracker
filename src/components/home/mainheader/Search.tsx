@@ -17,11 +17,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 
 async function getCoinData() {
-	const res = await fetch("/api/crypto/latest", {
-		headers: {
-			"X-CMC_PRO_API_KEY": process.env.COIN_MARKET_CAP_API_KEY as string,
-		},
-	})
+	const res = await fetch("/api/crypto/latest")
 
 	return res.json()
 }

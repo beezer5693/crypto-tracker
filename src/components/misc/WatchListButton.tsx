@@ -7,14 +7,17 @@ import { useContext } from "react"
 import { WatchlistContext } from "@/context/WatchListContext"
 import { useSession } from "next-auth/react"
 import { Button } from "@/components/ui/button"
+import { useToast } from "../ui/use-toast"
 import { Star } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Loader2 } from "lucide-react"
 import Tooltip from "@/components/ui/tooltip"
+import Image from "next/image"
 
 type WatchListButtonProps = {
 	coinId: number
 	name?: string
+	icon?: string
 	className?: string
 	className2?: string
 	className3?: string
@@ -24,6 +27,7 @@ type WatchListButtonProps = {
 export default function WatchListButton({
 	coinId,
 	name,
+	icon,
 	className,
 	className2,
 	className3,
@@ -35,6 +39,8 @@ export default function WatchListButton({
 		state: { watchlist },
 		dispatch,
 	} = useContext(WatchlistContext)
+
+	const { toast } = useToast()
 
 	const handleWatchList = async (coinId: number) => {
 		setIsLoading(true)
@@ -54,6 +60,18 @@ export default function WatchListButton({
 					})
 
 					dispatch({ type: "REMOVE", payload: coinId })
+					toast({
+						description: (
+							<div className="flex items-center gap-2">
+								{icon && <Image src={icon} height={20} width={20} alt="logo" />}
+								<p className="font-normal text-neutral-800 dark:text-neutral-300">
+									<span className="font-bold text-neutral-800 dark:text-neutral-100">{name}</span> removed from
+									watchlist
+								</p>
+							</div>
+						),
+						duration: 3000,
+					})
 					setIsLoading(false)
 				}
 
@@ -65,6 +83,17 @@ export default function WatchListButton({
 					})
 
 					dispatch({ type: "ADD", payload: coinId })
+					toast({
+						description: (
+							<div className="flex items-center gap-2">
+								{icon && <Image src={icon} height={20} width={20} alt="logo" />}
+								<p className="font-normal text-neutral-800 dark:text-neutral-300">
+									<span className="font-bold text-neutral-800 dark:text-neutral-100">{name}</span> added to watchlist
+								</p>
+							</div>
+						),
+						duration: 3000,
+					})
 					setIsLoading(false)
 				}
 			}

@@ -23,8 +23,7 @@ async function getMetaData() {
 }
 
 export default async function DataTableMain() {
-	const coinData = await getCoinData()
-	const metaData = await getMetaData()
+	const [coinData, metaData] = await Promise.all([getCoinData(), getMetaData()])
 
 	const cryptoData = coinData.data.map((coin: any, i: number) => {
 		return {

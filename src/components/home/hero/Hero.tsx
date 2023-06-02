@@ -4,30 +4,35 @@ import LoadingUI from "./LoadingUI"
 import { Suspense } from "react"
 
 async function getGlobalMetrics() {
-	const res = await fetch(
-		`https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/latest?CMC_PRO_API_KEY=${process.env.COIN_MARKET_CAP_API_KEY}`
-	)
+	const res = await fetch(`https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/latest`, {
+		headers: {
+			"X-CMC_PRO_API_KEY": process.env.COIN_MARKET_CAP_API_KEY as string,
+		},
+	})
 
 	return res.json()
 }
 
 async function getCoinData(symbols: string[] = ["BTC", "ETH", "ADA", "XRP", "SOL", "DOGE"]) {
 	const res = await fetch(
-		`https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=${symbols.join(",")}&CMC_PRO_API_KEY=${
-			process.env.COIN_MARKET_CAP_API_KEY
-		}`,
-		{ next: { revalidate: 60 } }
+		`https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=${symbols.join(",")}`,
+		{
+			headers: {
+				"X-CMC_PRO_API_KEY": process.env.COIN_MARKET_CAP_API_KEY as string,
+			},
+			next: { revalidate: 60 },
+		}
 	)
 
 	return res.json()
 }
 
 async function getMetaData(ids: string[]) {
-	const res = await fetch(
-		`https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?id=${ids.join(",")}&CMC_PRO_API_KEY=${
-			process.env.COIN_MARKET_CAP_API_KEY
-		}`
-	)
+	const res = await fetch(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?id=${ids.join(",")}`, {
+		headers: {
+			"X-CMC_PRO_API_KEY": process.env.COIN_MARKET_CAP_API_KEY as string,
+		},
+	})
 
 	return res.json()
 }

@@ -5,6 +5,7 @@ import { WatchlistContext } from "@/context/WatchListContext"
 import { columns } from "@/components/data-table/columns"
 import { useQuery } from "@tanstack/react-query"
 import React from "react"
+import Loading from "./loading"
 
 async function getCoinData(coinIds: number[]) {
 	const res = await fetch(`/api/crypto/quote?id=${coinIds.join(",")}`)
@@ -70,6 +71,6 @@ export default function DataTableWatchlist() {
 		}
 	}, [coins, metaData])
 
-	if (coinsIsLoading || metaDataIsLoading || coinsIsFetching || metaDataIsFetching) return <div>Loading...</div>
+	if (coinsIsLoading || metaDataIsLoading || coinsIsFetching || metaDataIsFetching) return <Loading />
 	return <>{!!data.length && <DataTable columns={columns} data={data} />}</>
 }

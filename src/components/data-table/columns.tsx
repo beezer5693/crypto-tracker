@@ -47,8 +47,8 @@ export const columns: ColumnDef<Crypto>[] = [
 		accessorKey: "watchlist",
 		header: () => <div className="w-0"></div>,
 		cell: ({ row }) => {
-			const { coinId, name } = row.original
-			return <WatchListButton side="bottom" name={name} coinId={Number(coinId)} />
+			const { coinId, name, icon } = row.original
+			return <WatchListButton side="bottom" icon={icon} name={name} coinId={Number(coinId)} />
 		},
 	},
 	{

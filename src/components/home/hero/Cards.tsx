@@ -272,7 +272,7 @@ export default async function Cards({ coins, news, promise }: CardProps) {
 										<p className="text-emerald-600 transition duration-200 ease-out group-hover:text-neutral-800 dark:text-emerald-500 group-hover:dark:text-neutral-100">
 											Read more
 										</p>
-										<ChevronRight className="h-3 w-3 stroke-emerald-600 transition-all ease-out group-hover:tranneutral-x-1 group-hover:stroke-neutral-800 dark:stroke-emerald-500 group-hover:dark:stroke-neutral-100" />
+										<ChevronRight className="h-3 w-3 stroke-emerald-600 transition-all ease-out group-hover:transition-x-1 group-hover:stroke-neutral-800 dark:stroke-emerald-500 group-hover:dark:stroke-neutral-100" />
 									</div>
 								</Link>
 							</div>

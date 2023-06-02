@@ -30,8 +30,7 @@ async function getCoinMetaData(id: string) {
 }
 
 export default async function Coin({ params: { id } }: Params) {
-	const currencyData: Promise<any> = getCoinData(id)
-	const currencyMetaData: Promise<any> = getCoinMetaData(id)
+	const [currencyData, currencyMetaData] = await Promise.all([getCoinData(id), getCoinMetaData(id)])
 
 	return (
 		<section className="flex w-full flex-col items-center">

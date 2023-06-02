@@ -35,7 +35,7 @@ export default async function Category({ params: { categoryId } }: CategoryPageP
 
 	const ethereumDescription = (
 		<>
-			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">Ethereum ecosystem coins & tokens</h1>
+			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">Ethereum ecosystem </h1>
 			<p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
 				Ethereum is a decentralized, open-source blockchain with smart contract functionality. Ether (ETH or Ξ) is the
 				native cryptocurrency of the platform. After Bitcoin, it is the second-largest cryptocurrency by market
@@ -46,9 +46,7 @@ export default async function Category({ params: { categoryId } }: CategoryPageP
 
 	const bnbChainDescription = (
 		<>
-			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">
-				BNB Chain ecosystem coins & tokens
-			</h1>
+			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">BNB Chain ecosystem</h1>
 			<p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
 				Binance Chain is a blockchain software system developed by Binance and its community. Binance DEX refers to the
 				decentralized exchange features developed on top of Binance Chain. Binance Chain is a community-driven
@@ -61,7 +59,7 @@ export default async function Category({ params: { categoryId } }: CategoryPageP
 
 	const solanaDescription = (
 		<>
-			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">Solana ecosystem coins & tokens</h1>
+			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">Solana ecosystem </h1>
 			<p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
 				Solana is a high-performance blockchain that can enable growing decentralized applications and systems to scale
 				without sacrificing security. It is designed to support 50,000 transactions per second (tps) with 400
@@ -77,7 +75,7 @@ export default async function Category({ params: { categoryId } }: CategoryPageP
 
 	const polkadotDescription = (
 		<>
-			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">Polkdot ecosystem coins & tokens</h1>
+			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">Polkdot ecosystem </h1>
 			<p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
 				Polkadot is a blockchain protocol designed to support parachains created by different developers. It aims to
 				provide interoperability, scalability, and security. It allows the transfer of any type of data or asset across
@@ -91,7 +89,7 @@ export default async function Category({ params: { categoryId } }: CategoryPageP
 
 	const avalancheDescription = (
 		<>
-			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">Avalance ecosystem coins & tokens</h1>
+			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">Avalance ecosystem </h1>
 			<p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
 				Avalanche is an open-source platform for launching decentralized finance applications and enterprise blockchain
 				deployments in one interoperable, highly scalable ecosystem. Developers who build on Avalanche can easily create
@@ -113,7 +111,7 @@ export default async function Category({ params: { categoryId } }: CategoryPageP
 
 	const gamingDescription = (
 		<>
-			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">Gaming coins & tokens</h1>
+			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">Gaming tokens & coins</h1>
 			<p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
 				Gaming cryptocurrencies are digital currencies people can use to buy in-game items or pay for gaming services.
 				They are similar to other cryptocurrencies in that they are decentralized and use blockchain technology and
@@ -146,7 +144,7 @@ export default async function Category({ params: { categoryId } }: CategoryPageP
 
 	const web3Description = (
 		<>
-			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">Web3 coins & tokens</h1>
+			<h1 className="text-3xl font-medium text-neutral-800 dark:text-neutral-100">Web3 tokens & coins</h1>
 			<p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
 				Web3 is a term used to describe the third generation of Internet services. The first generation, Web 1.0, was
 				the Internet as we know it today. The second generation, Web 2.0, was the rise of social media and

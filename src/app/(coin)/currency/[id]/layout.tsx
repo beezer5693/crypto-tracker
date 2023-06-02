@@ -7,7 +7,7 @@ type Children = {
 
 export default function Layout({ children }: Children) {
 	return (
-		<div className="relative mx-auto flex min-h-screen flex-col items-center bg-white pb-20 dark:bg-[#1c1c1c]">
+		<div className="relative mx-auto flex min-h-screen flex-col items-center overflow-hidden bg-white pb-20 dark:bg-[#1c1c1c] sm:overflow-auto">
 			{/* @ts-expect-error Async Server Component */}
 			<SubHeader />
 			<MainHeader />
