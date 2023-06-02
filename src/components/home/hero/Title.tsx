@@ -76,14 +76,14 @@ export default function Title({ globalMetrics }: TitleProps) {
 						}`}
 					>
 						{Math.sign(globalMetrics.totalVolumeChange24h) === -1 ? (
-							<ChevronDown className="inline h-4 w-4 text-red-500" />
+							<ChevronDown className="inline h-4 w-4 align-middle text-red-500" />
 						) : (
-							<ChevronUp className="inline h-4 w-4 text-emerald-500" />
+							<ChevronUp className="inline h-4 w-4 align-middle text-emerald-500" />
 						)}
 						{formatNumber(Math.abs(globalMetrics.totalVolumeChange24h), "decimal", "standard", 2)}%
 					</span>
 					<span className="mx-0.5">
-						{Math.sign(globalMetrics.totalVolumeChange24h) === -1 ? "decrease" : "increase"}
+						{Math.sign(globalMetrics.totalVolumeChange24h) === -1 ? "decrease." : "increase."}
 					</span>
 					The total volume in DeFi is currently
 					<span className="mx-1 font-bold text-neutral-600 dark:text-neutral-300">
