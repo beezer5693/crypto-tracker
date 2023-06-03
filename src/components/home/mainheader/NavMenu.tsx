@@ -48,7 +48,7 @@ export default function NavMenu({ isOpen, onClose }: Props) {
 			}
 		}
 		const handleScroll = () => {
-			if (scrollY >= 800 && isOpen) {
+			if (scrollY >= 200 && isOpen) {
 				onClose()
 			}
 			setScrollY(window.scrollY)
