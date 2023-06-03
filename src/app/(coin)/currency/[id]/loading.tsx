@@ -65,7 +65,7 @@ export default function Loading() {
 						</CardContent>
 					</Card>
 				</div>
-				<div className="flex w-full min-w-[380px] max-w-[800px] flex-col items-center gap-5 xl:max-w-[400px] xl:flex-none xl:self-start">
+				<div className="flex w-full min-w-[336px] max-w-[800px] flex-col items-center gap-5 xl:max-w-[400px] xl:flex-none xl:self-start">
 					<Card className="w-full">
 						<CardHeader>
 							<CardTitle>
