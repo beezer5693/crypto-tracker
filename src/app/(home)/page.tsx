@@ -5,7 +5,7 @@ import DataTableMain from "@/components/data-table/datatable"
 
 export default async function Home() {
 	return (
-		<main className="flex min-h-screen flex-col bg-white pb-20 dark:bg-[#1c1c1c]">
+		<main className="flex min-h-screen flex-col overflow-x-hidden bg-white pb-20 dark:bg-[#1c1c1c]">
 			<SubHeader />
 			<MainHeader />
 			{/* @ts-expect-error Async Server Component */}
