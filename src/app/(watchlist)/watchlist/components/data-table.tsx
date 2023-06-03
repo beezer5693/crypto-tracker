@@ -46,7 +46,7 @@ export default function DataTableWatchlist() {
 	})
 
 	React.useEffect(() => {
-		if (coins && metaData) {
+		if (coins?.data && metaData?.data) {
 			const cryptoData = Object.values(coins.data)
 			const coinData = cryptoData.map((coin: any, i: number) => {
 				return {
