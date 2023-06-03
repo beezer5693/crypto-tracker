@@ -13,7 +13,7 @@ export default function Loading() {
 			</div>
 			<div className="flex min-w-[336px] max-w-screen-xl flex-col items-center justify-center gap-5 xl:flex-row xl:items-start">
 				<div className="flex w-full max-w-[800px] flex-1 flex-col gap-5 xl:max-w-none">
-					<Card className="min-w-[380px]">
+					<Card className="min-w-[336px]">
 						<CardHeader>
 							<CardTitle className="space-y-3">
 								<Skeleton className="h-4 w-[70px] bg-neutral-200 dark:bg-neutral-700/50" />
