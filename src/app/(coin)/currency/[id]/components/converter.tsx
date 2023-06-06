@@ -8,13 +8,14 @@ import { formatNumber } from "@/lib/formatNums"
 type ConverterProps = {
 	coinId: string
 	symbol: string
+	coinPrice: number
 }
 
-export default function Converter({ coinId, symbol }: ConverterProps) {
+export default function Converter({ symbol, coinPrice }: ConverterProps) {
 	const [userInput, setUserInput] = React.useState<string | number>("")
 	const [dollarAmount, setDollarAmount] = React.useState<string | number>("")
 
-	async function handleUserInput(e: React.ChangeEvent<HTMLInputElement>, coinId: string) {
+	async function handleUserInput(e: React.ChangeEvent<HTMLInputElement>, coinPrice: number) {
 		const regex = /^[0-9\b]+$/
 		if (e.target.value !== "" && !regex.test(e.target.value)) return
 		if (e.target.value === "") {
@@ -23,20 +24,13 @@ export default function Converter({ coinId, symbol }: ConverterProps) {
 			return
 		}
 		setUserInput(parseInt(e.target.value))
-		const res = await fetch(`/api/crypto/converter?id=${coinId}&amount=${e.target.value}&convert=USD`)
-		const data = await res.json()
+		const coinAmount = parseInt(e.target.value) * coinPrice
 		setDollarAmount(
 			formatNumber(
-				data.data.quote.USD.price,
+				coinAmount,
 				"decimal",
 				"standard",
-				data.data.quote.USD.price >= 1
-					? 2
-					: data.data.quote.USD.price >= 0.1
-					? 4
-					: data.data.quote.USD.price >= 0.01
-					? 6
-					: 8
+				coinAmount >= 1 ? 2 : coinAmount >= 0.1 ? 4 : coinAmount >= 0.01 ? 6 : 8
 			)
 		)
 	}
@@ -53,7 +47,7 @@ export default function Converter({ coinId, symbol }: ConverterProps) {
 						placeholder="0"
 						className="w-full"
 						value={userInput}
-						onChange={e => handleUserInput(e, coinId)}
+						onChange={e => handleUserInput(e, coinPrice)}
 					/>
 					<p className="absolute right-3 top-1/2 -translate-y-1/2 text-xs">{symbol}</p>
 				</div>

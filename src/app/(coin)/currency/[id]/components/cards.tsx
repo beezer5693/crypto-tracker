@@ -464,7 +464,7 @@ export default async function Cards({ currencyData, currencyMetaData, id }: Card
 							</div>
 						</CardContent>
 					</Card>
-					<Converter coinId={id} symbol={coin.symbol} />
+					<Converter coinId={id} coinPrice={coin.price} symbol={coin.symbol} />
 				</div>
 			</div>
 		</div>
