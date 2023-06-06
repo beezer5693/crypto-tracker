@@ -5,7 +5,7 @@ import { signIn, useSession } from "next-auth/react"
 import { useToast } from "@/components/ui/use-toast"
 import { Button } from "@/components/ui/button"
 import { FaDiscord } from "react-icons/fa"
-import { Loader2 } from "lucide-react"
+import { Loader } from "lucide-react"
 
 export default function DiscordAuth() {
 	const [isLoading, setIsLoading] = React.useState<boolean>(true)
@@ -43,7 +43,7 @@ export default function DiscordAuth() {
 			className="w-full gap-1.5 border border-neutral-300 bg-white transition duration-300 ease-out hover:border-neutral-400/50 hover:bg-neutral-200/30 hover:ring-2 hover:ring-transparent dark:border-neutral-600/40 dark:border-b-transparent dark:bg-neutral-700/50 dark:shadow-sm dark:shadow-black/30 dark:hover:border-neutral-600/50 dark:hover:bg-neutral-700/70"
 		>
 			{isLoading ? (
-				<Loader2 className="h-4 w-4 animate-spin stroke-neutral-700 dark:stroke-neutral-200" />
+				<Loader className="h-4 w-4 animate-spin stroke-neutral-700 dark:stroke-neutral-200" />
 			) : (
 				<FaDiscord className="h-5 w-5 fill-neutral-700 dark:fill-neutral-200" />
 			)}

@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button"
 import { useToast } from "../ui/use-toast"
 import { Star } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { Loader2 } from "lucide-react"
+import { Loader } from "lucide-react"
 import Tooltip from "@/components/ui/tooltip"
 import Image from "next/image"
 
@@ -130,7 +130,7 @@ export default function WatchListButton({
 				}
 			>
 				{isLoading ? (
-					<Loader2 className={cn("h-3 w-3 animate-spin text-neutral-800 dark:text-neutral-100", className2)} />
+					<Loader className={cn("h-3 w-3 animate-spin text-neutral-800 dark:text-neutral-100", className2)} />
 				) : (
 					<Star
 						className={cn(

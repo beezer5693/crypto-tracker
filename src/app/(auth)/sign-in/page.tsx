@@ -12,7 +12,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
 import { authSignInSchema } from "@/lib/validators/authform"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { AlertCircle, Eye, EyeOff, Loader2 } from "lucide-react"
+import { AlertCircle, Eye, EyeOff, Loader } from "lucide-react"
 
 export default function SignIn() {
 	const [isLoading, setIsLoading] = React.useState<boolean>(false)
@@ -130,7 +130,7 @@ export default function SignIn() {
 					>
 						{isLoading ? (
 							<>
-								<Loader2 className="h-4 w-4 animate-spin text-white" />
+								<Loader className="h-4 w-4 animate-spin text-white" />
 								<span className="text-[.95rem] text-white">Signing in...</span>
 							</>
 						) : (
