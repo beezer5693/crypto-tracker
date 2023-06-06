@@ -10,12 +10,12 @@ import { cn } from "@/lib/utils"
 import { FiPieChart } from "react-icons/fi"
 import { ChevronDown } from "lucide-react"
 
-export default function MainHeader() {
+export default function Navbar() {
 	const [isOpen, setIsOpen] = React.useState(false)
 
 	return (
 		<div className="sticky top-0 z-50 w-full">
-			<Header className="flex w-full flex-col gap-5 border-b border-neutral-200/60 bg-white px-6 py-3.5  dark:border-neutral-700/50 dark:bg-[#1c1c1c] lg:flex-row">
+			<nav className="flex w-[330px] items-center gap-5 border-b border-neutral-200/60 bg-white px-6 py-3.5 dark:border-neutral-700/50 dark:bg-[#1c1c1c] sm:m-0  sm:w-full sm:justify-between lg:flex-row">
 				<div className="flex flex-col items-center gap-5 sm:flex-row sm:gap-20">
 					<Logo height={20} width={20} />
 					<nav className="flex items-center">
@@ -55,7 +55,7 @@ export default function MainHeader() {
 					</div>
 					<Search />
 				</div>
-			</Header>
+			</nav>
 			<NavMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
 		</div>
 	)
