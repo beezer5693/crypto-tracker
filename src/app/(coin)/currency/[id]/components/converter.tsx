@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input"
 import { formatNumber } from "@/lib/formatNums"
 
 type ConverterProps = {
-	coinId: string
 	symbol: string
 	coinPrice: number
 }
