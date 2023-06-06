@@ -67,10 +67,10 @@ export default function LineChart({ id }: LineChartProps) {
 	React.useEffect(() => {
 		if (historicalQuotes?.data) {
 			setChart({
-				labels: [...historicalQuotes.data.quotes.map((item: any) => item.timestamp)],
+				labels: [...historicalQuotes?.data?.quotes.map((item: any) => item.timestamp)],
 				datasets: [
 					{
-						data: [...historicalQuotes.data.quotes.map((item: any) => item.quote.USD.price)],
+						data: [...historicalQuotes?.data?.quotes.map((item: any) => item.quote.USD.price)],
 						borderColor:
 							historicalQuotes.data.quotes[0].quote.USD.price >
 							historicalQuotes.data.quotes[historicalQuotes.data.quotes.length - 1].quote.USD.price
@@ -82,12 +82,12 @@ export default function LineChart({ id }: LineChartProps) {
 			})
 		}
 		setChartDates(
-			`${new Date(historicalQuotes?.data.quotes[0].timestamp).toLocaleDateString("en-US", {
+			`${new Date(historicalQuotes?.data?.quotes[0]?.timestamp).toLocaleDateString("en-US", {
 				month: "long",
 				day: "numeric",
 				year: "numeric",
 			})} - ${new Date(
-				historicalQuotes?.data.quotes[historicalQuotes?.data.quotes.length - 1].timestamp
+				historicalQuotes?.data?.quotes[historicalQuotes?.data.quotes.length - 1]?.timestamp
 			).toLocaleDateString("en-US", {
 				month: "long",
 				day: "numeric",
