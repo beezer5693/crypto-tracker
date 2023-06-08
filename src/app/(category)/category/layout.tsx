@@ -1,8 +1,14 @@
 import Navbar from "@/components/home/navbar/Navbar"
 import SubHeader from "@/components/home/subheader/SubHeader"
+import { Metadata } from "next"
 
 type Props = {
 	children: React.ReactNode
+}
+
+export const metadata: Metadata = {
+	title: "coinDex",
+	description: "Crypto market data, charts, prices, trades and volumes.",
 }
 
 export default function Layout({ children }: Props) {

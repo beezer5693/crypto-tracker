@@ -51,7 +51,13 @@ export default function Converter({ symbol, coinPrice }: ConverterProps) {
 					<p className="absolute right-3 top-1/2 -translate-y-1/2 text-xs">{symbol}</p>
 				</div>
 				<div className="relative">
-					<Input placeholder="0" type="text" className="w-full cursor-text" value={dollarAmount} readOnly />
+					<Input
+						placeholder="0"
+						type="text"
+						className="w-full cursor-text focus-visible:border-neutral-300 focus-visible:ring-transparent dark:focus-visible:border-neutral-700/50 dark:focus-visible:ring-transparent"
+						value={dollarAmount}
+						readOnly
+					/>
 					<p className="absolute right-3 top-1/2 -translate-y-1/2 text-xs">USD</p>
 				</div>
 			</CardContent>

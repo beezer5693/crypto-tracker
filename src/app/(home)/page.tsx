@@ -2,6 +2,12 @@ import Navbar from "@/components/home/navbar/Navbar"
 import SubHeader from "../../components/home/subheader/SubHeader"
 import Hero from "@/components/home/hero/Hero"
 import DataTableMain from "@/components/data-table/datatable"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+	title: "coinDex",
+	description: "Crypto market data, charts, prices, trades and volumes.",
+}
 
 export default async function Home() {
 	return (
