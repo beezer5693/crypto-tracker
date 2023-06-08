@@ -39,7 +39,7 @@ export default function GoogleAuth() {
 	return (
 		<Button
 			onClick={handleGoogleAuth}
-			className="w-full gap-1.5 border border-neutral-300 bg-white shadow-md shadow-neutral-200/60 transition duration-300 ease-out hover:border-neutral-400/50 hover:bg-neutral-200/30 hover:ring-2 hover:ring-transparent dark:border-neutral-600/40 dark:border-b-transparent dark:bg-neutral-700/50 dark:shadow-black/10 dark:hover:border-neutral-600/50 dark:hover:bg-neutral-700/70"
+			className="w-full gap-1.5 rounded-md border border-neutral-300/80 bg-white shadow-sm shadow-neutral-200/60 transition duration-300 ease-out hover:border-neutral-400/50 hover:bg-neutral-200/30 hover:ring-2 hover:ring-transparent dark:border-neutral-600/40 dark:border-b-transparent dark:bg-neutral-700/50 dark:shadow-black/10 dark:hover:border-neutral-600/50 dark:hover:bg-neutral-700/70"
 		>
 			{isLoading ? (
 				<Loader2 className="h-4 w-4 animate-spin text-neutral-700 dark:text-neutral-200" />

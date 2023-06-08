@@ -126,7 +126,7 @@ export default function SignIn() {
 					<Button
 						disabled={isLoading}
 						type="submit"
-						className="mb-2 gap-2 border-x border-t border-emerald-400 bg-emerald-600 text-white shadow-sm transition duration-300 ease-out hover:bg-emerald-400 dark:border-emerald-500 dark:bg-emerald-500/60 dark:hover:border-emerald-500 dark:hover:bg-emerald-500"
+						className="mb-2 w-full gap-2 rounded-md border-x border-t border-emerald-500 bg-emerald-500 text-sm text-white shadow-sm shadow-neutral-900/70 transition duration-300 ease-out hover:border-emerald-400 hover:bg-emerald-400 dark:border-emerald-500 dark:bg-emerald-500/60 dark:hover:border-emerald-500 dark:hover:bg-emerald-500"
 					>
 						{isLoading ? (
 							<>

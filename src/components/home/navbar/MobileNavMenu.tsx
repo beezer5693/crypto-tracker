@@ -192,7 +192,7 @@ export default function MobileNavMenu({ menuOpen, setMenuOpen }: MobileNavMenuPr
 					{session.status === "authenticated" ? (
 						<Button
 							onClick={handleLogout}
-							className="w-full border border-neutral-300/80 bg-white text-sm shadow-sm shadow-neutral-200/60 transition duration-300 ease-out hover:border-neutral-400/50  hover:bg-neutral-200/10 hover:ring-2 hover:ring-transparent dark:border-neutral-600/40 dark:border-b-transparent dark:bg-neutral-700/50 dark:shadow-black/10 dark:hover:border-neutral-600/50 dark:hover:bg-neutral-700/70"
+							className="w-full rounded-md border border-neutral-300/80 bg-white text-sm shadow-sm shadow-neutral-200/60 transition duration-300 ease-out hover:border-neutral-400/50  hover:bg-neutral-200/10 hover:ring-2 hover:ring-transparent dark:border-neutral-600/40 dark:border-b-transparent dark:bg-neutral-700/50 dark:shadow-black/10 dark:hover:border-neutral-600/50 dark:hover:bg-neutral-700/70"
 						>
 							<div className="relative">
 								<LogOut
@@ -205,12 +205,12 @@ export default function MobileNavMenu({ menuOpen, setMenuOpen }: MobileNavMenuPr
 					) : (
 						<>
 							<Link href={"/sign-up"}>
-								<Button className="mb-2 w-full gap-2 border-x border-t border-emerald-400 bg-emerald-600 text-sm text-white shadow-sm transition duration-300 ease-out hover:bg-emerald-400 dark:border-emerald-500 dark:bg-emerald-500/60 dark:hover:border-emerald-500 dark:hover:bg-emerald-500">
+								<Button className="mb-2 w-full gap-2 rounded-md border-x border-t border-emerald-500 bg-emerald-500 text-sm text-white shadow-sm shadow-neutral-900/70 transition duration-300 ease-out hover:border-emerald-400 hover:bg-emerald-400 dark:border-emerald-500 dark:bg-emerald-500/60 dark:hover:border-emerald-500 dark:hover:bg-emerald-500">
 									Get Started
 								</Button>
 							</Link>
 							<Link href={"/sign-in"}>
-								<Button className="w-full border border-neutral-300 bg-white text-sm shadow-sm shadow-neutral-200/60 transition duration-300 ease-out hover:border-neutral-400/50  hover:bg-neutral-200/20 hover:ring-2 hover:ring-transparent dark:border-neutral-600/40 dark:border-b-transparent dark:bg-neutral-700/50 dark:shadow-black/10 dark:hover:border-neutral-600/50 dark:hover:bg-neutral-700/70">
+								<Button className="w-full rounded-md border border-neutral-300/80 bg-white text-sm shadow-sm shadow-neutral-200/60 transition duration-300 ease-out hover:border-neutral-400/50  hover:bg-neutral-200/20 hover:ring-2 hover:ring-transparent dark:border-neutral-600/40 dark:border-b-transparent dark:bg-neutral-700/50 dark:shadow-black/10 dark:hover:border-neutral-600/50 dark:hover:bg-neutral-700/70">
 									Sign In
 								</Button>
 							</Link>
