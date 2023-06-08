@@ -10,7 +10,7 @@ import { ChevronRight, Globe, Gamepad2, Coins } from "lucide-react"
 import { IoImageOutline } from "react-icons/io5"
 
 type Props = {
-	isOpen: boolean
+	dropDownMenuOpen: boolean
 	onClose: () => void
 }
 
@@ -19,7 +19,7 @@ async function getCategoryMetaData() {
 	return res.json()
 }
 
-export default function NavMenu({ isOpen, onClose }: Props) {
+export default function NavMenu({ dropDownMenuOpen, onClose }: Props) {
 	const [metaData, setMetaData] = React.useState<any[]>([])
 	const [scrollY, setScrollY] = React.useState<number>(0)
 	const ref = useRef<HTMLDivElement>(null)
@@ -48,7 +48,7 @@ export default function NavMenu({ isOpen, onClose }: Props) {
 			}
 		}
 		const handleScroll = () => {
-			if (scrollY >= 200 && isOpen) {
+			if (scrollY >= 200 && dropDownMenuOpen) {
 				onClose()
 			}
 			setScrollY(window.scrollY)
@@ -59,14 +59,14 @@ export default function NavMenu({ isOpen, onClose }: Props) {
 			document.removeEventListener("click", handleOutsideClick)
 			window.removeEventListener("scroll", handleScroll)
 		}
-	}, [isOpen, onClose, scrollY])
+	}, [dropDownMenuOpen, onClose, scrollY])
 
 	return (
 		<div
 			className={cn(
-				"absolute z-50 hidden w-full border-y border-neutral-200/60 bg-white shadow-lg shadow-neutral-300/50 dark:border-neutral-700/50 dark:bg-[#1c1c1c] dark:shadow-black/10",
+				"absolute left-0 right-0 top-[100%] z-20 hidden w-full border-y border-neutral-200/60 bg-white shadow-lg shadow-neutral-300/50 dark:border-neutral-700/50 dark:bg-[#1c1c1c] dark:shadow-black/10",
 				{
-					"flex flex-col border-t-0 fade-in-50 lg:flex-row": isOpen,
+					"flex flex-col fade-in-50 lg:flex-row": dropDownMenuOpen,
 				}
 			)}
 			ref={ref}
@@ -181,9 +181,9 @@ export default function NavMenu({ isOpen, onClose }: Props) {
 						View tokens and coins from the most popular crypto platforms.
 					</p>
 				</div>
-				<div className="grid grid-cols-1 gap-3 self-start">
+				<div className="grid grid-cols-1 gap-4 self-start">
 					<Link className="cursor-pointer" href={"/category/618c0beeb7dd913155b462f9"}>
-						<div className="flex items-center gap-5 rounded-md border border-neutral-200/60 bg-gradient-to-tl from-white from-60% to-[#edf7f4] p-3 transition duration-300 ease-out hover:border-neutral-300/70 dark:border-neutral-700/50 dark:from-[#202020] dark:from-60% dark:to-[#252a29] hover:dark:border-neutral-600/60">
+						<div className="flex items-center gap-5 rounded-md border border-neutral-200/60 bg-gradient-to-tl from-white from-60% to-[#edf7f4] p-3 shadow-md shadow-neutral-200/60 transition duration-300 ease-out hover:border-neutral-300/70 dark:border-neutral-700/50 dark:from-[#202020] dark:from-60% dark:to-[#252a29] dark:shadow-black/10 hover:dark:border-neutral-600/60">
 							<Image
 								className="rounded-md border border-neutral-200/60 dark:border-neutral-700/50"
 								src="/images/ethereum.png"
@@ -200,7 +200,7 @@ export default function NavMenu({ isOpen, onClose }: Props) {
 						</div>
 					</Link>
 					<Link className="cursor-pointer" href={"/category/60308028d2088f200c58a005"}>
-						<div className="flex items-center gap-5 rounded-md border border-neutral-200/60 bg-gradient-to-tl from-white from-60% to-[#edf7f4] p-3 transition duration-300 ease-out hover:border-neutral-300/70 dark:border-neutral-700/50 dark:from-[#202020] dark:from-60% dark:to-[#252a29] hover:dark:border-neutral-600/60">
+						<div className="flex items-center gap-5 rounded-md border border-neutral-200/60 bg-gradient-to-tl from-white from-60% to-[#edf7f4] p-3 shadow-md shadow-neutral-200/60 transition duration-300 ease-out hover:border-neutral-300/70 dark:border-neutral-700/50 dark:from-[#202020] dark:from-60% dark:to-[#252a29] dark:shadow-black/10 hover:dark:border-neutral-600/60">
 							<Image
 								className="rounded-md border border-neutral-200/60 dark:border-neutral-700/50"
 								src="/images/binance.png"

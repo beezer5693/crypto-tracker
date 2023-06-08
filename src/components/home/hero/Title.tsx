@@ -24,20 +24,18 @@ export default function Title({ globalMetrics }: TitleProps) {
 	const [isOpened, setIsOpened] = React.useState<boolean>(false)
 
 	return (
-		<div className="flex flex-col items-center gap-1 pb-5 sm:items-start">
-			<h1 className="text-sm font-bold text-neutral-800 dark:text-neutral-200 sm:text-xl">
+		<div className="flex flex-col gap-1 pb-5">
+			<h1 className="font-bold text-neutral-800 dark:text-neutral-200 sm:text-xl">
 				{"Today's Cryptocurrency Prices by Market Cap"}
 			</h1>
-			<div className="flex flex-wrap items-center justify-center">
-				<div className="flex items-center">
+			<div className="flex flex-wrap">
+				<p className="inline-flex flex-wrap items-center justify-start">
 					<span className="mr-[3px] text-[.8rem] font-medium text-neutral-600 dark:text-neutral-400">
 						The global crypto market cap is
 					</span>
 					<span className="mr-[3px] text-[.8rem] font-bold text-neutral-600 dark:text-neutral-300">
 						{formatCurrency(globalMetrics.totalCryptoMarketCap, "currency", "USD", "compact", 2)},
 					</span>
-				</div>
-				<div className="flex items-center">
 					<span className="mr-[3px] text-[.8rem] font-medium text-neutral-600 dark:text-neutral-400">a</span>
 					<span
 						className={`inline-flex items-center text-[.8rem] font-bold ${
@@ -51,17 +49,18 @@ export default function Title({ globalMetrics }: TitleProps) {
 						)}
 						{formatNumber(Math.abs(globalMetrics.totalMarketCapChange24h), "decimal", "standard", 2)}%
 						<span className="mx-[3px] text-[.8rem] font-medium text-neutral-600 dark:text-neutral-400">
-							{Math.sign(globalMetrics.totalMarketCapChange24h) === -1 ? "decrease." : "increase."}
+							{Math.sign(globalMetrics.totalMarketCapChange24h) === -1 ? "decrease" : "increase"}
 						</span>
 					</span>
 					<span className="text-[.8rem] font-medium text-neutral-600 dark:text-neutral-400">over the last day.</span>
-					<Button
+					&nbsp;
+					<span
 						onClick={() => setIsOpened(prev => !prev)}
-						className="hover group ml-2 h-3 p-0 text-[.8rem] font-medium text-neutral-600 underline decoration-neutral-600 transition duration-200 ease-out hover:text-neutral-800 dark:text-neutral-400 dark:decoration-neutral-400 hover:dark:text-neutral-300"
+						className="cursor-pointer text-[.8rem] font-medium text-neutral-600 underline decoration-neutral-600 transition duration-200 ease-out hover:text-neutral-800 dark:text-neutral-400 dark:decoration-neutral-400 hover:dark:text-neutral-300"
 					>
-						<span>{isOpened ? "Read less" : "Read more"}</span>
-					</Button>
-				</div>
+						{isOpened ? "Read less" : "Read more"}
+					</span>
+				</p>
 			</div>
 			<Collapse isOpened={isOpened}>
 				<p className="mt-2 max-w-4xl text-[.8rem] font-medium text-neutral-600 dark:text-neutral-400 sm:justify-start">

@@ -73,7 +73,7 @@ export default async function Hero() {
 
 	return (
 		<section className="w-full px-5">
-			<div className="relative mx-auto max-w-screen-xl flex-col justify-start pb-9 pt-7">
+			<div className="relative mx-auto max-w-screen-xl flex-col pt-7 sm:pb-9">
 				<Title globalMetrics={globalMetrics} />
 				<Suspense fallback={<LoadingUI />}>
 					{/* @ts-expect-error Async Server Component */}

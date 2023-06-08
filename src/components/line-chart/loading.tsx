@@ -1,4 +1,4 @@
-import { Loader } from "lucide-react"
+import { Loader2 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 import { cn } from "@/lib/utils"
 import { Skeleton } from "../ui/skeleton"
@@ -87,7 +87,7 @@ export default function ChartLoading({ buttonActive }: LoadingProps) {
 			</CardHeader>
 			<CardContent className="mt-3">
 				<div className="relative flex h-[225px] w-full flex-1 items-center justify-center sm:h-[300px] xl:h-[400px]">
-					<Loader className="h-10 w-10 animate-spin text-neutral-300 dark:text-neutral-700/50" />
+					<Loader2 className="h-6 w-6 animate-spin text-neutral-300 dark:text-neutral-700/50 sm:h-10 sm:w-10" />
 				</div>
 			</CardContent>
 		</div>

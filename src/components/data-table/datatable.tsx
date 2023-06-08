@@ -45,7 +45,7 @@ export default async function DataTableMain() {
 	})
 
 	return (
-		<section className="mt-44 w-full bg-transparent px-5">
+		<section className="w-full bg-transparent px-5">
 			<div className="mx-auto max-w-screen-xl">{cryptoData && <DataTable columns={columns} data={cryptoData} />}</div>
 		</section>
 	)

@@ -22,7 +22,7 @@ export default async function SnapShot() {
 	}
 
 	return (
-		<div className="flex items-center gap-3.5 overflow-x-hidden transition duration-200 hover:overflow-x-auto">
+		<div className="snapshot flex items-center gap-3.5 overflow-x-hidden px-6 transition duration-200 hover:overflow-x-auto sm:px-0">
 			<div className="flex shrink-0 items-center gap-1 text-[.7rem]">
 				<span className="font-medium text-neutral-800 dark:text-neutral-200">Cryptos:</span>
 				<span className="font-medium text-emerald-600 dark:text-emerald-500">{globalMetricsData.totalCryptos}</span>

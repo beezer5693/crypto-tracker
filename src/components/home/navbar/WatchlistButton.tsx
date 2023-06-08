@@ -6,6 +6,8 @@ import { FiStar } from "react-icons/fi"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import TooltipDemo from "@/components/ui/tooltip"
+import { ChevronDown } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 export default function WatchlistButton() {
 	const [userId, setUserId] = React.useState<string>("")
@@ -44,10 +46,9 @@ export default function WatchlistButton() {
 				content={session?.status === "authenticated" ? null : ToolTipContent}
 				side="bottom"
 			>
-				<Button className="group flex h-[24px] cursor-pointer items-center gap-1.5 rounded px-2 py-1 transition duration-300 ease-out hover:bg-neutral-200/40 dark:hover:bg-neutral-700/40">
-					<FiStar className="h-3 w-3 cursor-pointer stroke-neutral-800 transition duration-300 ease-out dark:stroke-neutral-400 group-hover:dark:stroke-neutral-200" />
-					<span className="text-[.7rem] font-medium text-neutral-800 dark:text-neutral-200">Watchlist</span>
-				</Button>
+				<li className="cursor-pointer text-[.7rem] font-medium text-neutral-800 transition duration-200 ease-out hover:text-emerald-500 dark:text-neutral-100 dark:hover:text-emerald-400 sm:text-[.8rem]">
+					Watchlist
+				</li>
 			</TooltipDemo>
 		</Link>
 	)

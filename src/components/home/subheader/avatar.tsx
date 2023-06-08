@@ -4,7 +4,7 @@ import React from "react"
 import { signOut, useSession } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-import { Loader, LogOut, Star } from "lucide-react"
+import { Loader2, LogOut, Star } from "lucide-react"
 import Link from "next/link"
 import {
 	DropdownMenu,

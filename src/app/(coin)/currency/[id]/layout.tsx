@@ -8,8 +8,10 @@ type Children = {
 export default function Layout({ children }: Children) {
 	return (
 		<div className="relative mx-auto flex min-h-screen flex-col items-center overflow-hidden bg-white pb-20 dark:bg-[#1c1c1c] sm:overflow-auto">
-			<SubHeader />
-			<Navbar />
+			<div className="flex w-full flex-col-reverse sm:flex-col">
+				<SubHeader />
+				<Navbar />
+			</div>
 			{children}
 		</div>
 	)

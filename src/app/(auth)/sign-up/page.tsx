@@ -13,7 +13,7 @@ import GoogleAuth from "../components/GoogleAuth"
 import Link from "next/link"
 import { Collapse } from "react-collapse"
 import { cn } from "@/lib/utils"
-import { Loader, EyeOff, Eye, AlertCircle, Circle } from "lucide-react"
+import { Loader2, EyeOff, Eye, AlertCircle, Circle } from "lucide-react"
 import { AiFillCheckCircle } from "react-icons/ai"
 
 type ValidationType = {
@@ -302,7 +302,7 @@ export default function SignUp() {
 					>
 						{isLoading ? (
 							<>
-								<Loader className="h-4 w-4 animate-spin text-white" />
+								<Loader2 className="h-4 w-4 animate-spin text-white" />
 								<span className="text-[.95rem] text-white">Signing up...</span>
 							</>
 						) : (

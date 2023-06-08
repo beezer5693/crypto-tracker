@@ -13,8 +13,10 @@ const inter = Inter({ weight: ["100", "200", "300", "400", "500", "600", "700", 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={`${inter.className} relative min-h-screen scroll-smooth bg-white antialiased dark:bg-black`}>
-				<ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
+			<body
+				className={`${inter.className} relative min-h-screen w-full overflow-x-hidden scroll-smooth bg-white antialiased dark:bg-[#1c1c1c]`}
+			>
+				<ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange>
 					<QueryProvider>
 						<AuthContext>
 							<WatchlistContextProvider watchlist={inititalState.watchlist}>{children}</WatchlistContextProvider>

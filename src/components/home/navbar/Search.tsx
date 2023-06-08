@@ -47,19 +47,20 @@ export default function Search() {
 
 	return (
 		<>
-			<div className="relative w-80">
+			<div className="cursor-pointer" onClick={() => setOpen(true)}>
+				<SearchIcon size={20} className="stroke-neutral-800 dark:stroke-neutral-100 sm:hidden" />
+			</div>
+			<Button
+				onClick={() => setOpen(true)}
+				className="relative hidden h-8 w-full max-w-sm justify-start border bg-neutral-200/20 px-9 text-xs text-neutral-500 transition duration-300 ease-out hover:bg-neutral-200/40 hover:text-neutral-800 dark:border-neutral-700/60 dark:bg-neutral-800/10  dark:text-neutral-400 dark:hover:bg-neutral-700/30 dark:hover:text-neutral-200 sm:inline-flex"
+			>
+				<span>Search</span>
 				<SearchIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 stroke-neutral-500 dark:stroke-neutral-400" />
-				<Button
-					onClick={() => setOpen(true)}
-					className="h-8 w-full justify-start border bg-neutral-200/20 px-9 text-xs text-neutral-500 transition duration-300 ease-out hover:bg-neutral-200/40 hover:text-neutral-800  dark:border-neutral-700/60 dark:bg-neutral-800/10 dark:text-neutral-400 dark:hover:bg-neutral-700/30 dark:hover:text-neutral-200"
-				>
-					Search currencies, coins...
-				</Button>
 				<div className="absolute right-1.5 top-1/2 hidden h-5 -translate-y-1/2 items-center justify-center gap-[.2rem] rounded border border-neutral-300/90 bg-neutral-200/60 px-2 dark:border-neutral-700 dark:bg-[#303030] sm:flex">
 					<span className="text-xs">⌘</span>
 					<span className="text-xs">K</span>
 				</div>
-			</div>
+			</Button>
 			{!!coinList?.data?.length && (
 				<CommandDialog open={open} onOpenChange={setOpen}>
 					<CommandInput placeholder="Search cryptocurrencies..." />

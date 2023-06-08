@@ -90,7 +90,7 @@ export function DataTable<TData, TValue>(this: any, { columns, data }: DataTable
 					</TableBody>
 				</Table>
 			</div>
-			<div className="flex w-full items-center justify-between space-x-4 overflow-x-auto px-4 py-4 xl:px-0">
+			<div className="table-nav flex w-full items-center justify-between space-x-4 overflow-x-auto px-4 py-4 xl:px-0">
 				<p className="shrink-0 text-[.8rem] text-neutral-800 dark:text-neutral-300">
 					Showing {start} - {end} out of {table.getFilteredRowModel().rows.length}
 				</p>

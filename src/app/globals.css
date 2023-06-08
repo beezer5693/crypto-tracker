@@ -6,3 +6,11 @@
 .ReactCollapse--collapse {
 	transition: height 300ms;
 }
+
+.snapshot::-webkit-scrollbar {
+	display: none;
+}
+
+.table-nav::-webkit-scrollbar {
+	display: none;
+}

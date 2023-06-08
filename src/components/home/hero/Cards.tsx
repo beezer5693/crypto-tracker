@@ -14,7 +14,7 @@ export default async function Cards({ coins, news, promise }: CardProps) {
 	const metaData = await promise
 
 	return (
-		<div className="-mb-[175px] grid grid-cols-1 gap-3.5 lg:grid-cols-3">
+		<div className="hidden grid-cols-1 gap-3.5 sm:grid lg:grid-cols-3">
 			<Card className="col-span-1 flex flex-col justify-between gap-8">
 				<CardHeader>
 					<CardTitle className="w-full space-x-3">
@@ -247,7 +247,7 @@ export default async function Cards({ coins, news, promise }: CardProps) {
 						<div key={i} className="flex items-start justify-around gap-4">
 							<Image
 								priority
-								className="rounded dark:border dark:border-neutral-700/50"
+								className="rounded-lg dark:border dark:border-neutral-700/50"
 								src={`/images/ethereum.png`}
 								height={175}
 								width={175}
