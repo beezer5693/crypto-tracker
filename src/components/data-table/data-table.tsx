@@ -52,7 +52,8 @@ export function DataTable<TData, TValue>(this: any, { columns, data }: DataTable
 
 	return (
 		<div className="rounded-lg border dark:border-neutral-700/50 xl:border-none">
-			<div>
+			<div className="relative">
+				<span className="absolute bottom-0 right-0 top-0 w-20 rounded-lg bg-gradient-to-r from-transparent to-white dark:to-[#1c1c1c] xl:bg-gradient-to-r xl:from-transparent dark:xl:from-transparent"></span>
 				<Table className="min-w-[1250px]">
 					<TableHeader>
 						{table.getHeaderGroups().map(headerGroup => (

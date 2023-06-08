@@ -1,12 +1,13 @@
+import { Skeleton } from "@/components/ui/skeleton"
 import { Loader2 } from "lucide-react"
 
 export default function Loading() {
 	return (
-		<div className="flex h-full w-full flex-col items-center justify-center gap-5 p-60">
-			<div className="flex items-center gap-3">
-				<Loader2 className="h-8 w-8 animate-spin text-emerald-500" />
-				<span className="text-lg font-medium text-neutral-600 dark:text-neutral-400">Loading...</span>
+		<Skeleton className="flex w-full items-center justify-center">
+			<div className="mt-10 flex items-center gap-3 sm:mt-48">
+				<Loader2 className="h-5 w-5 animate-spin text-emerald-500 sm:h-7 sm:w-7" />
+				<span className="font-medium text-neutral-600 dark:text-neutral-400 sm:text-lg">Loading watchlist...</span>
 			</div>
-		</div>
+		</Skeleton>
 	)
 }

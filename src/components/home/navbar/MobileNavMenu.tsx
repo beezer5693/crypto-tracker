@@ -78,8 +78,8 @@ export default function MobileNavMenu({ menuOpen, setMenuOpen }: MobileNavMenuPr
 		<div
 			className={
 				menuOpen
-					? "fixed left-0 top-0 z-50 flex h-screen w-full flex-col justify-between overflow-y-auto bg-neutral-50 duration-300 ease-in dark:bg-[#1c1c1c] sm:hidden"
-					: "fixed left-[-100%] top-0 z-50 flex h-screen w-full flex-col overflow-y-auto bg-white dark:bg-[#1c1c1c] sm:hidden"
+					? "fixed left-0 top-0 z-50 flex h-full w-full flex-col justify-between overflow-y-scroll bg-neutral-50 pb-10 duration-300 ease-in dark:bg-[#1c1c1c] sm:hidden"
+					: "fixed left-[-100%] top-0 z-50 flex h-full w-full flex-col overflow-y-auto bg-white dark:bg-[#1c1c1c] sm:hidden"
 			}
 		>
 			<div>
