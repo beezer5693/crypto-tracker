@@ -1,6 +1,6 @@
 import ThemeSwitch from "./theme-switch"
 import SnapShot from "./snapshot"
-import ProfileSection from "./avatar"
+import Avatar from "./avatar"
 
 export default function SubHeader() {
 	return (
@@ -12,7 +12,7 @@ export default function SubHeader() {
 				<ThemeSwitch />
 				<div className="h-5 w-[0.5px] border-l border-neutral-200/80 dark:border-neutral-700/50"></div>
 				<div className="flex items-center gap-2 pl-0.5">
-					<ProfileSection />
+					<Avatar />
 				</div>
 			</div>
 		</header>

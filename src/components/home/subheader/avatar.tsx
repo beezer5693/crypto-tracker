@@ -76,12 +76,12 @@ export default function ProfileSection() {
 	return (
 		<>
 			<Link href={"/sign-in"}>
-				<Button className="h-6 border border-neutral-300 bg-white px-2.5 text-[.7rem] text-neutral-800 transition duration-200 ease-out hover:border-neutral-400/50 hover:bg-neutral-200/30 hover:ring-2 hover:ring-transparent dark:border-neutral-600/40 dark:border-b-transparent dark:bg-neutral-700/50 dark:text-neutral-200 dark:shadow-sm dark:shadow-black/30 dark:hover:border-neutral-600/50 dark:hover:bg-neutral-700/70">
+				<Button className="h-6 border border-neutral-300/80 bg-white px-2 text-[.7rem] shadow-sm shadow-neutral-200/60 transition duration-300 ease-out hover:border-neutral-400/50  hover:bg-neutral-200/10 hover:ring-2 hover:ring-transparent dark:border-neutral-600/40 dark:border-b-transparent dark:bg-neutral-700/50 dark:shadow-black/10 dark:hover:border-neutral-600/50 dark:hover:bg-neutral-700/70">
 					Sign in
 				</Button>
 			</Link>
 			<Link href={"/sign-up"}>
-				<Button className="h-6 border-x border-b border-t border-emerald-400 bg-emerald-500 px-2.5 text-[.7rem] text-white transition duration-200 ease-out hover:border-emerald-400 hover:bg-emerald-400 dark:border-emerald-500 dark:border-b-transparent dark:bg-emerald-600/80 dark:shadow-sm dark:shadow-black/30 dark:hover:border-emerald-500 dark:hover:bg-emerald-500">
+				<Button className="h-6 rounded border-x border-t border-emerald-500 bg-emerald-500 px-2.5 text-[.7rem] text-white transition duration-300 ease-out hover:border-emerald-400 hover:bg-emerald-400 dark:border-emerald-500 dark:bg-emerald-500/60 dark:hover:border-emerald-500 dark:hover:bg-emerald-500">
 					Get started
 				</Button>
 			</Link>
