@@ -14,7 +14,7 @@ export default function Navbar() {
 	const [menuOpen, setMenuOpen] = React.useState(false)
 
 	return (
-		<div className="sticky top-0 z-50 w-full">
+		<>
 			<nav className="relative z-40 flex w-full min-w-[330px] items-center justify-between gap-5 border-b border-neutral-200/60 bg-white px-6 py-3.5 dark:border-neutral-700/50 dark:bg-[#1c1c1c]">
 				<div className="flex items-center gap-16">
 					<Logo height={20} width={20} />
@@ -52,6 +52,6 @@ export default function Navbar() {
 				<NavMenu dropDownMenuOpen={dropDownMenuOpen} onClose={() => setDropDownMenuOpen(false)} />
 			</nav>
 			<MobileNavMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-		</div>
+		</>
 	)
 }

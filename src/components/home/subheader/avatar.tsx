@@ -65,7 +65,7 @@ export default function ProfileSection() {
 					<DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>
 						<div className="flex items-center gap-2">
 							<LogOut className="h-3 w-3 stroke-neutral-800 dark:stroke-neutral-100" />
-							<p className="text-xs font-medium text-neutral-800 dark:text-neutral-100">Sign out</p>
+							<p className="text-xs font-medium text-neutral-800 dark:text-neutral-100">Logout</p>
 						</div>
 					</DropdownMenuItem>
 				</DropdownMenuContent>
