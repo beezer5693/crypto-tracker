@@ -9,7 +9,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { ChevronDown, Coins, Gamepad2, LogOut, Moon, Star, Sun, X } from "lucide-react"
-import { set } from "zod"
 
 type MobileNavMenuProps = {
 	menuOpen: boolean
