@@ -91,59 +91,61 @@ export function DataTable<TData, TValue>(this: any, { columns, data }: DataTable
 					</TableBody>
 				</Table>
 			</div>
-			<div className="table-nav flex w-full items-center justify-between space-x-4 overflow-x-auto px-4 py-4 xl:px-0">
-				<p className="shrink-0 text-[.8rem] text-neutral-800 dark:text-neutral-300">
-					Showing {start} - {end} out of {table.getFilteredRowModel().rows.length}
-				</p>
-				<div className="flex items-center space-x-2">
-					<Button
-						className={cn("h-6 w-6 px-1 py-0.5", {
-							hidden: table.getFilteredRowModel().rows.length <= pageSize,
-						})}
-						onClick={() => table.previousPage()}
-						disabled={!table.getCanPreviousPage()}
-					>
-						<span className="sr-only">Go to previous page</span>
-						<ChevronLeft className="h-4 w-4 stroke-neutral-600  dark:stroke-neutral-400" />
-					</Button>
-					<Pagination
-						pageSize={table.getState().pagination.pageSize}
-						siblingCount={1}
-						totalCount={table.getFilteredRowModel().rows.length}
-						currentPage={pageIndex + 1}
-						onPageChange={paginate}
-					/>
+			<div>
+				<div className="table-nav flex items-center justify-between space-x-4 overflow-x-auto px-4 py-4 xl:px-0">
+					<p className="text-[.8rem] text-neutral-800 dark:text-neutral-300">
+						Showing {start} - {end} out of {table.getFilteredRowModel().rows.length}
+					</p>
+					<div className="flex items-center space-x-2">
+						<Button
+							className={cn("h-6 w-6 px-1 py-0.5", {
+								hidden: table.getFilteredRowModel().rows.length <= pageSize,
+							})}
+							onClick={() => table.previousPage()}
+							disabled={!table.getCanPreviousPage()}
+						>
+							<span className="sr-only">Go to previous page</span>
+							<ChevronLeft className="h-4 w-4 stroke-neutral-600  dark:stroke-neutral-400" />
+						</Button>
+						<Pagination
+							pageSize={table.getState().pagination.pageSize}
+							siblingCount={1}
+							totalCount={table.getFilteredRowModel().rows.length}
+							currentPage={pageIndex + 1}
+							onPageChange={paginate}
+						/>
 
-					<Button
-						className={cn("h-6 w-6 px-1 py-0.5", {
-							hidden: table.getFilteredRowModel().rows.length <= pageSize,
-						})}
-						onClick={() => table.nextPage()}
-						disabled={!table.getCanNextPage()}
-					>
-						<span className="sr-only">Go to next page</span>
-						<ChevronRight className="h-4 w-4 stroke-neutral-600 dark:stroke-neutral-400" />
-					</Button>
-				</div>
-				<div className="flex shrink-0 items-center space-x-2">
-					<p className="text-[.8rem] text-neutral-800 dark:text-neutral-300">Show rows</p>
-					<Select
-						value={`${table.getState().pagination.pageSize}`}
-						onValueChange={value => {
-							table.setPageSize(Number(value))
-						}}
-					>
-						<SelectTrigger className="h-8">
-							<SelectValue placeholder={table.getState().pagination.pageSize} />
-						</SelectTrigger>
-						<SelectContent side="top">
-							{[100, 50, 25].map(pageSize => (
-								<SelectItem key={pageSize} value={`${pageSize}`}>
-									<span className="text-[.8rem] font-medium text-neutral-800 dark:text-neutral-300">{pageSize}</span>
-								</SelectItem>
-							))}
-						</SelectContent>
-					</Select>
+						<Button
+							className={cn("h-6 w-6 px-1 py-0.5", {
+								hidden: table.getFilteredRowModel().rows.length <= pageSize,
+							})}
+							onClick={() => table.nextPage()}
+							disabled={!table.getCanNextPage()}
+						>
+							<span className="sr-only">Go to next page</span>
+							<ChevronRight className="h-4 w-4 stroke-neutral-600 dark:stroke-neutral-400" />
+						</Button>
+					</div>
+					<div className="flex shrink-0 items-center space-x-2">
+						<p className="text-[.8rem] text-neutral-800 dark:text-neutral-300">Show rows</p>
+						<Select
+							value={`${table.getState().pagination.pageSize}`}
+							onValueChange={value => {
+								table.setPageSize(Number(value))
+							}}
+						>
+							<SelectTrigger className="h-8">
+								<SelectValue placeholder={table.getState().pagination.pageSize} />
+							</SelectTrigger>
+							<SelectContent side="top">
+								{[100, 50, 25].map(pageSize => (
+									<SelectItem key={pageSize} value={`${pageSize}`}>
+										<span className="text-[.8rem] font-medium text-neutral-800 dark:text-neutral-300">{pageSize}</span>
+									</SelectItem>
+								))}
+							</SelectContent>
+						</Select>
+					</div>
 				</div>
 			</div>
 		</div>

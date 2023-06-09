@@ -72,9 +72,9 @@ export default function DataTableWatchlist() {
 		}
 	}, [coins, metaData])
 
-	if (coinsIsLoading || metaDataIsLoading || coinsIsFetching || metaDataIsFetching) return <Loading />
-
 	if (watchlist.length === 0) return <EmptyWatchList />
+
+	if (coinsIsLoading || metaDataIsLoading || coinsIsFetching || metaDataIsFetching) return <Loading />
 
 	return <>{!!data.length && <DataTable columns={columns} data={data} />}</>
 }
