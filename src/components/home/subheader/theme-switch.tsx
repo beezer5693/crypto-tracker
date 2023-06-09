@@ -22,7 +22,7 @@ export default function ThemeSwitch() {
 			) : (
 				<Moon
 					onClick={() => setTheme("dark")}
-					className="h-[18px] w-[18px] cursor-pointer stroke-neutral-400 transition duration-300 ease-out hover:stroke-neutral-600"
+					className="h-[18px] w-[18px] cursor-pointer stroke-neutral-600 transition duration-300 ease-out hover:stroke-neutral-400"
 				/>
 			)}
 		</>

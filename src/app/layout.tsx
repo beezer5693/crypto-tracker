@@ -16,9 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<head>
 				<link rel="icon" href="./favicon.ico" />
 			</head>
-			<body
-				className={`${inter.className} relative min-h-screen w-full overflow-x-hidden scroll-smooth bg-white antialiased dark:bg-[#1c1c1c]`}
-			>
+			<body className={`${inter.className} scroll-smooth bg-white antialiased dark:bg-[#1c1c1c]`}>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange>
 					<QueryProvider>
 						<AuthContext>
