@@ -98,7 +98,7 @@ export default function MobileNavMenu({ menuOpen, setMenuOpen }: MobileNavMenuPr
 					<Accordion type="single" collapsible>
 						<AccordionItem value="item-1">
 							<AccordionTrigger className="[&[data-state=open]>svg]:-rotate-180">
-								Categories
+								Cryptocurrencies
 								<ChevronDown className="h-4 w-4 stroke-neutral-600 transition-transform duration-200 dark:stroke-neutral-400" />
 							</AccordionTrigger>
 							<AccordionContent>
