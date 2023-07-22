@@ -39,7 +39,7 @@ export default function WatchlistButton() {
 	)
 
 	return (
-		<Link href={session?.status === "authenticated" ? `/watchlist` : "/"}>
+		<Link href={"/watchlist"}>
 			<TooltipDemo
 				sideOffset={5}
 				asChild={true}
